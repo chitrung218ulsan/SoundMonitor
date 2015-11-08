@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "recon-ws": {
+      "version": "1.0.0",
+      "dependencies": {
+        "ws": {
+          "version": "0.8.0",
+          "dependencies": {
+            "options": {
+              "version": "0.0.6"
+            },
+            "ultron": {
+              "version": "1.0.2"
+            }
+          }
+        }
+      }
+    }
+  }
+}
