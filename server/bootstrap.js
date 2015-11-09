@@ -83,17 +83,18 @@ Meteor.startup(function()
 			
 			
 			// Insert received data into Data Collection
-			//Data.insert(inputData);
+			Data.insert(inputData);
 			
 			// Update value in House
-			
-			/*House.updateCommands({houseNumber:houseNumber},
+			/*
+			House.updateCommands({houseNumber:houseNumber},
 				{$set:{
 					sound:sound,
 					vibration: vibration,
 					battery: battery,
 					updatedAt: new Date()
-				}});*/
+				}});
+				*/
 				
 		}	
 		catch(e)
