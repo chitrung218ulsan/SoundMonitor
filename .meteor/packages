@@ -22,4 +22,9 @@ meteorhacks:npm
 
 
 npm-container
+<<<<<<< HEAD
 mizzao:bootstrap-3
+=======
+accounts-password
+accounts-ui
+>>>>>>> origin/master
