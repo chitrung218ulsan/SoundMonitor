@@ -28,3 +28,4 @@ accounts-ui
 bootstrap
 reactive-var
 dburles:collection-helpers
+iron:router
