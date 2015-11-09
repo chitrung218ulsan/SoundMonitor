@@ -25,3 +25,6 @@ npm-container
 mizzao:bootstrap-3
 accounts-password
 accounts-ui
+bootstrap
+reactive-var
+dburles:collection-helpers
