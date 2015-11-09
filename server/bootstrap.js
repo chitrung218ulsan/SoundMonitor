@@ -38,6 +38,13 @@ Meteor.startup(function()
 	/*
 	Function Defitions
 	*/ 
+	UserStatus.events.on("connectionLogout",function(userId){
+		console.log(userId);
+		
+	})
+	
+	/*******************************************************************************/
+	
 	function startWebsocket(){
 		var Future = Npm.require('fibers');
 		var ws = new Websocket(wsURL);

@@ -1,0 +1,220 @@
+<template name="setup">
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>                        
+		  </button>
+		  <a class="navbar-brand" href="#">Sound Monitoring</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+		  <ul class="nav navbar-nav">
+			<li class="active"><a href="{{pathFor route='home'}}">Home</a></li>
+			<li><a href="#">Setup</a></li>
+			<li><a href="#">Configuration</a></li>
+			<li><a href="#">Data Analysis</a></li>
+			<li><a href="#">Report</a></li>
+		  </ul>
+		  <ul class="nav navbar-nav">
+			<li><a href="#"><span class="glyphicon glyphicon-user"></span> {{>loginButtons}} </a></li>
+		  </ul>
+		</div>
+	  </div>
+	</nav>
+	
+	<div class="container">
+    
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+		  <li class="active">
+			  <a href="#apartment" role="tab" data-toggle="tab">
+				  <icon class="fa fa-home"></icon> Apartment
+			  </a>
+		  </li>
+		  <li><a href="#building" role="tab" data-toggle="tab">
+			  <i class="fa fa-user"></i> Building
+			  </a>
+		  </li>
+		  <li>
+			  <a href="#home" role="tab" data-toggle="tab">
+				  <i class="fa fa-envelope"></i> Home
+			  </a>
+		  </li>
+		  <li>
+			  <a href="#node" role="tab" data-toggle="tab">
+				  <i class="fa fa-cog"></i> Node
+			  </a>
+		  </li>
+		</ul>
+    
+		<!-- Tab panes -->
+		<div class="tab-content">
+		  <div class="tab-pane fade active in" id="apartment">
+		  
+			{{>addApartment}}
+			
+			{{#if AparmentsLoaded}}
+			<table class="table table-hover">
+				<thead>
+				  <tr>
+					<th><div class='text-center'>Name</div></th>
+					<th><div class='text-center'>Address</div></th>
+					<th><div class='text-center'>Total Of Homes</div></th>
+					<th><div class='text-center'>Total Of Buildings</div></th>
+					<th><div class='text-center'>Construction Date</div></th>
+					<th><div class='text-center'>Manager</div></th>
+					<th><div class='text-center'>Remarks</div></th>
+				  </tr>
+				</thead>
+				<tbody>
+					 {{#each apartmentsList}}
+					  <tr>
+					 
+						<td><div class='text-center'>{{name}}</div></td>
+						<td><div class='text-center'>{{address}}</div></td>
+						<td><div class='text-center'>{{numOfHouses}}</div></td>
+						<td><div class='text-center'>{{numOfBuildings}}</div></td>
+						<td><div class='text-center'>{{constructDate}}</div></td>
+						<td><div class='text-center'>{{manager}}</div></td>
+						<td><div class='text-center'>{{remarks}}</div></td>
+						
+					  </tr>
+					{{/each}}  
+				</tbody>
+			</table>
+		  
+			{{/if}}
+			
+		  </div>
+		  <div class="tab-pane fade" id="building">
+			{{#if BuildingsLoaded}}
+				<table class="table table-hover">
+					<thead>
+					  <tr>
+						<th><div class='text-center'>Aparment Name</div></th>
+						<th><div class='text-center'>Building Number</div></th>
+						<th><div class='text-center'>Total Of Floors</div></th>
+						<th><div class='text-center'>Number of Homes/Foor</div></th>
+						<th><div class='text-center'>Type</div></th>
+						<th><div class='text-center'>Manager</div></th>
+						<th><div class='text-center'>Remarks</div></th>
+					  </tr>
+					</thead>
+					<tbody>
+						 {{#each buildingsList}}
+						  <tr>
+						 
+							<td><div class='text-center'>{{apartName}}</div></td>
+							<td><div class='text-center'>{{buildingNumber}}</div></td>
+							<td><div class='text-center'>{{numOfFloors}}</div></td>
+							<td><div class='text-center'>{{numHousePerFloor}}</div></td>
+							<td><div class='text-center'>{{type}}</div></td>
+							<td><div class='text-center'>{{manager}}</div></td>
+							<td><div class='text-center'>{{remarks}}</div></td>
+							
+						  </tr>
+						{{/each}}  
+					</tbody>
+				</table>
+		  
+			{{/if}}
+			  
+		  </div>
+		  <div class="tab-pane fade" id="home">
+			{{#if HomesLoaded}}
+				<table class="table table-hover">
+					<thead>
+					  <tr>
+						<th><div class='text-center'>Aparment Name</div></th>
+						<th><div class='text-center'>Building Name</div></th>
+						<th><div class='text-center'>Floor Number</div></th>
+						<th><div class='text-center'>Home Number</div></th>
+						<th><div class='text-center'>Owner Name</div></th>
+						<th><div class='text-center'>Telephone Number</div></th>
+						<th><div class='text-center'>Node Number</div></th>
+						<th><div class='text-center'>Node Serial Number</div></th>
+						
+					  </tr>
+					</thead>
+					<tbody>
+						 {{#each homesList}}
+						  <tr>
+						 
+							<td><div class='text-center'>{{apartName}}</div></td>
+							<td><div class='text-center'>{{buildingName}}</div></td>
+							<td><div class='text-center'>{{floor}}</div></td>
+							<td><div class='text-center'>{{homeNumber}}</div></td>
+							<td><div class='text-center'>{{owner}}</div></td>
+							<td><div class='text-center'>{{telNumber}}</div></td>
+							<td><div class='text-center'>{{nodeId}}</div></td>
+							<td><div class='text-center'>{{nodeSerial}}</div></td>
+						  </tr>
+						{{/each}}  
+					</tbody>
+				</table>
+		  
+			{{/if}}
+			  
+		  </div>
+		  <div class="tab-pane fade" id="node">
+			  {{#if NodesLoaded}}
+				<table class="table table-hover">
+					<thead>
+					  <tr>
+						<th><div class='text-center'>Node Number</div></th>
+						<th><div class='text-center'>Hardware version</div></th>
+						<th><div class='text-center'>Software version</div></th>
+						<th><div class='text-center'>Marker Name</div></th>
+						<th><div class='text-center'>Remarks</div></th>
+						
+						
+					  </tr>
+					</thead>
+					<tbody>
+						 {{#each nodesList}}
+						  <tr>
+						 
+							<td><div class='text-center'>{{nodeId}}</div></td>
+							<td><div class='text-center'>{{harwareVersion}}</div></td>
+							<td><div class='text-center'>{{softwareVersion}}</div></td>
+							<td><div class='text-center'>{{markerName}}</div></td>
+							<td><div class='text-center'>{{remarks}}</div></td>
+							
+						  </tr>
+						{{/each}}  
+					</tbody>
+				</table>
+		  
+			{{/if}}
+			 
+		  </div>
+		</div>
+    
+	</div>
+
+</template>
+
+<template name="addApartment">
+	
+	<button type="button" class="btn pull-left btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add Department</button>
+
+	  <!-- Modal -->
+	 <div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Modal Header</h4>
+			</div>
+			<div class="modal-body">
+			  <p>This is a large modal.</p>
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+</template>
