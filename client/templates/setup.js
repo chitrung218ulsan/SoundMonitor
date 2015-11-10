@@ -25,3 +25,7 @@ Template.setup.helpers({
 	},
 	
 });
+
+Template.addApartment.onRendered(function() {
+    this.$('.datetimepicker').datetimepicker();
+});

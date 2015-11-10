@@ -33,7 +33,7 @@ Meteor.startup(function()
 	
 	var wsURL = 'ws://203.250.78.212:9002/websockets/data_service';
 	var Websocket = Meteor.npmRequire('recon-ws');
-	startWebsocket();
+	//startWebsocket();
 	
 	/*
 	Function Defitions
