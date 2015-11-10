@@ -38,10 +38,7 @@ Meteor.startup(function()
 	/*
 	Function Defitions
 	*/ 
-	UserStatus.events.on("connectionLogout",function(userId){
-		console.log(userId);
-		
-	})
+	
 	
 	/*******************************************************************************/
 	

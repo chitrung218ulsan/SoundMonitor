@@ -1,3 +1,3 @@
 Accounts.onLogin(function(){
-	Router.go('home');
+	//Router.go('home');
 });

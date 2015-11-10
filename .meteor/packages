@@ -30,3 +30,5 @@ mizzao:user-status
 autopublish
 twbs:bootstrap
 tsega:bootstrap3-datetimepicker
+wenzhixin:bootstrap-table
+aslagle:reactive-table

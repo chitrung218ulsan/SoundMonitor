@@ -1,0 +1,163 @@
+<template name="addApartment">
+	
+	<div class="btn-group">
+	  <button type="button" class="btn pull-left btn-primary" id="addApart" data-toggle="modal" data-target="#mymodal">Add</button>
+	  <button type="button" class="btn pull-left btn-primary" id="modifyApart" data-toggle="modal" data-target="#mymodal1">Modify</button>
+	  <button type="button" class="btn pull-left btn-primary" id="deleteApart">Delete</button>
+	</div>
+	
+	<!--<button type="button" class="btn pull-left btn-primary btn-lg" data-toggle="modal" data-target="#mymodal">Add Department</button>
+	-->
+	 
+	 <div class="modal fade" id="mymodal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+		  
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">Add Department</h4>
+				</div>
+				
+				<div class="modal-body">
+					<form class="form-horizontal" role="form">
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="apartName">Aparment Name:</label>
+							<div class="col-sm-10">
+							  <input type="apartment" class="form-control" id="apartName" name="apartName" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="address">Address:</label>
+							<div class="col-sm-10"> 
+							  <input type="address" class="form-control" id="addr" name ="address" placeholder="">
+							</div>
+						 </div>
+						 
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="total of homes"># Homes:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number Of Home" class="form-control" id="numOfHomes" name="numOfHomes" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="total of buildings"># Buildings:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number of Buildings" class="form-control" id="numOfBuildings" name="numOfBuildings" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="construction date">Construction Date:</label>
+							<div class="col-sm-10"> 
+							  <div class="input-group datetimepicker">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<input class="set-due-date form-control" type="text" name="constructDate"/>
+							  </div>
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="manager">Manager:</label>
+							<div class="col-sm-10"> 
+							  <input type="Manager" class="form-control" id="manager" name="manager" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="remark">Remarks:</label>
+							<div class="col-sm-10"> 
+							  <input type="Remarks" class="form-control" id="remark" name="remark" placeholder="">
+							</div>
+						 </div>
+						 
+						 <div class="form-group"> 
+							<div class="col-sm-offset-2 col-sm-10">
+							  <button type="submit" class="btn btn-default" id="apartSubmit">Submit</button>
+							</div>
+						 </div> 
+					</form>
+				</div>
+				
+				<div class="modal-footer">
+				  <button type="submit" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			
+			</div>
+		</div>
+	  </div>
+	  
+	  
+			<div class="modal fade" id="mymodal1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+		  
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">Modify Department</h4>
+				</div>
+				
+				<div class="modal-body">
+					<form class="form-horizontal" role="form">
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="apartName">Aparment Name:</label>
+							<div class="col-sm-10">
+							  <input type="apartment" class="form-control" id="modifyApartName" name="modifyApartName" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="address">Address:</label>
+							<div class="col-sm-10"> 
+							  <input type="address" class="form-control" id="modifyAddr" name ="modifyAddr" placeholder="">
+							</div>
+						 </div>
+						 
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="total of homes"># Homes:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number Of Home" class="form-control" id="modifyNumOfHomes" name="modifyNumOfHomes" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="total of buildings"># Buildings:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number of Buildings" class="form-control" id="modifyNumOfBuildings" name="modifyNumOfBuildings" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="construction date">Construction Date:</label>
+							<div class="col-sm-10"> 
+							  <div class="input-group datetimepicker">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<input class="set-due-date form-control" type="text" id="modifyConstructDate" name="modifyConstructDate"/>
+							  </div>
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="manager">Manager:</label>
+							<div class="col-sm-10"> 
+							  <input type="Manager" class="form-control" id="modifyManager" name="modifyManager" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="remark">Remarks:</label>
+							<div class="col-sm-10"> 
+							  <input type="Remarks" class="form-control" id="modifyRemark" name="modifyRemark" placeholder="">
+							</div>
+						 </div>
+						 
+						 <div class="form-group"> 
+							<div class="col-sm-offset-2 col-sm-10">
+							  <button type="submit" class="btn btn-default" id="modifySubmit">Submit</button>
+							</div>
+						 </div> 
+					</form>
+				</div>
+				
+				<div class="modal-footer">
+				  <button type="submit" class="btn btn-primary" id="modifyClose" data-dismiss="modal">Close</button>
+				</div>
+			
+			</div>
+		</div>
+	  </div>
+	 
+	  
+	
+</template>

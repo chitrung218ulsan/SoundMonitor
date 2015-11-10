@@ -14,7 +14,7 @@ Meteor.methods({
 			createdAt: new Date(),
 			createdBy: currentUser
 		};
-		Aparment.insert(apart);
+		Apartment.insert(apart);
 	},
 	
 	'createBuilding':function(apartName,buildingNum,totalFloor,totalHomePerFloor,type,manager,remarks){
@@ -70,4 +70,8 @@ Meteor.methods({
 		};
 		Node.insert(node);
 	},
+	
+	'removeApartment':function(apartName){
+		Apartment.remove({_id:apartName});
+	}
 });
