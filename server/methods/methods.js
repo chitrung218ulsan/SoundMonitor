@@ -73,5 +73,24 @@ Meteor.methods({
 	
 	'removeApartment':function(apartName){
 		Apartment.remove({_id:apartName});
+	},
+	'removeBuilding':function(buildingId){
+		Building.remove({_id:buildingId});
+	},
+	'updateBuilding':function(buildingId,apartName,buildingNum,numOfFloors,numHousePerFloor,type,manager,remarks){
+		var currentUser = Meteor.userId();
+		console.log('updateBuilding');
+		Building.update({_id:buildingId},
+			{$set:{
+				apartName: apartName,
+				buildingNumber: buildingNum,
+				manager: manager,
+				numOfFloors: numOfFloors,
+				numHousePerFloor: numHousePerFloor,
+				type: type,
+				remarks: remarks,
+				createdAt: new Date(),
+			    createdBy: currentUser
+			}});
 	}
 });

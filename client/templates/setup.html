@@ -83,6 +83,11 @@
 		  </div>
 		  <div class="tab-pane fade" id="building">
 			{{#if BuildingsLoaded}}
+				
+				{{>addBuilding}}
+				
+				{{> reactiveTable class="table table-bordered table-hover" collection=buildingsList showFilter=false fields=setupBuildingFields showNavigation=always}}
+			<!--
 				<table class="table table-hover">
 					<thead>
 					  <tr>
@@ -111,7 +116,7 @@
 						{{/each}}  
 					</tbody>
 				</table>
-		  
+		    -->  
 			{{/if}}
 			  
 		  </div>

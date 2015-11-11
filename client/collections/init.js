@@ -4,7 +4,7 @@ Session.setDefault('buildingsLoaded',false);
 Session.setDefault('homesLoaded',false);
 Session.setDefault('nodesLoaded',false);
 Session.setDefault('modifyApartObject',undefined)
-
+Session.setDefault('modifyBuildingObject',undefined)
 Meteor.subscribe('All-Apartment',function(){
 	Session.set('apartmentsLoaded',true);
 });

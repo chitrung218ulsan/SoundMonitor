@@ -1,5 +1,6 @@
 Meteor.startup(function()
 {
+	
 	Apartment.remove({});
 	Building.remove({});
 	var apart1 = 
@@ -31,15 +32,25 @@ Meteor.startup(function()
 	Apartment.insert(apart1);
 	Building.insert(building1);
 	
+	
 	var wsURL = 'ws://203.250.78.212:9002/websockets/data_service';
 	var Websocket = Meteor.npmRequire('recon-ws');
-	//startWebsocket();
+	startWebsocket();
 	
 	/*
 	Function Defitions
 	*/ 
-	
-	
+	Accounts.validateLoginAttempt(function(attempt){
+		if(attempt.allowed)
+		{
+			console.log('login sucess');
+			console.log(attempt.user);
+			return true;
+		}
+	});
+	Accounts.config({
+		forbidClientAccountCreation:false
+	});
 	/*******************************************************************************/
 	
 	function startWebsocket(){

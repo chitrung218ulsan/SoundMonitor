@@ -25,25 +25,12 @@ Template.addApartment.events({
    'click #modifySubmit':function(event){
 	   event.preventDefault();
 	   var apartName = $('[name=modifyApartName]').val();
-	   if(apartName==undefined)
-	   {
-		   alert('Please select an apartment to modify');
-	   }
-	   else{
-		   Session.set('modifyApartObject',undefined);
-			
-	   }
+	   
    },
    
    'click #modifyClose':function(event){
-	   Session.set('modifyApartObject',undefined);
-		document.getElementById("modifyApartName").setAttribute('value','');
-		document.getElementById("modifyAddr").setAttribute('value','');
-		document.getElementById("modifyNumOfHomes").setAttribute('value','');
-		document.getElementById("modifyNumOfBuildings").setAttribute('value','');
-		document.getElementById("modifyConstructDate").setAttribute('value','');
-		document.getElementById("modifyManager").setAttribute('value','');
-		document.getElementById("modifyRemark").setAttribute('value','');
+	  
+		
    },
    
    'click #deleteApart':function(){
@@ -56,17 +43,23 @@ Template.addApartment.events({
 		    Meteor.call('removeApartment',Apartment.TRACK_DELETE.apartId[i]);
 	   }
 	   Apartment.TRACK_DELETE.apartId = [];
-	   Session.set('deleteApartObject',undefined);
+	   Session.set('modifyApartObject',undefined);
    },
    
    'click #modifyApart':function(){
 	   event.preventDefault();
-	   Apartment.TRACK_DELETE.apartId = [];
+	   
 	   var object = Session.get('modifyApartObject');
 	   if(object == undefined)
 	   {
-		   
-		   alert('Please select an apartment to modify');
+		    document.getElementById("modifyApartName").setAttribute('value','');
+			document.getElementById("modifyAddr").setAttribute('value','');
+			document.getElementById("modifyNumOfHomes").setAttribute('value','');
+			document.getElementById("modifyNumOfBuildings").setAttribute('value','');
+			document.getElementById("modifyConstructDate").setAttribute('value','');
+			document.getElementById("modifyManager").setAttribute('value','');
+			document.getElementById("modifyRemark").setAttribute('value','');
+		   //alert('Please select an apartment to modify');
 	   }
 	   else{
 		    console.log(object.name);
