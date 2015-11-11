@@ -5,6 +5,10 @@ body {
     background: #A6A6A6
 }
 */
+
+h1 {
+    text-align: center;
+}
 /* Tab Navigation */
 .nav-tabs {
     margin: 0;

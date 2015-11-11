@@ -44,7 +44,7 @@
 			{{>addApartment}}
 			
 			
-			{{> reactiveTable class="table table-bordered table-hover" collection=apartmentsList showFilter=false fields=setupApartFields showNavigation=always}}
+			{{> reactiveTable class="table table-bordered table-hover" collection=apartmentsList showFilter=true fields=setupApartFields showNavigation=always}}
 			
 			<!--
 			<table class="table table-hover">
@@ -86,7 +86,7 @@
 				
 				{{>addBuilding}}
 				
-				{{> reactiveTable class="table table-bordered table-hover" collection=buildingsList showFilter=false fields=setupBuildingFields showNavigation=always}}
+				{{> reactiveTable class="table table-bordered table-hover" collection=buildingsList showFilter=true fields=setupBuildingFields showNavigation=always}}
 			<!--
 				<table class="table table-hover">
 					<thead>
@@ -122,6 +122,11 @@
 		  </div>
 		  <div class="tab-pane fade" id="home">
 			{{#if HomesLoaded}}
+				
+				{{> addHome}}
+				
+				{{> reactiveTable class="table table-bordered table-hover" collection=homesList showFilter=true fields=setupHomeFields showNavigation=always}}
+			<!--
 				<table class="table table-hover">
 					<thead>
 					  <tr>
@@ -152,7 +157,7 @@
 						{{/each}}  
 					</tbody>
 				</table>
-		  
+		    -->
 			{{/if}}
 			  
 		  </div>

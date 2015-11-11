@@ -1,0 +1,192 @@
+<template name="addHome">
+	
+	<div class="btn-group pull-center">
+	  <button type="button" class="btn pull-left btn-primary" id="addHome" data-toggle="modal" data-target="#mymodalHome">Add</button>
+	  <button type="button" class="btn pull-left btn-primary" id="modifyHome" data-toggle="modal" data-target="#mymodalHome1">Modify</button>
+	  <button type="button" class="btn pull-left btn-primary" id="deleteHome">Delete</button>
+	</div>
+	
+	<!--<button type="button" class="btn pull-left btn-primary btn-lg" data-toggle="modal" data-target="#mymodal">Add Department</button>
+	-->
+	 
+	 <div class="modal fade" id="mymodalHome" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+		  
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">Add Buiding</h4>
+				</div>
+				
+				<div class="modal-body">
+					<form class="form-horizontal" role="form">
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_apartName">Aparment Name:</label>
+							<div class="col-sm-10">
+							  <!--<input type="apartment" class="form-control" id="building_apartName" name="building_apartName" placeholder=""> -->
+							  <select name= "selectAparmentName" class="form-control" id="home_apartNameSelection">
+							  {{#if AparmentsLoaded}}
+								  {{#each apartmentsList}}
+									<option value="{{name}}">{{name}}</option>
+								  {{/each}}
+							  {{/if}}
+							  </select>
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_buildingName">Building Name:</label>
+							<div class="col-sm-10"> 
+							  <select name= "selectBuildingName" class="form-control" id="home_buildingNameSelection">
+							  {{#if BuildingsLoaded}}
+								  {{#each buildingsList}}
+									<option value="{{buildingNumber}}">{{buildingNumber}}</option>
+								  {{/each}}
+							  {{/if}}
+							  </select>
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_homeNumber">Home Number:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number Of Home" class="form-control" id="home_homeNumber" name="home_homeNumber" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_floorNumber">Floor Number:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number Of Home" class="form-control" id="home_floorNumber" name="home_floorNumber" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_ownerName">Owner Name:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number of Buildings" class="form-control" id="home_ownerName" name="home_ownerName" placeholder="">
+							</div>
+						 </div>
+						  <div class="form-group">
+							<label class="control-label col-sm-2" for="home_telNumber">Telephone Number:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number of Buildings" class="form-control" id="home_telNumber" name="home_telNumber" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_NodeId">Node Id:</label>
+							<div class="col-sm-10"> 
+							  <input type="Manager" class="form-control" id="home_NodeId" name="home_NodeId" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_nodeSerial">Node Serial Number:</label>
+							<div class="col-sm-10"> 
+							  <input type="Remarks" class="form-control" id="home_nodeSerial" name="home_nodeSerial" placeholder="">
+							</div>
+						 </div>
+						 
+						 <div class="form-group"> 
+							<div class="col-sm-offset-2 col-sm-10">
+							  <button type="submit" class="btn btn-default" id="home_addSubmit">Submit</button>
+							</div>
+						 </div> 
+					</form>
+				</div>
+				
+				<div class="modal-footer">
+				  <button type="submit" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			
+			</div>
+		</div>
+	  </div>
+	  
+	  
+			<div class="modal fade" id="mymodalHome1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+		  
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">Modify Building</h4>
+				</div>
+				
+				<div class="modal-body">
+					<form class="form-horizontal" role="form">
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="modify_home_ApartName">Aparment Name:</label>
+							<div class="col-sm-10">
+							  <select name= "selectAparmentName" class="form-control" id="modify_home_apartNameSelection">
+							  {{#if AparmentsLoaded}}
+								  {{#each apartmentsList}}
+									<option value="{{name}}">{{name}}</option>
+								  {{/each}}
+							  {{/if}}
+							  </select>
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_buildingName">Building Name:</label>
+							<div class="col-sm-10"> 
+							  <select name= "selectBuildingName" class="form-control" id="modify_home_buildingNameSelection">
+							  {{#if BuildingsLoaded}}
+								  {{#each buildingsList}}
+									<option value="{{buildingNumber}}">{{buildingNumber}}</option>
+								  {{/each}}
+							  {{/if}}
+							  </select>
+							</div>
+						 </div>
+						 
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_homeNumber">Home Number:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number Of Home" class="form-control" id="modify_home_homeNumber" name="modify_home_homeNumber" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_floorNumber">Floor Number:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number Of Home" class="form-control" id="modify_home_floorNumber" name="modify_home_floorNumber" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_ownerName">Owner Name:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number of Buildings" class="form-control" id="modify_home_ownerName" name="modify_home_ownerName" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_telNumber">Telephone Number:</label>
+							<div class="col-sm-10"> 
+							  <input type="Number of Buildings" class="form-control" id="modify_home_telNumber" name="modify_home_telNumber" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_NodeId">Node Id:</label>
+							<div class="col-sm-10"> 
+							  <input type="Manager" class="form-control" id="modify_home_NodeId" name="modify_home_NodeId" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group">
+							<label class="control-label col-sm-2" for="home_nodeSerial">Node Serial Number:</label>
+							<div class="col-sm-10"> 
+							  <input type="Remarks" class="form-control" id="modify_home_nodeSerial" name="modify_home_nodeSerial" placeholder="">
+							</div>
+						 </div>
+						 <div class="form-group"> 
+							<div class="col-sm-offset-2 col-sm-10">
+							  <button type="submit" class="btn btn-default" id="modify_HomeSubmit">Submit</button>
+							</div>
+						 </div> 
+					</form>
+				</div>
+				
+				<div class="modal-footer">
+				  <button type="submit" class="btn btn-primary" id="modifyBuildingClose" data-dismiss="modal">Close</button>
+				</div>
+			
+			</div>
+		</div>
+	  </div>
+	 
+	  
+	
+</template>

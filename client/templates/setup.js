@@ -57,6 +57,22 @@ Template.setup.helpers({
 						
 					];
 		return fields;
+	},
+	setupHomeFields:function(){
+		var fields= [
+								
+						{ key: '_id',label: '', fn: function (value, object) { return new Spacebars.SafeString("<input type='checkbox' id='tableHomeCheckbox' name=value/>");}},
+						{ key: 'apartName', label: 'Apartment Name' },
+						{ key: 'buildingNumber', label: 'Building Name' },
+						{ key: 'floor', label: 'Floor' },
+						{ key: 'homeNumber', label: 'Home Number' },
+						{ key: 'owner', label: 'Owner Name' },
+						{ key: 'telNumber', label: 'Phone Number' },
+						{ key: 'nodeId', label: 'Node Id' },
+						{ key: 'nodeSerial', label: 'Node Serial Number' }
+						
+					];
+		return fields;
 	}
 	
 	
@@ -107,6 +123,36 @@ Template.setup.events({
 		  
 		  Building.TRACK_DELETE.buildingId = [];
 		  Session.set('modifyBuildingObject',undefined);
+		  
+	  }
+	  
+  },
+  
+  'click #home .reactive-table tbody tr ':function(){
+	  var selectedObject = this;
+	  
+	  var checkCheckBox = document.getElementById("tableHomeCheckbox").checked;
+	
+	 
+	 
+	 
+	  
+	  if(checkCheckBox)
+	  {
+		  /*Building.TRACK_DELETE.buildingId.push(selectedObject._id);
+		  console.log('click #building .reactive-table tbody tr');
+		  
+		  for(var i=0;i<Building.TRACK_DELETE.buildingId.length;i++)
+		  {
+			
+			console.log(Building.TRACK_DELETE.buildingId[i]);
+		  }*/
+		  Session.set('modifyHomeObject',this);
+	  }
+	  else{
+		  
+		  //Building.TRACK_DELETE.buildingId = [];
+		  Session.set('modifyHomeObject',undefined);
 		  
 	  }
 	  
