@@ -6,7 +6,7 @@
     {{> navigation }}
     {{> soundAlert}}
     {{> soundBreadcrumb }}
-    {{> pageTitle }}
+    <!--{{> pageTitle }}-->
 
     {{> Router }}
 </body>
@@ -70,7 +70,7 @@
 <template name="soundAlert">
     <div class="container-fluid" style="display : {{ status }}">
         <div class="row">
-            <div class="alert {{ messageType }} alert-dismissible" role="alert">
+            <div class="alert {{ messageType }} alert-dismissible" role="alert" style="text-align: center">
                 <button type="button" class="close"><span aria-hidden="true">×</span></button>
                 <strong>{{ catchWord }}</strong> {{ message }}
             </div>

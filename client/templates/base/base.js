@@ -10,7 +10,6 @@ Template.navigation.helpers({
         return currentRoute && routeName === currentRoute.route.getName() ? 'active' : '';
     }
 });
-
 Template.soundAlert.theInstance = null;
 Template.soundAlert.onCreated(function(){
     this.type = new ReactiveVar(SoundMonitor.Constants.ALERT_TYPE.info);
@@ -31,20 +30,20 @@ Template.soundAlert.onCreated(function(){
 });
 Template.soundAlert.helpers({
     status : function(){
-        return this.status.get();
+        return Template.instance().status.get();
     },
     messageType : function(){
-        return this.type.get().class;
+        return Template.instance().type.get().class;
     },
     catchWord : function(){
-        return this.type.get().notification;
+        return Template.instance().type.get().notification;
     },
     message : function(){
-        return this.message.get();
+        return Template.instance().message.get();
     }
 });
 Template.soundAlert.events({
     'click .close' : function(event){
-        this.status.set("none");
+        Template.instance().status.set("none");
     }
 });

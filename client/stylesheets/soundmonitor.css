@@ -5,10 +5,19 @@ body {
     background: #A6A6A6
 }
 */
-
-h1 {
-    text-align: center;
+body {
+    padding-top: 50px;
 }
+
+.navbar-fixed-top {
+    border: 0;
+}
+
+#login-dropdown-list{
+    top: 40px;
+    left: -169px;
+}
+
 /* Tab Navigation */
 .nav-tabs {
     margin: 0;

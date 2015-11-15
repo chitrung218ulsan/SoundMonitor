@@ -9,7 +9,6 @@ Meteor.startup(function()
 		address: "Ulsan",
 		constructDate: new Date(),
 		manager: "Trung",
-		remarks: "",
 		createdBy: "Trung"
 	};
 	//var apartId = findAparment('Lotte');
@@ -20,7 +19,6 @@ Meteor.startup(function()
 		numOfFloors: 7,
 		numHousePerFloor: 6,
 		type: "complex",
-		remarks: "",
 		createdBy: "Trung"
 	};
 	

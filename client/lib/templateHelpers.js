@@ -12,3 +12,10 @@ UI.registerHelper('title', function(routeName){
     }
     return title;
 });
+
+Tracker.autorun(function(){
+    var userId = Meteor.userId();
+    if (!userId && Template.soundAlert.theInstance){
+        Template.soundAlert.theInstance.setMessage(SoundMonitor.Constants.ALERT_TYPE.success, "You have signed out successfully!");
+    }
+});
