@@ -1,0 +1,79 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Sound Monitor Application</title>
+</head>
+<body>
+    {{> navigation }}
+    {{> soundAlert}}
+    {{> soundBreadcrumb }}
+    {{> pageTitle }}
+
+    {{> Router }}
+</body>
+
+<!--https://github.com/monbro/meteor-breadcrumb-plugin/blob/master/examples/advanced/meteor.html-->
+<template name="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ pathFor route='dashboard' }}">Sound Monitoring</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            {{> loginButtons }}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="{{ isActiveRoute 'dashboard' }}"><a href="{{ pathFor route='dashboard' }}">{{ title 'dashboard'}}</a></li>
+                    <li class="{{ isActiveRoute 'setup' }}"><a href="{{ pathFor route='setup'}}">{{ title 'setup' }}</a></li>
+                    <li class="{{ isActiveRoute 'configuration' }}"><a href="{{ pathFor route='configuration' }}">{{ title 'configuration' }}</a></li>
+                    <li class="{{ isActiveRoute 'dataAnalysis' }}"><a href="{{ pathFor route='dataAnalysis' }}">{{ title 'dataAnalysis' }}</a></li>
+                    <li class="{{ isActiveRoute 'report' }}"><a href="{{ pathFor route='report' }}">{{ title 'report' }}</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <button type="button" class="btn btn-primary">Search</button>
+                    <input type="text" class="form-control" placeholder="apartment or building or home or node">
+                </form>
+            </div>
+        </div>
+    </nav>
+</template>
+
+<!--https://github.com/monbro/meteor-breadcrumb-plugin/blob/master/examples/advanced/meteor.html-->
+<template name="soundBreadcrumb">
+    <div class="container">
+        <div class="row">
+            {{> breadcrumb }}
+        </div>
+    </div>
+</template>
+
+<template name="pageTitle">
+    <div class="container">
+        <div class="row">
+            <h1>
+                {{ title }}
+            </h1>
+        </div>
+    </div>
+</template>
+
+<template name="soundAlert">
+    <div class="container-fluid" style="display : {{ status }}">
+        <div class="row">
+            <div class="alert {{ messageType }} alert-dismissible" role="alert">
+                <button type="button" class="close"><span aria-hidden="true">×</span></button>
+                <strong>{{ catchWord }}</strong> {{ message }}
+            </div>
+        </div>
+    </div>
+</template>

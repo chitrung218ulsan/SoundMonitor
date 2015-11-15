@@ -2,6 +2,9 @@ accounts-base@1.2.2
 accounts-password@1.1.4
 accounts-ui@1.1.6
 accounts-ui-unstyled@1.1.8
+aldeed:autoform@5.3.2
+aldeed:collection2@2.5.0
+aldeed:simple-schema@1.3.3
 anti:i18n@0.4.3
 aslagle:reactive-table@0.8.16
 autopublish@1.0.4
@@ -65,6 +68,7 @@ mizzao:user-status@0.6.6
 mobile-experience@1.0.1
 mobile-status-bar@1.0.6
 momentjs:moment@2.8.4
+monbro:iron-router-breadcrumb@1.0.10
 mongo@1.1.3
 mongo-id@1.0.1
 npm-bcrypt@0.7.8_2
@@ -97,4 +101,3 @@ underscore@1.0.4
 url@1.0.5
 webapp@1.2.3
 webapp-hashing@1.0.5
-wenzhixin:bootstrap-table@1.9.0

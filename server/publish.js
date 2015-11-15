@@ -1,15 +1,15 @@
-Meteor.publish('All-Apartment',function(){
-	return Apartment.find();
+Meteor.publish(SoundMonitor.Constants.APARTMENT_SOURCE,function(){
+	return Apartment.find({isDeleted : false});
 });
-Meteor.publish('All-Building',function(){
-	return Building.find({});
+Meteor.publish(SoundMonitor.Constants.BUILDING_SOURCE,function(){
+	return Building.find({isDeleted: false});
 });
 Meteor.publish('All-Home',function(){
-	return Home.find({});
+	return Home.find({isDeleted: false});
 });
 Meteor.publish('All-Node',function(){
-	return Node.find({});
+	return Node.find({isDeleted: false});
 });
 Meteor.publish('All-Data',function(){
-	return Data.find({},{sort:{order:-1}});
+	return Data.find({isDeleted: false},{sort:{order:-1}});
 });

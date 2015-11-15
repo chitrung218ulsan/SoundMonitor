@@ -7,30 +7,32 @@ Meteor.startup(function()
 	{
 		name: "Lotte",
 		address: "Ulsan",
-		numOfHouses: 40,
-		numOfBuildings: 30,
 		constructDate: new Date(),
 		manager: "Trung",
 		remarks: "",
-		createdAt: new Date(),
 		createdBy: "Trung"
 	};
 	//var apartId = findAparment('Lotte');
 	//console.log(apartId);
 	var building1 = {
-		apartName: "Lotte",
+		name: "Building 1",
 		buildingNumber: 1,
-		manager: "Trung",
 		numOfFloors: 7,
 		numHousePerFloor: 6,
 		type: "complex",
 		remarks: "",
-		createdAt: new Date(),
 		createdBy: "Trung"
 	};
 	
-	Apartment.insert(apart1);
-	Building.insert(building1);
+	Apartment.insert(apart1, function(err,obj){
+		if(err){
+			console.log(err);
+			return;
+		}
+		building1.apartmentId = obj;
+		Building.insert(building1);
+	});
+
 	
 	
 	var wsURL = 'ws://203.250.78.212:9002/websockets/data_service';
@@ -80,20 +82,18 @@ Meteor.startup(function()
 			var json = JSON.parse(data);
 			console.log(json);
 			var nodeId = json.nodeId;
-			var houseNumber = 1;//House.findOne({nodeId:nodeId});
+			//var houseNumber = 1;//House.findOne({nodeId:nodeId});
 			var sound = json.sound;
 			var vibration = json.vibration;
 			var battery = json.battery;
 			
 			var inputData = 
 			{
-				"nodeId": nodeId,
-				"houseNumber" : houseNumber,
-				"sound" : sound,
-				"vibration": vibration,
-				"battery" : battery,
-				"createdAt": new Date(),
-				"createdBy": "Trung"
+				nodeNumber : nodeId,
+				sound : sound,
+				vibration : vibration,
+				battery : battery,
+				createdBy: "Trung"
 			}
 			
 			
@@ -116,20 +116,5 @@ Meteor.startup(function()
 		{
 			
 		}
-	}
-	
-	function findAparment(apartName)
-	{
-		var cursor = Apartment.find({name:apartName});
-		
-		cursor.forEach(function(myDoc)
-		{
-			//console.log(myDoc);
-			console.log(myDoc._id);
-			return myDoc._id;
-		});
-		
-		
-		
 	}
 });
