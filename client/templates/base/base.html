@@ -5,8 +5,6 @@
 <body>
     {{> navigation }}
     {{> soundAlert}}
-    {{> soundBreadcrumb }}
-    {{> pageTitle }}
 
     {{> Router }}
 </body>
@@ -33,12 +31,12 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="{{ isActiveRoute 'dashboard' }}"><a href="{{ pathFor route='dashboard' }}">{{ title 'dashboard'}}</a></li>
+                    <li class="{{ isActiveRoute 'dashboard' }}"><a href="{{ pathFor route='dashboard' }}">{{ titlePage 'dashboard'}}</a></li>
                     <li class="{{ isActiveRoute 'setup' }}">
                         <div class="btn-group">
                             <button class="btn">
                                 <a href="{{ pathFor route='setup'}}">
-                                {{ title 'setup' }}
+                                {{ titlePage 'setup' }}
                                 </a>
                             </button>
                             <button href="#" class="btn dropdown-toggle" data-toggle="dropdown"
@@ -48,30 +46,30 @@
                             <ul class="dropdown-menu">
                                 <li class="{{ isActiveRoute 'apartment'}}">
                                     <a href="{{ pathFor route='apartment'}}">
-                                        {{ title 'apartment' }}
+                                        {{ titlePage 'apartment' }}
                                     </a>
                                 </li>
                                 <li class="{{ isActiveRoute 'building'}}">
                                     <a href="{{ pathFor route='building'}}">
-                                        {{ title 'building' }}
+                                        {{ titlePage 'building' }}
                                     </a>
                                 </li>
                                 <li class="{{ isActiveRoute 'home'}}">
                                     <a href="{{ pathFor route='home'}}">
-                                        {{ title 'home' }}
+                                        {{ titlePage 'home' }}
                                     </a>
                                 </li>
                                 <li class="{{ isActiveRoute 'node'}}">
                                     <a href="{{ pathFor route='node'}}">
-                                        {{ title 'node' }}
+                                        {{ titlePage 'node' }}
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="{{ isActiveRoute 'configuration' }}"><a href="{{ pathFor route='configuration' }}">{{ title 'configuration' }}</a></li>
-                    <li class="{{ isActiveRoute 'dataAnalysis' }}"><a href="{{ pathFor route='dataAnalysis' }}">{{ title 'dataAnalysis' }}</a></li>
-                    <li class="{{ isActiveRoute 'report' }}"><a href="{{ pathFor route='report' }}">{{ title 'report' }}</a></li>
+                    <li class="{{ isActiveRoute 'configuration' }}"><a href="{{ pathFor route='configuration' }}">{{ titlePage 'configuration' }}</a></li>
+                    <li class="{{ isActiveRoute 'dataAnalysis' }}"><a href="{{ pathFor route='dataAnalysis' }}">{{ titlePage 'dataAnalysis' }}</a></li>
+                    <li class="{{ isActiveRoute 'report' }}"><a href="{{ pathFor route='report' }}">{{ titlePage 'report' }}</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <button type="button" class="btn btn-primary">Search</button>
@@ -104,11 +102,14 @@
     <div class="container">
         <div class="row">
             <h1 class="page-header">
-                {{ title }}
+                {{ titlePage }}
             </h1>
         </div>
     </div>
 </template>
 <template name="layout">
+    {{> soundBreadcrumb }}
+    {{> pageTitle }}
 
+    {{> yield }}
 </template>

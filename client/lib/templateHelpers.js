@@ -1,7 +1,7 @@
 /**
  * Created by Hieu on 11/13/2015.
  */
-UI.registerHelper('title', function(routeName){
+UI.registerHelper('titlePage', function(routeName){
     var title = "";
     if(routeName){
         var theR = Router.routes[routeName];
