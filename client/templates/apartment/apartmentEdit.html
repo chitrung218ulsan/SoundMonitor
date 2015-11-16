@@ -1,0 +1,7 @@
+<template name="apartmentEdit">
+    <div class="container">
+        <div class="row">
+            {{> quickForm collection='Apartment' doc=theInstance id='editApartmentForm' type='update' omitFields='isDeleted,' }}
+        </div>
+    </div>
+</template>

@@ -9,7 +9,8 @@ Meteor.startup(function()
 		address: "Ulsan",
 		constructDate: new Date(),
 		manager: "Trung",
-		createdBy: "Trung"
+		createdBy: "Trung",
+		remarks: "Lotte"
 	};
 	//var apartId = findAparment('Lotte');
 	//console.log(apartId);
@@ -19,7 +20,8 @@ Meteor.startup(function()
 		numOfFloors: 7,
 		numHousePerFloor: 6,
 		type: "complex",
-		createdBy: "Trung"
+		createdBy: "Trung",
+		remarks: "Building 1"
 	};
 	
 	Apartment.insert(apart1, function(err,obj){

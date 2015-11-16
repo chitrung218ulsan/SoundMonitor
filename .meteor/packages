@@ -27,7 +27,6 @@ reactive-var
 dburles:collection-helpers
 iron:router
 mizzao:user-status
-autopublish
 twbs:bootstrap
 tsega:bootstrap3-datetimepicker
 aslagle:reactive-table

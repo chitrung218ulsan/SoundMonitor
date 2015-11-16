@@ -15,6 +15,8 @@ Template.soundAlert.onCreated(function(){
     this.type = new ReactiveVar(SoundMonitor.Constants.ALERT_TYPE.info);
     this.message = new ReactiveVar(SoundMonitor.Constants.ALERT_TYPE.info.defaultMes);
     this.status = new ReactiveVar("none");
+    this.previousRoute = "";
+    this.currentRoute = "";
     this.setMessage = function(type, mes){
         this.type.set(type);
         this.message.set(mes || type.defaultMes);

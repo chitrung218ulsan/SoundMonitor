@@ -6,7 +6,7 @@
     {{> navigation }}
     {{> soundAlert}}
     {{> soundBreadcrumb }}
-    <!--{{> pageTitle }}-->
+    {{> pageTitle }}
 
     {{> Router }}
 </body>
@@ -34,7 +34,41 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="{{ isActiveRoute 'dashboard' }}"><a href="{{ pathFor route='dashboard' }}">{{ title 'dashboard'}}</a></li>
-                    <li class="{{ isActiveRoute 'setup' }}"><a href="{{ pathFor route='setup'}}">{{ title 'setup' }}</a></li>
+                    <li class="{{ isActiveRoute 'setup' }}">
+                        <div class="btn-group">
+                            <button class="btn">
+                                <a href="{{ pathFor route='setup'}}">
+                                {{ title 'setup' }}
+                                </a>
+                            </button>
+                            <button href="#" class="btn dropdown-toggle" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <b class="caret"></b>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="{{ isActiveRoute 'apartment'}}">
+                                    <a href="{{ pathFor route='apartment'}}">
+                                        {{ title 'apartment' }}
+                                    </a>
+                                </li>
+                                <li class="{{ isActiveRoute 'building'}}">
+                                    <a href="{{ pathFor route='building'}}">
+                                        {{ title 'building' }}
+                                    </a>
+                                </li>
+                                <li class="{{ isActiveRoute 'home'}}">
+                                    <a href="{{ pathFor route='home'}}">
+                                        {{ title 'home' }}
+                                    </a>
+                                </li>
+                                <li class="{{ isActiveRoute 'node'}}">
+                                    <a href="{{ pathFor route='node'}}">
+                                        {{ title 'node' }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="{{ isActiveRoute 'configuration' }}"><a href="{{ pathFor route='configuration' }}">{{ title 'configuration' }}</a></li>
                     <li class="{{ isActiveRoute 'dataAnalysis' }}"><a href="{{ pathFor route='dataAnalysis' }}">{{ title 'dataAnalysis' }}</a></li>
                     <li class="{{ isActiveRoute 'report' }}"><a href="{{ pathFor route='report' }}">{{ title 'report' }}</a></li>
@@ -47,7 +81,16 @@
         </div>
     </nav>
 </template>
-
+<template name="soundAlert">
+    <div class="container-fluid" style="display : {{ status }}">
+        <div class="row">
+            <div class="alert {{ messageType }} alert-dismissible" role="alert" style="text-align: center">
+                <button type="button" class="close"><span aria-hidden="true">×</span></button>
+                <strong>{{ catchWord }}</strong> {{ message }}
+            </div>
+        </div>
+    </div>
+</template>
 <!--https://github.com/monbro/meteor-breadcrumb-plugin/blob/master/examples/advanced/meteor.html-->
 <template name="soundBreadcrumb">
     <div class="container">
@@ -60,20 +103,12 @@
 <template name="pageTitle">
     <div class="container">
         <div class="row">
-            <h1>
+            <h1 class="page-header">
                 {{ title }}
             </h1>
         </div>
     </div>
 </template>
+<template name="layout">
 
-<template name="soundAlert">
-    <div class="container-fluid" style="display : {{ status }}">
-        <div class="row">
-            <div class="alert {{ messageType }} alert-dismissible" role="alert" style="text-align: center">
-                <button type="button" class="close"><span aria-hidden="true">×</span></button>
-                <strong>{{ catchWord }}</strong> {{ message }}
-            </div>
-        </div>
-    </div>
 </template>
