@@ -29,4 +29,5 @@ Tracker.autorun(function(){
     var currentR = Router.current();
     Template.soundAlert.previousRoute = Template.soundAlert.currentRoute;
     Template.soundAlert.currentRoute = (currentR && currentR.url) || "";
+    //Template.soundAlert.theInstance && Template.soundAlert.theInstance.hide();
 });

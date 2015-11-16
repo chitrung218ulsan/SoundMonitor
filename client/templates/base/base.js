@@ -10,6 +10,7 @@ Template.navigation.helpers({
         return currentRoute && routeName === currentRoute.route.getName() ? 'active' : '';
     }
 });
+
 Template.soundAlert.theInstance = null;
 Template.soundAlert.onCreated(function(){
     this.type = new ReactiveVar(SoundMonitor.Constants.ALERT_TYPE.info);
@@ -47,5 +48,17 @@ Template.soundAlert.helpers({
 Template.soundAlert.events({
     'click .close' : function(event){
         Template.instance().status.set("none");
+    }
+});
+
+Template.pageTitle.helpers({
+    actions: function(){
+        var currentRoute = Router.current();
+        var links = currentRoute.route.options.pageActionLinks && currentRoute.route.options.pageActionLinks();
+        return _.map(links,function(li){
+            return {
+                link: new Spacebars.SafeString("<a class='btn btn-primary' role='button' href="+Router.routes[li.routeName].path(li.routeData)+">" + Router.routes[li.routeName].options.title + "</a>")
+            };
+        });
     }
 });

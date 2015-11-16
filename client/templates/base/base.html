@@ -101,9 +101,23 @@
 <template name="pageTitle">
     <div class="container">
         <div class="row">
-            <h1 class="page-header">
-                {{ titlePage }}
-            </h1>
+            <div class="col-md-8">
+                <h1 class="page-header">
+                    {{ titlePage }}
+                </h1>
+            </div>
+            <div class="col-md-4">
+                <h1 class="page-header">
+                    <div class="btn-group btn-group" role="group" aria-label="...">
+                        {{#each actions }}
+                            {{link}}
+                        {{/each}}
+                        <!--<button type="button" class="btn btn-primary">Left</button>-->
+                        <!--<button type="button" class="btn btn-primary">Middle</button>-->
+                        <!--<button type="button" class="btn btn-primary">Right</button>-->
+                    </div>
+                </h1>
+            </div>
         </div>
     </div>
 </template>

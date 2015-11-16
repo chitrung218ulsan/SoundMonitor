@@ -1,0 +1,16 @@
+/**
+ * Created by Hieu on 11/15/2015.
+ */
+AutoForm.hooks({
+    editApartmentForm : {
+        onSuccess: function(formType, result){
+            var entityType = Router.current().route.options.parent;
+            var id = Router.current().params._id;
+            Template.soundAlert.theInstance.setMessage(
+                SoundMonitor.Constants.ALERT_TYPE.success,
+                "The " + entityType + " has been edited successfully."
+            );
+            Router.go(entityType, {_id: id});
+        }
+    }
+});
