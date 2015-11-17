@@ -2,15 +2,8 @@
  * Created by Hieu on 11/13/2015.
  */
 UI.registerHelper('titlePage', function(routeName){
-    var title = "";
-    if(routeName){
-        var theR = Router.routes[routeName];
-        title = theR.options.title || routeName;
-    } else {
-        var currentRoute = Router.current();
-        title = currentRoute.route.options.title || currentRoute.route.getName();
-    }
-    return title;
+    var routeObj = (routeName)? Router.routes[routeName] : Router.current().route;
+    return $.isFunction(routeObj.options.title)? routeObj.options.title() : routeObj.options.title;
 });
 UI.registerHelper('theInstance', function(){
     var theCol = SoundMonitor.Functions.getCollection(Router.current().route.getName());

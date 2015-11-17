@@ -28,6 +28,9 @@ Template.soundAlert.onCreated(function(){
     };
     this.show = function(){
         this.status.set("");
+        Meteor.setTimeout(function(){
+            Template.soundAlert.theInstance.hide();
+        },3000);
     };
     Template.soundAlert.theInstance = this;
 });
@@ -47,7 +50,7 @@ Template.soundAlert.helpers({
 });
 Template.soundAlert.events({
     'click .close' : function(event){
-        Template.instance().status.set("none");
+        Template.instance().hide();
     }
 });
 
