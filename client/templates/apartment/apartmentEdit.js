@@ -10,7 +10,17 @@ AutoForm.hooks({
                 SoundMonitor.Constants.ALERT_TYPE.success,
                 "The " + entityType + " has been edited successfully."
             );
-            Router.go(entityType, {_id: id});
+            var url = Template.soundAlert.previousRoute ||
+                Router.routes[Router.current().route.options.parent].path({_id: id});
+            Router.go(url);
         }
+    }
+});
+
+Template.apartmentEdit.events({
+    'click .edit-deny': function(){
+        var url = Template.soundAlert.previousRoute ||
+            Router.routes[Router.current().route.options.parent].path({_id: Router.current().params._id});
+        Router.go(url);
     }
 });

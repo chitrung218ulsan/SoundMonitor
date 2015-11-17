@@ -56,8 +56,12 @@ Template.pageTitle.helpers({
         var currentRoute = Router.current();
         var links = currentRoute.route.options.pageActionLinks && currentRoute.route.options.pageActionLinks();
         return _.map(links,function(li){
+            var routeName = $.isFunction(li.routeName)? li.routeName() : li.routeName;
+            var routeData = $.isFunction(li.routeData)? li.routeData() : li.routeData;
+            var query = $.isFunction(li.query)? li.query() : li.query;
+            var actionTitle = $.isFunction(li.actionTitle)? li.actionTitle() : li.actionTitle;
             return {
-                link: new Spacebars.SafeString("<a class='btn btn-primary' role='button' href="+Router.routes[li.routeName].path(li.routeData)+">" + Router.routes[li.routeName].options.title + "</a>")
+                link: new Spacebars.SafeString("<a class='btn btn-primary' role='button' href="+Router.routes[routeName].path(routeData, query)+">" + actionTitle + "</a>")
             };
         });
     }
