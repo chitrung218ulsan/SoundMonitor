@@ -2,8 +2,13 @@
  * Created by Hieu on 11/13/2015.
  */
 UI.registerHelper('titlePage', function(routeName){
-    var routeObj = (routeName)? Router.routes[routeName] : Router.current().route;
-    return $.isFunction(routeObj.options.title)? routeObj.options.title() : routeObj.options.title;
+    if(routeName)
+        return Router.routes[routeName].options.title;
+    else{
+        var routeObj = Router.current();
+        return (!routeObj) ? "" :
+        $.isFunction(routeObj.route.options.title) ? _.bind(routeObj.route.options.title,routeObj)() : routeObj.route.options.title;
+    }
 });
 UI.registerHelper('theInstance', function(){
     var theCol = SoundMonitor.Functions.getCollection(Router.current().route.getName());

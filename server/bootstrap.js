@@ -1,37 +1,37 @@
 Meteor.startup(function()
 {
 	
-	Apartment.remove({});
-	Building.remove({});
-	var apart1 = 
-	{
-		name: "Lotte",
-		address: "Ulsan",
-		constructDate: new Date(),
-		manager: "Trung",
-		createdBy: "Trung",
-		remarks: "Lotte"
-	};
-	//var apartId = findAparment('Lotte');
-	//console.log(apartId);
-	var building1 = {
-		name: "Building 1",
-		buildingNumber: 1,
-		numOfFloors: 7,
-		numHousePerFloor: 6,
-		type: "complex",
-		createdBy: "Trung",
-		remarks: "Building 1"
-	};
-	
-	Apartment.insert(apart1, function(err,obj){
-		if(err){
-			console.log(err);
-			return;
-		}
-		building1.apartmentId = obj;
-		Building.insert(building1);
-	});
+	//Apartment.remove({});
+	//Building.remove({});
+	//var apart1 =
+	//{
+	//	name: "Lotte",
+	//	address: "Ulsan",
+	//	constructDate: new Date(),
+	//	manager: "Trung",
+	//	createdBy: "Trung",
+	//	remarks: "Lotte"
+	//};
+	////var apartId = findAparment('Lotte');
+	////console.log(apartId);
+	//var building1 = {
+	//	name: "Building 1",
+	//	buildingNumber: 1,
+	//	numOfFloors: 7,
+	//	numHousePerFloor: 6,
+	//	type: "complex",
+	//	createdBy: "Trung",
+	//	remarks: "Building 1"
+	//};
+	//
+	//Apartment.insert(apart1, function(err,obj){
+	//	if(err){
+	//		console.log(err);
+	//		return;
+	//	}
+	//	building1.apartmentId = obj;
+	//	Building.insert(building1);
+	//});
 
 	
 	

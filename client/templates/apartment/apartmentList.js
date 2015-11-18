@@ -18,8 +18,7 @@ Template.apartmentList.helpers({
             }}
         ];
         return {
-            collection: Apartment.find()
-            ,fields: fields
+            fields: fields
         };
     }
 });
