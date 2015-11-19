@@ -1,7 +1,62 @@
 <template name="dashboard">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            This Dashboard page is under construction ... Please come back later.
+            <div class="col-md-3 form-group">
+                <label for="apartment-selection-dashboard">Select an apartment</label>
+                <select class="form-control" id="apartment-selection-dashboard">
+                    <option value="0" selected></option>
+                    {{ #each apartments }}
+                    <option value="{{_id}}">{{ name }}</option>
+                    {{ /each }}
+                </select>
+            </div>
         </div>
     </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" style="background-color: antiquewhite">
+                <div class="list-group" id="building-list">
+                    {{# each buildings}}
+                        <button type="button" class="list-group-item" value="{{_id}}">{{name}}</button>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-4" style="background-color: lightblue">
+                        <ul class="list-group" id="building-list">
+                            {{# each homes }}
+                                {{# if isRemainder index 0}}
+                                    <li class="list-group-item">{{homeNumber}} - {{floor}}</li>
+                                {{/if}}
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <div class="col-md-4" style="background-color: lightblue">
+                        <div class="col-md-4" style="background-color: lightblue">
+                            <ul class="list-group" id="building-list">
+                                {{# each homes }}
+                                    {{# if isRemainder index 1}}
+                                        <li class="list-group-item">{{homeNumber}} - {{floor}}</li>
+                                    {{/if}}
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="background-color: lightblue">
+                        <div class="col-md-4" style="background-color: lightblue">
+                            <ul class="list-group" id="building-list">
+                                {{# each homes }}
+                                    {{# if isRemainder index 2}}
+                                        <li class="list-group-item">{{homeNumber}} - {{floor}}</li>
+                                    {{/if}}
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </template>
