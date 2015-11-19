@@ -4,14 +4,13 @@
 AutoForm.hooks({
     editApartmentForm : {
         onSuccess: function(formType, result){
-            var entityType = Router.current().route.options.parent;
-            var id = Router.current().params._id;
+            var entityType = Router.current().route.options.entityType;
             Template.soundAlert.theInstance.setMessage(
                 SoundMonitor.Constants.ALERT_TYPE.success,
-                "The " + entityType + " has been edited successfully."
+                "The " + entityType + " " + this.currentDoc.name + " has been edited successfully."
             );
             var url = Template.soundAlert.previousRoute ||
-                Router.routes[Router.current().route.options.parent].path({_id: id});
+                Router.routes[Router.current().route.options.parent].path({_id: this.currentDoc._id});
             Router.go(url);
         }
     }
