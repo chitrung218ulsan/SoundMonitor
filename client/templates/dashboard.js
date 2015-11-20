@@ -7,7 +7,18 @@ Template.dashboard.onCreated(function(){
 });
 Template.dashboard.helpers({
     apartments: function(){
-        return Apartment.find({});
+        var templ = Template.instance();
+        var query = Apartment.find({});
+        query.observeChanges({
+            removed: function(id){
+                if(id == templ.apartmentSelected.get()._id){
+                    templ.apartmentSelected.set(undefined);
+                    templ.buildingSelected.set(undefined);
+                }
+
+            }
+        });
+        return query;
     },
     buildings: function(){
         var ap = Template.instance().apartmentSelected.get();
