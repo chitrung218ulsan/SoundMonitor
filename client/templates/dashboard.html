@@ -24,35 +24,52 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-4" style="background-color: lightblue">
-                        <ul class="list-group" id="building-list">
+                        <ul class="list-group" id="home-list-col0">
                             {{# each homes }}
                                 {{# if isRemainder index 0}}
-                                    <li class="list-group-item">{{homeNumber}} - {{floor}}</li>
+                                    <li class="list-group-item">
+                                        <ul class="list-group">
+                                            <li><span class="label label-default">Home #</span> : {{homeNumber}}</li>
+                                            <li><span class="label label-default">Floor #</span> : {{floor}}</li>
+                                            <li><span class="label label-default">Owner</span> : {{owner}}</li>
+                                            <li><span class="label label-default">Telephone #</span> :: {{telNumber}}</li>
+                                        </ul>
+                                    </li>
                                 {{/if}}
                             {{/each}}
                         </ul>
                     </div>
                     <div class="col-md-4" style="background-color: lightblue">
-                        <div class="col-md-4" style="background-color: lightblue">
-                            <ul class="list-group" id="building-list">
-                                {{# each homes }}
-                                    {{# if isRemainder index 1}}
-                                        <li class="list-group-item">{{homeNumber}} - {{floor}}</li>
-                                    {{/if}}
-                                {{/each}}
-                            </ul>
-                        </div>
+                        <ul class="list-group" id="home-list-col1">
+                            {{# each homes }}
+                                {{# if isRemainder index 1}}
+                                    <li class="list-group-item">
+                                        <ul class="list-group">
+                                            <li><span class="label label-default">Home #</span> : {{homeNumber}}</li>
+                                            <li><span class="label label-default">Floor #</span> : {{floor}}</li>
+                                            <li><span class="label label-default">Owner</span> : {{owner}}</li>
+                                            <li><span class="label label-default">Telephone #</span> :: {{telNumber}}</li>
+                                        </ul>
+                                    </li>
+                                {{/if}}
+                            {{/each}}
+                        </ul>
                     </div>
                     <div class="col-md-4" style="background-color: lightblue">
-                        <div class="col-md-4" style="background-color: lightblue">
-                            <ul class="list-group" id="building-list">
-                                {{# each homes }}
-                                    {{# if isRemainder index 2}}
-                                        <li class="list-group-item">{{homeNumber}} - {{floor}}</li>
-                                    {{/if}}
-                                {{/each}}
-                            </ul>
-                        </div>
+                        <ul class="list-group" id="home-list-col2">
+                            {{# each homes }}
+                                {{# if isRemainder index 2}}
+                                    <li class="list-group-item">
+                                        <ul class="list-group">
+                                            <li><span class="label label-default">Home #</span> : {{homeNumber}}</li>
+                                            <li><span class="label label-default">Floor #</span> : {{floor}}</li>
+                                            <li><span class="label label-default">Owner</span> : {{owner}}</li>
+                                            <li><span class="label label-default">Telephone #</span> :: {{telNumber}}</li>
+                                        </ul>
+                                    </li>
+                                {{/if}}
+                            {{/each}}
+                        </ul>
                     </div>
                 </div>
             </div>
