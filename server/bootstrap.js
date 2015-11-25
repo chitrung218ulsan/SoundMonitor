@@ -1,9 +1,13 @@
 Meteor.startup(function()
 {
+<<<<<<< HEAD
 	Apartment.remove({});
 	Building.remove({});
 	Home.remove({});
 	
+=======
+
+>>>>>>> origin/master
 	var apart1 =
 	{
 		name: "Lotte",
@@ -20,6 +24,7 @@ Meteor.startup(function()
 		buildingNumber: 1,
 		numOfFloors: 7,
 		numHousePerFloor: 6,
+<<<<<<< HEAD
 		type: "type1",
 		createdBy: "Trung",
 		remarks: "Building 1"
@@ -75,12 +80,66 @@ Meteor.startup(function()
 		remarks: "home4"
 	};
 	
+=======
+		type: "complex",
+		createdBy: "Trung",
+		remarks: "Building 1"
+	};
+
+	var building2 = {
+		name: "Building 2",
+		buildingNumber: 3,
+		numOfFloors: 2,
+		numHousePerFloor: 3,
+		type: "simple",
+		createdBy: "Hieu Ngo",
+		remarks: "Building 2"
+	};
+
+	var home1 = {
+		floor: 1,
+		homeNumber: 101,
+		owner: 'Hieu',
+		telNumber: '7889302',
+		createdBy: "Hieu Ngo",
+		nodeId: 'unknown'
+	};
+
+	var home2 = {
+		floor: 2,
+		homeNumber: 201,
+		owner: 'Hieu',
+		telNumber: '9999999',
+		createdBy: "Hieu Ngo",
+		nodeId: 'unknown'
+	};
+
+	var home3 = {
+		floor: 1,
+		homeNumber: 301,
+		owner: 'Hieu',
+		telNumber: '7889302',
+		createdBy: "Hieu Ngo",
+		nodeId: 'unknown'
+	};
+
+	var home4 = {
+		floor: 2,
+		homeNumber: 401,
+		owner: 'Hieu',
+		telNumber: '9999999',
+		createdBy: "Hieu Ngo",
+		nodeId: 'unknown'
+	};
+
+>>>>>>> origin/master
 	Apartment.insert(apart1, function(err,obj){
 		if(err){
 			console.log(err);
 			return;
 		}
 		building1.apartmentId = obj;
+<<<<<<< HEAD
 		building1.apartmentName = apart1.name;
 		building2.apartmentId = obj;
 		building2.apartmentName = apart1.name;
@@ -134,6 +193,28 @@ Meteor.startup(function()
 			});
 			*/
 		;
+=======
+		building2.apartmentId = obj;
+		Building.insert(building1,function(err,bu1){
+			home1.buildingId = bu1;
+			home3.buildingId = bu1;
+			home4.buildingId = bu1;
+			Home.insert(home1, function(err,hu1){
+				console.log(err);
+			});
+			Home.insert(home3);
+			Home.insert(home4);
+		});
+		Building.insert(building2, function(err,bu2){
+			home2.buildingId = bu2;
+			home3.buildingId = bu2;
+			home4.buildingId = bu2;
+			Home.insert(home2,function(err,hu2){
+				console.log(err);
+			});
+			Home.insert(home3);
+			Home.insert(home4);
+>>>>>>> origin/master
 		});
 	});
 
