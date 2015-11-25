@@ -1,0 +1,22 @@
+<template name="nodeEdit">
+    <div class="container">
+        <div class="row">
+            {{#autoForm collection="Node" id="editNodeForm" doc=this type='update' }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-info edit-deny">Cancel</button>
+
+                <span class="help-block"></span>
+					{{> afQuickField name='name' }}
+                    {{> afQuickField name='nodeNumber' }}
+                    {{> afQuickField name='hardwareVersion' }}
+                    {{> afQuickField name='softwareVersion' }}
+                    {{> afQuickField name='nodeSerial' }} 
+					{{> afQuickField name='remarks' }}
+                    {{> afQuickField name='lastModifiedBy' }}
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-info edit-deny">Cancel</button>
+            {{/autoForm}}
+        </div>
+    </div>
+</template>

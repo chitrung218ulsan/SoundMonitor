@@ -1,0 +1,73 @@
+<template name="nodeCreate">
+    <div class="container">
+        <div class="row">
+            <!--{{> quickForm collection=this id='createBuildingForm' type='insert' omitFields='isDeleted,createdAt, lastModifiedAt,lastModifiedBy' }}-->
+			{{#autoForm id="createNodeForm" type="insert" collection="Node"}}
+			
+			<div class="form-group {{#if afFieldIsInvalid name='createdBy'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='createdBy'}}</label>
+				{{> afFieldInput name='createdBy'}}
+				{{#if afFieldIsInvalid name='createdBy'}}
+				<span class="help-block">{{{afFieldMessage name='createdBy'}}}</span>
+				{{/if}}
+			  </div>
+			  
+			  
+			  <div class="form-group {{#if afFieldIsInvalid name='name'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='name'}}</label>
+				{{> afFieldInput name='name'}}
+				{{#if afFieldIsInvalid name='name'}}
+				<span class="help-block">{{{afFieldMessage name='name'}}}</span>
+				{{/if}}
+			  </div>
+			  
+			  
+			  <div class="form-group {{#if afFieldIsInvalid name='nodeNumber'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='nodeNumber'}}</label>
+				{{> afFieldInput name='nodeNumber'}}
+				{{#if afFieldIsInvalid name='nodeNumber'}}
+				<span class="help-block">{{{afFieldMessage name='nodeNumber'}}}</span>
+				{{/if}}
+			  </div>
+			  
+			   <div class="form-group {{#if afFieldIsInvalid name='hardwareVersion'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='hardwareVersion'}}</label>
+				{{> afFieldInput name='hardwareVersion'}}
+				{{#if afFieldIsInvalid name='hardwareVersion'}}
+				<span class="help-block">{{{afFieldMessage name='hardwareVersion'}}}</span>
+				{{/if}}
+			  </div>
+			  
+			  <div class="form-group {{#if afFieldIsInvalid name='softwareVersion'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='softwareVersion'}}</label>
+				{{> afFieldInput name='softwareVersion'}}
+				{{#if afFieldIsInvalid name='softwareVersion'}}
+				<span class="help-block">{{{afFieldMessage name='softwareVersion'}}}</span>
+				{{/if}}
+			  </div>
+			  
+			  <div class="form-group {{#if afFieldIsInvalid name='nodeSerial'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='nodeSerial'}}</label>
+				{{> afFieldInput name='nodeSerial'}}
+				{{#if afFieldIsInvalid name='nodeSerial'}}
+				<span class="help-block">{{{afFieldMessage name='nodeSerial'}}}</span>
+				{{/if}}
+			  </div>
+			  
+			   <div class="form-group {{#if afFieldIsInvalid name='remarks'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='remarks'}}</label>
+				{{> afFieldInput name='remarks'}}
+				{{#if afFieldIsInvalid name='remarks'}}
+				<span class="help-block">{{{afFieldMessage name='remarks'}}}</span>
+				{{/if}}
+			  </div>
+			  
+			  <div class="form-group">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="reset" class="btn btn-default">Reset Form</button>
+			  </div>
+			{{/autoForm}}
+			
+        </div>
+    </div>
+</template>

@@ -1,0 +1,7 @@
+<template name="apartmentCreate">
+    <div class="container">
+        <div class="row">
+            {{> quickForm collection=this id='createApartmentForm' type='insert' omitFields='isDeleted,createdAt, lastModifiedAt,lastModifiedBy' }}
+        </div>
+    </div>
+</template>

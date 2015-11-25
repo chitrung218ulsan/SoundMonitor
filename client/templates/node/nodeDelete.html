@@ -1,0 +1,22 @@
+<template name="nodeDelete">
+    <div class="container">
+        <div class="row">
+            {{#autoForm collection="Node" id="deleteNodeForm" doc=theInstance }}
+                <fieldset>
+                    <legend><span class="alert alert-danger" role="alert">Are you sure you want to delete the following node? </span></legend>
+                    <button type="button" class="btn btn-danger delete-confirm">YES</button>
+                    <button type="button" class="btn btn-info delete-deny">NO</button>
+                    {{> afQuickField name='name' readonly=true}}
+                    {{> afQuickField name='nodeNumber' readonly=true}}
+                    {{> afQuickField name='hardwareVersion' readonly=true}}
+                    {{> afQuickField name='softwareVersion' readonly=true}}
+                    {{> afQuickField name='nodeSerial' readonly=true}}
+                </fieldset>
+                {{#with theInstance}}
+                <button type="button" class="btn btn-danger delete-confirm">YES</button>
+                <button type="button" class="btn btn-info delete-deny">NO</button>
+                {{/with}}
+            {{/autoForm}}
+        </div>
+    </div>
+</template>

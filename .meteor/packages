@@ -27,8 +27,10 @@ reactive-var
 dburles:collection-helpers
 iron:router
 mizzao:user-status
-autopublish
 twbs:bootstrap
 tsega:bootstrap3-datetimepicker
-wenzhixin:bootstrap-table
 aslagle:reactive-table
+aldeed:collection2
+aldeed:autoform
+monbro:iron-router-breadcrumb
+mrt:moment

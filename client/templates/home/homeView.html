@@ -1,0 +1,7 @@
+<template name="homeView">
+    <div class="container">
+        <div class="row">
+            {{> quickForm collection='Home' doc=this id='viewHomeForm' type='readonly' omitFields='isDeleted,'}}
+        </div>
+    </div>
+</template>

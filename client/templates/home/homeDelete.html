@@ -1,0 +1,22 @@
+<template name="homeDelete">
+    <div class="container">
+        <div class="row">
+            {{#autoForm collection="Home" id="deleteHomeForm" doc=theInstance }}
+                <fieldset>
+                    <legend><span class="alert alert-danger" role="alert">Are you sure you want to delete the following home? </span></legend>
+                    <button type="button" class="btn btn-danger delete-confirm">YES</button>
+                    <button type="button" class="btn btn-info delete-deny">NO</button>
+                    {{> afQuickField name='name' readonly=true}}
+                    {{> afQuickField name='floor' readonly=true}}
+                    {{> afQuickField name='homeNumber' readonly=true}}
+                    {{> afQuickField name='telNumber' readonly=true}}
+                    
+                </fieldset>
+                {{#with theInstance}}
+                <button type="button" class="btn btn-danger delete-confirm">YES</button>
+                <button type="button" class="btn btn-info delete-deny">NO</button>
+                {{/with}}
+            {{/autoForm}}
+        </div>
+    </div>
+</template>

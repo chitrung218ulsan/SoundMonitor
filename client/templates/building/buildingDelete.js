@@ -1,0 +1,1 @@
+Template.buildingDelete.events(SoundMonitor.Functions.generateDeleteEventHandlers());

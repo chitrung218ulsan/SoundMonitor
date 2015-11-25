@@ -1,0 +1,23 @@
+<template name="homeEdit">
+    <div class="container">
+        <div class="row">
+            {{#autoForm collection="Home" id="editHomeForm" doc=this type='update' }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-info edit-deny">Cancel</button>
+
+                <span class="help-block"></span>
+					{{> afQuickField name='buildingId' options=buildingIdOptions}}
+					{{> afQuickField name='buildingName' options=buildingNameOptions}}
+                    {{> afQuickField name='homeNumber' }}
+                    {{> afQuickField name='floor' }}
+                    {{> afQuickField name='name' }}
+                    {{> afQuickField name='telNumber' }} 
+					{{> afQuickField name='remarks' }}
+                    {{> afQuickField name='lastModifiedBy' }}
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-info edit-deny">Cancel</button>
+            {{/autoForm}}
+        </div>
+    </div>
+</template>
