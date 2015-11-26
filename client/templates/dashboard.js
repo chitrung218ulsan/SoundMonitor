@@ -32,7 +32,7 @@ Template.dashboard.helpers({
         }) : [];
     },
     isRemainder: function(index, rem){
-        return index % 3 == rem;
+        return index % 2 == rem;
     }
 });
 
@@ -48,4 +48,8 @@ Template.dashboard.events({
         var newId = target.value;
         Template.instance().buildingSelected.set(Building.findOne({_id: newId}));
     }
+});
+
+Template.registerHelper('formatDate', function(date) {
+  return moment(date).format('DD/MM/YYYY hh:mm:ss');
 });

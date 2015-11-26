@@ -1,9 +1,5 @@
 <template name="dashboard">
-<<<<<<< HEAD
     <div class="container">
-=======
-    <div class="container-fluid">
->>>>>>> origin/master
         <div class="row">
             <div class="col-md-3 form-group">
                 <label for="apartment-selection-dashboard">Select an apartment</label>
@@ -16,18 +12,12 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
     <div class="container">
         <div class="row">
 		<!--
             <div class="col-md-3" style="background-color: antiquewhite">
 		-->
 			 <div class="col-md-3" style="background-color: antiquewhite">
-=======
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3" style="background-color: antiquewhite">
->>>>>>> origin/master
                 <div class="list-group" id="building-list">
                     {{# each buildings}}
                         <button type="button" class="list-group-item" value="{{_id}}">{{name}}</button>
@@ -36,42 +26,62 @@
             </div>
             <div class="col-md-9">
                 <div class="row">
-                    <div class="col-md-4" style="background-color: lightblue">
-<<<<<<< HEAD
+                    <div class="col-md-6" style="background-color: lightblue">
 						<ul class="list-group" id="home-list-col0">
 							{{# each homes }}
 								{{# if isRemainder index 0}}
 								
 								
 								  <div class="row">
-									<div class="col-md-4">
-										<p align="center">{{{homeNumber}}}</p>
+									<div class="col-md-12">
+										<h2 style="color:red" align="center">{{{homeNumber}}}</h2>
 									</div>
 								  </div>
 								  <div class="row">
-									<div class="col-md-4">
-										<p align="center">{{{name}}}</p>
+									<div class="col-md-3">
+										 <span class="label label-danger">Danger Label</span>
+									</div>
+									<div class="col-md-3">
+										<p align="center">ON/OFF</p>
+									</div>
+									<div class="col-md-3">
+										<p align="center">Node Status</p>
+									</div>
+									<div class="col-md-3">
+										<div class="progress">
+										  <div class="progress-bar" role="progressbar" aria-valuenow="50"
+										  aria-valuemin="0" aria-valuemax="100" style="width:{{nodeBattery}}%">
+											
+										  </div>
+										</div>
 									</div>
 								  </div>
 								  <div class="row">
-									<div class="col-md-4">
+									<div class="col-md-12">
 										<table class="table table-bordered" >
-									
+											 <thead>
+												<tr>
+												  <th class="col-md-6">Parameter</th>
+												  <th class="col-md-6">Value</th>
+												  <th class="col-md-6">Date</th>
+												 
+												</tr>
+											  </thead>
 											<tbody>
 											  <tr>
-												<td>sound</td>
-												<td>{{sound}}</td>
-												<td>{{lastDataUpdate}}</td>
+												<td >sound</td>
+												<td >{{sound}}</td>
+												<td >{{formatDate lastDataUpdate}}</td>
 											  </tr>
 											  <tr>
 												<td>vibration</td>
 												<td>{{vibration}}</td>
-												<td>{{lastDataUpdate}}</td>
+												<td>{{formatDate lastDataUpdate}}</td>
 											  </tr>
 											  <tr>
 												<td>over_threshold</td>
 												<td>{{lastOverThreshold}}</td>
-												<td>{{lastDataUpdate}}</td>
+												<td>{{formatDate lastDataUpdate}}</td>
 											  </tr>
 											</tbody>
 										 </table>
@@ -90,77 +100,103 @@
 										</li>
 									-->
 								{{/if}}
-=======
-                        <ul class="list-group" id="home-list-col0">
-                            {{# each homes }}
-                                {{# if isRemainder index 0}}
-                                    <li class="list-group-item">
-                                        <ul class="list-group">
-                                            <li><span class="label label-default">Home #</span> : {{homeNumber}}</li>
-                                            <li><span class="label label-default">Floor #</span> : {{floor}}</li>
-                                            <li><span class="label label-default">Owner</span> : {{owner}}</li>
-                                            <li><span class="label label-default">Telephone #</span> : {{telNumber}}</li>
-                                        </ul>
-                                    </li>
-                                {{/if}}
->>>>>>> origin/master
                             {{/each}}
                         </ul>
                     </div>
-                    <div class="col-md-4" style="background-color: lightblue">
+                    <div class="col-md-6" style="background-color: lightblue">
                         <ul class="list-group" id="home-list-col1">
                             {{# each homes }}
                                 {{# if isRemainder index 1}}
-<<<<<<< HEAD
+								
+									<div class="row">
+									<div class="col-md-12">
+										<h2 style="color:red" align="center">{{{homeNumber}}}</h2>
+									</div>
+								  </div>
+								  <div class="row">
+									<div class="col-md-3">
+										 <span class="label label-danger">Danger Label</span>
+									</div>
+									<div class="col-md-3">
+										<p align="center">ON/OFF</p>
+									</div>
+									<div class="col-md-3">
+										<p align="center">Node Status</p>
+									</div>
+									<div class="col-md-3">
+										<div class="progress">
+										  <div class="progress-bar" role="progressbar" aria-valuenow="50"
+										  aria-valuemin="0" aria-valuemax="100" style="width:{{nodeBattery}}%">
+											
+										  </div>
+										</div>
+									</div>
+								  </div>
+								  <div class="row">
+									<div class="col-md-12">
+										<table class="table table-bordered" >
+											 <thead>
+												<tr>
+												  <th class="col-md-6">Parameter</th>
+												  <th class="col-md-6">Value</th>
+												  <th class="col-md-6">Date</th>
+												 
+												</tr>
+											  </thead>
+											<tbody>
+											  <tr>
+												<td >sound</td>
+												<td >{{sound}}</td>
+												<td >{{formatDate lastDataUpdate}}</td>
+											  </tr>
+											  <tr>
+												<td>vibration</td>
+												<td>{{vibration}}</td>
+												<td>{{formatDate lastDataUpdate}}</td>
+											  </tr>
+											  <tr>
+												<td>over_threshold</td>
+												<td>{{lastOverThreshold}}</td>
+												<td>{{formatDate lastDataUpdate}}</td>
+											  </tr>
+											</tbody>
+										 </table>
+									</div>
+								  </div>
 								<!--
-=======
->>>>>>> origin/master
                                     <li class="list-group-item">
                                         <ul class="list-group">
                                             <li><span class="label label-default">Home #</span> : {{homeNumber}}</li>
                                             <li><span class="label label-default">Floor #</span> : {{floor}}</li>
                                             <li><span class="label label-default">Owner</span> : {{owner}}</li>
-<<<<<<< HEAD
                                             <li><span class="label label-default">LastUpdate</span> : {{lastDataUpdate}}</li>
                                         </ul>
                                     </li>
 								-->
-=======
-                                            <li><span class="label label-default">Telephone #</span> : {{telNumber}}</li>
-                                        </ul>
-                                    </li>
->>>>>>> origin/master
                                 {{/if}}
                             {{/each}}
                         </ul>
                     </div>
+					<!--
                     <div class="col-md-4" style="background-color: lightblue">
                         <ul class="list-group" id="home-list-col2">
                             {{# each homes }}
                                 {{# if isRemainder index 2}}
-<<<<<<< HEAD
-								<!--
-=======
->>>>>>> origin/master
+								
                                     <li class="list-group-item">
                                         <ul class="list-group">
                                             <li><span class="label label-default">Home #</span> : {{homeNumber}}</li>
                                             <li><span class="label label-default">Floor #</span> : {{floor}}</li>
                                             <li><span class="label label-default">Owner</span> : {{owner}}</li>
-<<<<<<< HEAD
                                             <li><span class="label label-default">LastUpdate</span> : {{lastDataUpdate}}</li>
                                         </ul>
                                     </li>
-								-->
-=======
-                                            <li><span class="label label-default">Telephone #</span> : {{telNumber}}</li>
-                                        </ul>
-                                    </li>
->>>>>>> origin/master
+								
                                 {{/if}}
                             {{/each}}
                         </ul>
                     </div>
+					-->
                 </div>
             </div>
         </div>
