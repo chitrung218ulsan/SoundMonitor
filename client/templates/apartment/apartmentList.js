@@ -7,6 +7,7 @@ Template.apartmentList.helpers({
             SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'_id', {hidden: true}),
             SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'name'),
             SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'address'),
+			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'manager'),
             {key: '_id', label: '', fn : function(value, object){
                 return new Spacebars.SafeString("<a href="+Router.routes['apartment.view'].path({_id:value})+">View</a>");
             }},

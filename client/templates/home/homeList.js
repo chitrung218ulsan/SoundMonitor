@@ -3,6 +3,9 @@ Template.homeList.helpers({
         var fields = [
             SoundMonitor.Functions.getFieldForTable(Home.simpleSchema(),'_id', {hidden: true}),
             SoundMonitor.Functions.getFieldForTable(Home.simpleSchema(),'homeNumber'),
+			SoundMonitor.Functions.getFieldForTable(Home.simpleSchema(),'apartmentName'),
+			SoundMonitor.Functions.getFieldForTable(Home.simpleSchema(),'buildingName'),
+			SoundMonitor.Functions.getFieldForTable(Home.simpleSchema(),'floor'),
             SoundMonitor.Functions.getFieldForTable(Home.simpleSchema(),'name'),
             {key: '_id', label: '', fn : function(value, object){
                 return new Spacebars.SafeString("<a href="+Router.routes['home.view'].path({_id:value})+">View</a>");

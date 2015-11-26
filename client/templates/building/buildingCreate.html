@@ -13,6 +13,22 @@
 				{{/if}}
 			  </div>
 			  
+			  <div class="form-group {{#if afFieldIsInvalid name='apartmentId'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='apartmentId'}}</label>
+				{{> afFieldInput name='apartmentId' options=apartIdOptions}}
+				{{#if afFieldIsInvalid name='apartmentId'}}
+				<span class="help-block">{{{afFieldMessage name='apartmentId'}}}</span>
+				{{/if}}
+			  </div>
+			  
+			   <div class="form-group {{#if afFieldIsInvalid name='apartmentName'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='apartmentName'}}</label>
+				{{> afFieldInput name='apartmentName' options=apartNameOptions}}
+				{{#if afFieldIsInvalid name='apartmentName'}}
+				<span class="help-block">{{{afFieldMessage name='apartmentName'}}}</span>
+				{{/if}}
+			  </div>
+			  
 			  <div class="form-group {{#if afFieldIsInvalid name='name'}}has-error{{/if}}">
 				<label class="control-label">{{afFieldLabelText name='name'}}</label>
 				{{> afFieldInput name='name'}}
@@ -50,6 +66,14 @@
 				{{/if}}
 			  </div>
 			  
+			  <div class="form-group {{#if afFieldIsInvalid name='manager'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='manager'}}</label>
+				{{> afFieldInput name='manager'}}
+				{{#if afFieldIsInvalid name='manager'}}
+				<span class="help-block">{{{afFieldMessage name='manager'}}}</span>
+				{{/if}}
+			  </div>
+			  
 			  <div class="form-group {{#if afFieldIsInvalid name='remarks'}}has-error{{/if}}">
 				<label class="control-label">{{afFieldLabelText name='remarks'}}</label>
 				{{> afFieldInput name='remarks'}}
@@ -58,21 +82,7 @@
 				{{/if}}
 			  </div>
 			  
-			  <div class="form-group {{#if afFieldIsInvalid name='apartmentId'}}has-error{{/if}}">
-				<label class="control-label">{{afFieldLabelText name='apartmentId'}}</label>
-				{{> afFieldInput name='apartmentId' options=apartIdOptions}}
-				{{#if afFieldIsInvalid name='apartmentId'}}
-				<span class="help-block">{{{afFieldMessage name='apartmentId'}}}</span>
-				{{/if}}
-			  </div>
 			  
-			   <div class="form-group {{#if afFieldIsInvalid name='apartmentName'}}has-error{{/if}}">
-				<label class="control-label">{{afFieldLabelText name='apartmentName'}}</label>
-				{{> afFieldInput name='apartmentName' options=apartNameOptions}}
-				{{#if afFieldIsInvalid name='apartmentName'}}
-				<span class="help-block">{{{afFieldMessage name='apartmentName'}}}</span>
-				{{/if}}
-			  </div>
 			  
 			  <div class="form-group">
 				<button type="submit" class="btn btn-primary">Submit</button>

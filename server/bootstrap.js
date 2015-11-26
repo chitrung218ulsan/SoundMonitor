@@ -1,8 +1,8 @@
 Meteor.startup(function()
 {
-	Apartment.remove({});
-	Building.remove({});
-	Home.remove({});
+	//Apartment.remove({});
+	//Building.remove({});
+	//Home.remove({});
 	
 	var apart1 =
 	{
@@ -21,6 +21,7 @@ Meteor.startup(function()
 		numOfFloors: 7,
 		numHousePerFloor: 6,
 		type: "type1",
+		manager: "Trung",
 		createdBy: "Trung",
 		remarks: "Building 1"
 	};
@@ -31,6 +32,7 @@ Meteor.startup(function()
 		numOfFloors: 2,
 		numHousePerFloor: 3,
 		type: "type2",
+		manager: "Trung",
 		createdBy: "Hieu Ngo",
 		remarks: "Building 2"
 	};
@@ -41,7 +43,10 @@ Meteor.startup(function()
 		name: 'Hieu',
 		telNumber: '7889302',
 		createdBy: "Hieu Ngo",
-		nodeId: 'unknown',
+		nodeId: 1,
+		sound:0,
+		vibration:0,
+		nodeBattery:0,
 		remarks: "home1"
 	};
 
@@ -51,7 +56,10 @@ Meteor.startup(function()
 		name: 'Hieu',
 		telNumber: '9999999',
 		createdBy: "Hieu Ngo",
-		nodeId: 'unknown',
+		nodeId: 1,
+		sound:0,
+		vibration:0,
+		nodeBattery:0,
 		remarks: "home2"
 	};
 
@@ -61,7 +69,7 @@ Meteor.startup(function()
 		name: 'Hieu',
 		telNumber: '7889302',
 		createdBy: "Hieu Ngo",
-		nodeId: 'unknown',
+		nodeId: 1,
 		remarks: "home3"
 	};
 
@@ -71,7 +79,7 @@ Meteor.startup(function()
 		name: 'Hieu',
 		telNumber: '9999999',
 		createdBy: "Hieu Ngo",
-		nodeId: 'unknown',
+		nodeId: 1,
 		remarks: "home4"
 	};
 	
@@ -205,15 +213,15 @@ Meteor.startup(function()
 			Data.insert(inputData);
 			
 			// Update value in House
-			/*
-			House.updateCommands({houseNumber:houseNumber},
-				{$set:{
-					sound:sound,
-					vibration: vibration,
-					battery: battery,
-					dataUpdatedAt: new Date()
-				}});
-				*/
+			
+			Home.update({'nodeId':nodeId},
+			{$set:{
+				sound:sound,
+				vibration: vibration,
+				nodeBattery: battery,
+				lastDataUpdate: new Date()
+			}},{ multi: true });
+				
 				
 		}	
 		catch(e)

@@ -33,7 +33,16 @@ Template.dashboard.helpers({
     },
     isRemainder: function(index, rem){
         return index % 2 == rem;
-    }
+    },
+	check: function(value,threshold)
+	{
+		if(value > 10)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
 });
 
 Template.dashboard.events({
