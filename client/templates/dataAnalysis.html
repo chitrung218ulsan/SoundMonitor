@@ -55,51 +55,25 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <span class="label label-warning">Warning</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p align="center">ON/OFF</p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p align="center">Node Status</p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                     aria-valuemin="0" aria-valuemax="100" style="width:{{nodeBattery}}%">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-12">
                                             <table class="table table-bordered" >
-                                                <thead>
-                                                <tr>
-                                                    <th class="col-md-6">Parameter</th>
-                                                    <th class="col-md-6">Value</th>
-                                                    <th class="col-md-6">Date</th>
-
-                                                </tr>
-                                                </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td >sound</td>
-                                                    <td >{{sound}}</td>
-                                                    <td >{{formatDate lastDataUpdate}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>vibration</td>
-                                                    <td>{{vibration}}</td>
-                                                    <td>{{formatDate lastDataUpdate}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>over_threshold</td>
-                                                    <td>{{lastOverThreshold}}</td>
-                                                    <td>{{formatDate lastDataUpdate}}</td>
-                                                </tr>
+                                                    <tr>
+                                                        <th>Max of Sound</th>
+                                                        <td >{{maxInfo.maxSound}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Over Sound Threshold</th>
+                                                        <td >{{maxInfo.overThresholdSound}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Max of Vibration</th>
+                                                        <td>{{maxInfo.maxVibration}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Over Vibration Threshold</th>
+                                                        <td>{{maxInfo.overThresholdVibration}}</td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -119,50 +93,24 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <span class="label label-danger">Danger Label</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p align="center">ON/OFF</p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p align="center">Node Status</p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                     aria-valuemin="0" aria-valuemax="100" style="width:{{nodeBattery}}%">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-12">
                                             <table class="table table-bordered" >
-                                                <thead>
-                                                <tr>
-                                                    <th class="col-md-6">Parameter</th>
-                                                    <th class="col-md-6">Value</th>
-                                                    <th class="col-md-6">Date</th>
-
-                                                </tr>
-                                                </thead>
                                                 <tbody>
                                                 <tr>
-                                                    <td >sound</td>
-                                                    <td >{{sound}}</td>
-                                                    <td >{{formatDate lastDataUpdate}}</td>
+                                                    <th>Max of Sound</th>
+                                                    <td >{{maxInfo.maxSound}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>vibration</td>
-                                                    <td>{{vibration}}</td>
-                                                    <td>{{formatDate lastDataUpdate}}</td>
+                                                    <th>Over Sound Threshold</th>
+                                                    <td >{{maxInfo.overThresholdSound}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>over_threshold</td>
-                                                    <td>{{lastOverThreshold}}</td>
-                                                    <td>{{formatDate lastDataUpdate}}</td>
+                                                    <th>Max of Vibration</th>
+                                                    <td>{{maxInfo.maxVibration}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Over Vibration Threshold</th>
+                                                    <td>{{maxInfo.overThresholdVibration}}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>

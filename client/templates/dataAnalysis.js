@@ -2,6 +2,7 @@
  * Created by Hieu on 11/15/2015.
  */
 Template.dataAnalysis.onCreated(function(){
+    var self = this;
     var startDate = moment().date(1);
     var endDate = moment();
     endDate.month(endDate.month() + 1).date(1);
@@ -10,6 +11,10 @@ Template.dataAnalysis.onCreated(function(){
     this.startDate = new ReactiveVar(startDate);
     this.endDate = new ReactiveVar(endDate);
     this.threshold = new ReactiveVar(undefined);
+
+    this.autorun(function(){
+        self.subscribe(SoundMonitor.Constants.DATA_SOURCE, self.buildingSelected.get(),self.startDate.get().toDate(), self.endDate.get().toDate());
+    });
 });
 Template.dataAnalysis.onRendered(function(){
     var self = this;
@@ -65,7 +70,7 @@ Template.dataAnalysis.helpers({
     },
     isRemainder: function(index, rem){
         return index % 2 == rem;
-    },
+    }
 });
 
 Template.dataAnalysis.events({
