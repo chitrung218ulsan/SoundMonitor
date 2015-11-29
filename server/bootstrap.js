@@ -1,10 +1,10 @@
 Meteor.startup(function()
 {
-	//Apartment.remove({});
-	//Building.remove({});
-	//Home.remove({});
-	//Node.remove({});
-	//Data.remove({});
+	Apartment.remove({});
+	Building.remove({});
+	Home.remove({});
+	Node.remove({});
+	Data.remove({});
 	
 	var apart1 = {
 		name: "Lotte",
@@ -57,6 +57,16 @@ Meteor.startup(function()
 		createdBy: "Hieu"
 	};
 
+	var node3 = {
+		name: "Node 3",
+		nodeNumber: 3,
+		hardwareVersion: "Hard V2",
+		softwareVersion: 'Soft V2',
+		nodeSerial: "2222",
+		remarks: "Node 3",
+		createdBy: "Hieu"
+	};
+
 	var home1 = {
 		floor: 1,
 		homeNumber: 101,
@@ -73,6 +83,32 @@ Meteor.startup(function()
 	var home2 = {
 		floor: 2,
 		homeNumber: 201,
+		name: 'Hieu',
+		telNumber: '9999999',
+		createdBy: "Hieu Ngo",
+		nodeId: 1,
+		sound:0,
+		vibration:0,
+		nodeBattery:0,
+		remarks: "home2"
+	};
+
+	var home3 = {
+		floor: 1,
+		homeNumber: 301,
+		name: 'Hieu',
+		telNumber: '7889302',
+		createdBy: "Hieu Ngo",
+		nodeId: 1,
+		sound:0,
+		vibration:0,
+		nodeBattery:0,
+		remarks: "home1"
+	};
+
+	var home4 = {
+		floor: 2,
+		homeNumber: 401,
 		name: 'Hieu',
 		telNumber: '9999999',
 		createdBy: "Hieu Ngo",
@@ -126,28 +162,22 @@ Meteor.startup(function()
 				});
 			});
 
-		});
-		Building.insert(building2, function(err,bu2){
-			if(err){
-				console.log(err);
-				return;
-			}
 			home2.apartmentName = apart1.name;
 			home2.apartmentId = obj;
-			home2.buildingId = bu2;
-			home2.buildingName = building2.name;
+			home2.buildingId = bu1;
+			home2.buildingName = building1.name;
 			Node.insert(node2,function(err,realNode2){
 				home2.nodeId = realNode2;
 				var data1 = {
 					nodeNumber: node2.nodeNumber,
-					sound: 100,
-					vibration: 150,
+					sound: 20,
+					vibration: 10,
 					battery: 2,
 					createdBy: "Hieu"
 				};
 				var data2 = {
 					nodeNumber: node2.nodeNumber,
-					sound: 50,
+					sound: 500,
 					vibration: 13,
 					battery: 4,
 					createdBy: "Hieu"
@@ -155,6 +185,38 @@ Meteor.startup(function()
 				Data.insert(data1);
 				Data.insert(data2);
 				Home.insert(home2,function(err,hu2){
+					console.log(err);
+				});
+			})
+		});
+		Building.insert(building2, function(err,bu2){
+			if(err){
+				console.log(err);
+				return;
+			}
+			home3.apartmentName = apart1.name;
+			home3.apartmentId = obj;
+			home3.buildingId = bu2;
+			home3.buildingName = building2.name;
+			Node.insert(node3,function(err,realNode2){
+				home3.nodeId = realNode2;
+				var data1 = {
+					nodeNumber: node3.nodeNumber,
+					sound: 100,
+					vibration: 150,
+					battery: 2,
+					createdBy: "Hieu"
+				};
+				var data2 = {
+					nodeNumber: node3.nodeNumber,
+					sound: 50,
+					vibration: 13,
+					battery: 4,
+					createdBy: "Hieu"
+				};
+				Data.insert(data1);
+				Data.insert(data2);
+				Home.insert(home3,function(err,hu2){
 					console.log(err);
 				});
 			})

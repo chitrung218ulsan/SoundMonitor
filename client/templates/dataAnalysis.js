@@ -84,6 +84,13 @@ Template.dataAnalysis.helpers({
     },
     vibrationThreshold: function(){
         return Template.instance().vibrationThreshold.get();
+    },
+    buildingMaxInfo: function(){
+        var chosenBuilding = Template.instance().buildingSelected.get();
+        return chosenBuilding && chosenBuilding.maxInfo(Template.instance().startDate.get().toDate()
+            , Template.instance().endDate.get().toDate()
+            , Template.instance().soundThreshold.get()
+            , Template.instance().vibrationThreshold.get());
     }
 });
 
@@ -96,6 +103,8 @@ Template.dataAnalysis.events({
     },
     'click #building-list .list-group-item': function(event){
         var target = event.currentTarget;
+        $('#building-list .list-group-item').removeClass('active');
+        $(target).addClass("active");
         var newId = target.value;
         Template.instance().buildingSelected.set(Building.findOne({_id: newId}));
     },

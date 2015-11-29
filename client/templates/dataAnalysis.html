@@ -49,6 +49,32 @@
             </div>
             <div class="col-md-9">
                 <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered" >
+                            {{ #with buildingMaxInfo }}
+                            <tbody>
+                            <tr>
+                                <th>Max of Sound</th>
+                                <td >{{maxSound}}</td>
+                            </tr>
+                            <tr>
+                                <th>Over Sound Threshold</th>
+                                <td >{{overThresholdSound}}</td>
+                            </tr>
+                            <tr>
+                                <th>Max of Vibration</th>
+                                <td>{{maxVibration}}</td>
+                            </tr>
+                            <tr>
+                                <th>Over Vibration Threshold</th>
+                                <td>{{overThresholdVibration}}</td>
+                            </tr>
+                            </tbody>
+                            {{ /with}}
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6" style="background-color: lightblue">
                         <ul class="list-group" id="home-list-col0">
                             {{# each homes }}
