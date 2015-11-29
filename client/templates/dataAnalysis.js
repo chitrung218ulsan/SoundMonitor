@@ -10,10 +10,12 @@ Template.dataAnalysis.onCreated(function(){
     this.buildingSelected = new ReactiveVar(undefined);
     this.startDate = new ReactiveVar(startDate);
     this.endDate = new ReactiveVar(endDate);
-    this.threshold = new ReactiveVar(undefined);
+    this.soundThreshold = new ReactiveVar(undefined);
+    this.vibrationThreshold = new ReactiveVar(undefined);
 
     this.autorun(function(){
-        self.subscribe(SoundMonitor.Constants.DATA_SOURCE, self.buildingSelected.get(),self.startDate.get().toDate(), self.endDate.get().toDate());
+        var bu = self.buildingSelected.get();
+        self.subscribe(SoundMonitor.Constants.DATA_SOURCE, (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate());
     });
 });
 Template.dataAnalysis.onRendered(function(){
@@ -70,6 +72,18 @@ Template.dataAnalysis.helpers({
     },
     isRemainder: function(index, rem){
         return index % 2 == rem;
+    },
+    startDate: function() {
+        return Template.instance().startDate.get().toDate();
+    },
+    endDate: function(){
+        return Template.instance().endDate.get().toDate();
+    },
+    soundThreshold: function(){
+        return Template.instance().soundThreshold.get();
+    },
+    vibrationThreshold: function(){
+        return Template.instance().vibrationThreshold.get();
     }
 });
 
@@ -85,9 +99,24 @@ Template.dataAnalysis.events({
         var newId = target.value;
         Template.instance().buildingSelected.set(Building.findOne({_id: newId}));
     },
-    'change #thresholdPicker': function(event){
+    'change #thresholdSoundPicker': function(event){
         var target = event.currentTarget;
         var threshold = target.value;
-        Template.instance().threshold.set(threshold);
+        Template.instance().soundThreshold.set(threshold);
+    },
+    'change #thresholdVibrationPicker': function(event){
+        var target = event.currentTarget;
+        var threshold = target.value;
+        Template.instance().vibrationThreshold.set(threshold);
+    }
+});
+
+// Home
+
+Template.dataHome.helpers({
+    maxInfo: function(){
+        var dataContext = Template.currentData();
+        var home = dataContext.home;
+        return home.maxInfo(dataContext.startDate, dataContext.endDate, dataContext.soundThreshold, dataContext.vibrationThreshold);
     }
 });

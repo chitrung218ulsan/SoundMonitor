@@ -1,7 +1,7 @@
 <template name="dataAnalysis">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 form-group">
+            <div class="col-md-2 col-md-offset-1 form-group">
                 <label for="apartment-selection-dashboard">Select an apartment</label>
                 <select class="form-control" id="apartment-selection-dashboard">
                     <option value="0" selected></option>
@@ -10,7 +10,7 @@
                     {{ /each }}
                 </select>
             </div>
-            <div class="col-md-3 form-group">
+            <div class="col-md-2 form-group">
                 <label for="startDateInput">Select start date:</label>
                 <div class='input-group date' id='startDatePicker'>
                     <input type='text' class="form-control" id="startDateInput" />
@@ -19,7 +19,7 @@
                     </span>
                 </div>
             </div>
-            <div class="col-md-3 form-group">
+            <div class="col-md-2 form-group">
                 <label for="endDateInput">Select start date:</label>
                 <div class='input-group date' id='endDatePicker'>
                     <input type='text' class="form-control" id="endDateInput"/>
@@ -28,9 +28,13 @@
                     </span>
                 </div>
             </div>
-            <div class="col-md-3 form-group">
-                <label for="thresholdPicker">Select threshold: </label>
-                <input type='text' class="form-control" id='thresholdPicker'/>
+            <div class="col-md-2 form-group">
+                <label for="thresholdSoundPicker">Sound threshold: </label>
+                <input type='text' class="form-control" id='thresholdSoundPicker'/>
+            </div>
+            <div class="col-md-2 form-group">
+                <label for="thresholdVibrationPicker">Vibration threshold: </label>
+                <input type='text' class="form-control" id='thresholdVibrationPicker'/>
             </div>
         </div>
     </div>
@@ -49,35 +53,7 @@
                         <ul class="list-group" id="home-list-col0">
                             {{# each homes }}
                                 {{# if isRemainder index 0}}
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h2 style="color:red" align="center">{{{homeNumber}}}</h2>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <table class="table table-bordered" >
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Max of Sound</th>
-                                                        <td >{{maxInfo.maxSound}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Over Sound Threshold</th>
-                                                        <td >{{maxInfo.overThresholdSound}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Max of Vibration</th>
-                                                        <td>{{maxInfo.maxVibration}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Over Vibration Threshold</th>
-                                                        <td>{{maxInfo.overThresholdVibration}}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    {{> dataHome home=this startDate=startDate endDate=endDate soundThreshold=soundThreshold vibrationThreshold=vibrationThreshold }}
                                 {{/if}}
                             {{/each}}
                         </ul>
@@ -86,36 +62,7 @@
                         <ul class="list-group" id="home-list-col1">
                             {{# each homes }}
                                 {{# if isRemainder index 1}}
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h2 style="color:red" align="center">{{{homeNumber}}}</h2>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <table class="table table-bordered" >
-                                                <tbody>
-                                                <tr>
-                                                    <th>Max of Sound</th>
-                                                    <td >{{maxInfo.maxSound}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Over Sound Threshold</th>
-                                                    <td >{{maxInfo.overThresholdSound}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Max of Vibration</th>
-                                                    <td>{{maxInfo.maxVibration}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Over Vibration Threshold</th>
-                                                    <td>{{maxInfo.overThresholdVibration}}</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    {{> dataHome home=this startDate=startDate endDate=endDate soundThreshold=soundThreshold vibrationThreshold=vibrationThreshold }}
                                 {{/if}}
                             {{/each}}
                         </ul>
@@ -125,4 +72,40 @@
         </div>
     </div>
 
+</template>
+
+<template name="dataHome">
+    {{ #with home }}
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="color:red" align="center">{{{homeNumber}}}</h2>
+        </div>
+    </div>
+    {{/with}}
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered" >
+                {{ #with maxInfo }}
+                <tbody>
+                <tr>
+                    <th>Max of Sound</th>
+                    <td >{{maxSound}}</td>
+                </tr>
+                <tr>
+                    <th>Over Sound Threshold</th>
+                    <td >{{overThresholdSound}}</td>
+                </tr>
+                <tr>
+                    <th>Max of Vibration</th>
+                    <td>{{maxVibration}}</td>
+                </tr>
+                <tr>
+                    <th>Over Vibration Threshold</th>
+                    <td>{{overThresholdVibration}}</td>
+                </tr>
+                </tbody>
+                {{ /with}}
+            </table>
+        </div>
+    </div>
 </template>

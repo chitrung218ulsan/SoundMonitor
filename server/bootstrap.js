@@ -3,9 +3,10 @@ Meteor.startup(function()
 	//Apartment.remove({});
 	//Building.remove({});
 	//Home.remove({});
+	//Node.remove({});
+	//Data.remove({});
 	
-	var apart1 =
-	{
+	var apart1 = {
 		name: "Lotte",
 		address: "Ulsan",
 		constructDate: new Date(),
@@ -13,8 +14,7 @@ Meteor.startup(function()
 		createdBy: "Trung",
 		remarks: "Lotte"
 	};
-	//var apartId = findAparment('Lotte');
-	//console.log(apartId);
+
 	var building1 = {
 		name: "Building 1",
 		buildingNumber: 1,
@@ -35,6 +35,26 @@ Meteor.startup(function()
 		manager: "Trung",
 		createdBy: "Hieu Ngo",
 		remarks: "Building 2"
+	};
+
+	var node1 = {
+		name: "Node 1",
+		nodeNumber: 1,
+		hardwareVersion: "Hard V1",
+		softwareVersion: 'Soft V1',
+		nodeSerial: "1111",
+		remarks: "Node 1",
+		createdBy: "Hieu"
+	};
+
+	var node2 = {
+		name: "Node 2",
+		nodeNumber: 2,
+		hardwareVersion: "Hard V2",
+		softwareVersion: 'Soft V2',
+		nodeSerial: "2222",
+		remarks: "Node 2",
+		createdBy: "Hieu"
 	};
 
 	var home1 = {
@@ -63,25 +83,6 @@ Meteor.startup(function()
 		remarks: "home2"
 	};
 
-	var home3 = {
-		floor: 1,
-		homeNumber: 301,
-		name: 'Hieu',
-		telNumber: '7889302',
-		createdBy: "Hieu Ngo",
-		nodeId: 1,
-		remarks: "home3"
-	};
-
-	var home4 = {
-		floor: 2,
-		homeNumber: 401,
-		name: 'Hieu',
-		telNumber: '9999999',
-		createdBy: "Hieu Ngo",
-		nodeId: 1,
-		remarks: "home4"
-	};
 	
 	Apartment.insert(apart1, function(err,obj){
 		if(err){
@@ -102,20 +103,29 @@ Meteor.startup(function()
 			home1.apartmentId = obj;
 			home1.buildingId = bu1;
 			home1.buildingName = building1.name;
-			//home3.buildingId = bu1;
-			//home4.buildingId = bu1;
-			Home.insert(home1, function(err,hu1){
-				console.log(err);
+			Node.insert(node1, function(err,realNode1){
+				home1.nodeId = realNode1;
+				var data1 = {
+					nodeNumber: node1.nodeNumber,
+					sound: 10,
+					vibration: 15,
+					battery: 2,
+					createdBy: "Hieu"
+				};
+				var data2 = {
+					nodeNumber: node1.nodeNumber,
+					sound: 20,
+					vibration: 10,
+					battery: 4,
+					createdBy: "Hieu"
+				};
+				Data.insert(data1);
+				Data.insert(data2);
+				Home.insert(home1, function(err,hu1){
+					console.log(err);
+				});
 			});
-			/*
-			Home.insert(home3, function(err,hu1){
-				console.log(err);
-			});
-			Home.insert(home4, function(err,hu1){
-				console.log(err);
-			});
-			*/
-			;
+
 		});
 		Building.insert(building2, function(err,bu2){
 			if(err){
@@ -126,22 +136,29 @@ Meteor.startup(function()
 			home2.apartmentId = obj;
 			home2.buildingId = bu2;
 			home2.buildingName = building2.name;
-			//home3.buildingId = bu2;
-			///home3.buildingName = building2.name;
-			//home4.buildingId = bu2;
-			//home4.buildingName = building2.name;
-			Home.insert(home2,function(err,hu2){
-				console.log(err);
-			});
-			/*
-			Home.insert(home3,function(err,hu2){
-				console.log(err);
-			});
-			Home.insert(home4,function(err,hu2){
-				console.log(err);
-			});
-			*/
-		;
+			Node.insert(node2,function(err,realNode2){
+				home2.nodeId = realNode2;
+				var data1 = {
+					nodeNumber: node2.nodeNumber,
+					sound: 100,
+					vibration: 150,
+					battery: 2,
+					createdBy: "Hieu"
+				};
+				var data2 = {
+					nodeNumber: node2.nodeNumber,
+					sound: 50,
+					vibration: 13,
+					battery: 4,
+					createdBy: "Hieu"
+				};
+				Data.insert(data1);
+				Data.insert(data2);
+				Home.insert(home2,function(err,hu2){
+					console.log(err);
+				});
+			})
+
 		});
 	});
 
