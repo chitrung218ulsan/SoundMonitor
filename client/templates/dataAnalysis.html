@@ -1,7 +1,180 @@
 <template name="dataAnalysis">
     <div class="container">
         <div class="row">
-            This Data Analysis page is under construction ... Please come back later.
+            <div class="col-md-3 form-group">
+                <label for="apartment-selection-dashboard">Select an apartment</label>
+                <select class="form-control" id="apartment-selection-dashboard">
+                    <option value="0" selected></option>
+                    {{ #each apartments }}
+                    <option value="{{_id}}">{{ name }}</option>
+                    {{ /each }}
+                </select>
+            </div>
+            <div class="col-md-3 form-group">
+                <label for="startDateInput">Select start date:</label>
+                <div class='input-group date' id='startDatePicker'>
+                    <input type='text' class="form-control" id="startDateInput" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <label for="endDateInput">Select start date:</label>
+                <div class='input-group date' id='endDatePicker'>
+                    <input type='text' class="form-control" id="endDateInput"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <label for="thresholdPicker">Select threshold: </label>
+                <input type='text' class="form-control" id='thresholdPicker'/>
+            </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" style="background-color: antiquewhite">
+                <div class="list-group" id="building-list">
+                    {{# each buildings}}
+                        <button type="button" class="list-group-item" value="{{_id}}">{{name}}</button>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-6" style="background-color: lightblue">
+                        <ul class="list-group" id="home-list-col0">
+                            {{# each homes }}
+                                {{# if isRemainder index 0}}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h2 style="color:red" align="center">{{{homeNumber}}}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <span class="label label-warning">Warning</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p align="center">ON/OFF</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p align="center">Node Status</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="50"
+                                                     aria-valuemin="0" aria-valuemax="100" style="width:{{nodeBattery}}%">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered" >
+                                                <thead>
+                                                <tr>
+                                                    <th class="col-md-6">Parameter</th>
+                                                    <th class="col-md-6">Value</th>
+                                                    <th class="col-md-6">Date</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td >sound</td>
+                                                    <td >{{sound}}</td>
+                                                    <td >{{formatDate lastDataUpdate}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>vibration</td>
+                                                    <td>{{vibration}}</td>
+                                                    <td>{{formatDate lastDataUpdate}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>over_threshold</td>
+                                                    <td>{{lastOverThreshold}}</td>
+                                                    <td>{{formatDate lastDataUpdate}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <div class="col-md-6" style="background-color: lightblue">
+                        <ul class="list-group" id="home-list-col1">
+                            {{# each homes }}
+                                {{# if isRemainder index 1}}
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h2 style="color:red" align="center">{{{homeNumber}}}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <span class="label label-danger">Danger Label</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p align="center">ON/OFF</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p align="center">Node Status</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="50"
+                                                     aria-valuemin="0" aria-valuemax="100" style="width:{{nodeBattery}}%">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered" >
+                                                <thead>
+                                                <tr>
+                                                    <th class="col-md-6">Parameter</th>
+                                                    <th class="col-md-6">Value</th>
+                                                    <th class="col-md-6">Date</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td >sound</td>
+                                                    <td >{{sound}}</td>
+                                                    <td >{{formatDate lastDataUpdate}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>vibration</td>
+                                                    <td>{{vibration}}</td>
+                                                    <td>{{formatDate lastDataUpdate}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>over_threshold</td>
+                                                    <td>{{lastOverThreshold}}</td>
+                                                    <td>{{formatDate lastDataUpdate}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </template>

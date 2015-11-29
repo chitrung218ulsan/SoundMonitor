@@ -14,9 +14,6 @@
     </div>
     <div class="container">
         <div class="row">
-		<!--
-            <div class="col-md-3" style="background-color: antiquewhite">
-		-->
 			 <div class="col-md-3" style="background-color: antiquewhite">
                 <div class="list-group" id="building-list">
                     {{# each buildings}}
@@ -30,8 +27,6 @@
 						<ul class="list-group" id="home-list-col0">
 							{{# each homes }}
 								{{# if isRemainder index 0}}
-								
-								
 								  <div class="row">
 									<div class="col-md-12">
 										<h2 style="color:red" align="center">{{{homeNumber}}}</h2>
@@ -40,14 +35,6 @@
 								  <div class="row">
 									<div class="col-md-3">
 										<span class="label label-warning">Warning</span>
-										<!--{{#if check {{sound}} 10}}
-											<span class="label label-danger">Danger Label</span>
-										
-										
-										{{else}}
-											<span class="label label-warning">Warning</span>
-										{{/if}}
-										-->
 									</div>
 									<div class="col-md-3">
 										<p align="center">ON/OFF</p>
@@ -95,18 +82,6 @@
 										 </table>
 									</div>
 								  </div>
-								
-									
-									<!--
-										<li class="list-group-item">
-											<ul class="list-group">
-												<li><span class="label label-default">Home #</span> : {{homeNumber}}</li>
-												<li><span class="label label-default">Floor #</span> : {{floor}}</li>
-												<li><span class="label label-default">Owner</span> : {{owner}}</li>
-												<li><span class="label label-default">LastUpdate</span> : {{lastDataUpdate}}</li>
-											</ul>
-										</li>
-									-->
 								{{/if}}
                             {{/each}}
                         </ul>
@@ -171,40 +146,10 @@
 										 </table>
 									</div>
 								  </div>
-								<!--
-                                    <li class="list-group-item">
-                                        <ul class="list-group">
-                                            <li><span class="label label-default">Home #</span> : {{homeNumber}}</li>
-                                            <li><span class="label label-default">Floor #</span> : {{floor}}</li>
-                                            <li><span class="label label-default">Owner</span> : {{owner}}</li>
-                                            <li><span class="label label-default">LastUpdate</span> : {{lastDataUpdate}}</li>
-                                        </ul>
-                                    </li>
-								-->
                                 {{/if}}
                             {{/each}}
                         </ul>
                     </div>
-					<!--
-                    <div class="col-md-4" style="background-color: lightblue">
-                        <ul class="list-group" id="home-list-col2">
-                            {{# each homes }}
-                                {{# if isRemainder index 2}}
-								
-                                    <li class="list-group-item">
-                                        <ul class="list-group">
-                                            <li><span class="label label-default">Home #</span> : {{homeNumber}}</li>
-                                            <li><span class="label label-default">Floor #</span> : {{floor}}</li>
-                                            <li><span class="label label-default">Owner</span> : {{owner}}</li>
-                                            <li><span class="label label-default">LastUpdate</span> : {{lastDataUpdate}}</li>
-                                        </ul>
-                                    </li>
-								
-                                {{/if}}
-                            {{/each}}
-                        </ul>
-                    </div>
-					-->
                 </div>
             </div>
         </div>

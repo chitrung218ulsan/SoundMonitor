@@ -29,3 +29,7 @@ Tracker.autorun(function(){
     Template.soundAlert.currentRoute = (currentR && currentR.url) || "";
     //Template.soundAlert.theInstance && Template.soundAlert.theInstance.hide();
 });
+
+Template.registerHelper('formatDate', function(date) {
+    return moment(date).format('DD/MM/YYYY hh:mm:ss');
+});
