@@ -112,11 +112,13 @@ Template.dataAnalysis.events({
         var target = event.currentTarget;
         var threshold = target.value;
         Template.instance().soundThreshold.set(threshold);
+        $(target).blur();
     },
     'change #thresholdVibrationPicker': function(event){
         var target = event.currentTarget;
         var threshold = target.value;
         Template.instance().vibrationThreshold.set(threshold);
+        $(target).blur();
     }
 });
 
