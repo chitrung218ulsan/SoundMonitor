@@ -37,3 +37,17 @@ Template.homeEdit.helpers({
     });
   }
 });
+Template.homeEdit.helpers({
+  apartmentNameOptions: function () {
+    return Apartment.find().map(function (c) {
+      return {label: c.name, value: c.name};
+    });
+  }
+});
+Template.homeEdit.helpers({
+  aparmentIdOptions: function () {
+    return Apartment.find().map(function (c) {
+      return {label: c.name, value: c._id};
+    });
+  }
+});

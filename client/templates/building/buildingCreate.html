@@ -36,14 +36,34 @@
 				<span class="help-block">{{{afFieldMessage name='name'}}}</span>
 				{{/if}}
 			  </div>
-			  <div class="form-group {{#if afFieldIsInvalid name='buildingNumber'}}has-error{{/if}}">
+			  <!--<div class="form-group {{#if afFieldIsInvalid name='buildingNumber'}}has-error{{/if}}">
 				<label class="control-label">{{afFieldLabelText name='buildingNumber'}}</label>
 				{{> afFieldInput name='buildingNumber'}}
 				{{#if afFieldIsInvalid name='buildingNumber'}}
 				<span class="help-block">{{{afFieldMessage name='buildingNumber'}}}</span>
 				{{/if}}
+			  </div> -->
+			  <div class="form-group {{#if afFieldIsInvalid name='type'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='type'}}</label>
+				{{> afFieldInput name='type' options="allowed"}}
+				{{#if afFieldIsInvalid name='type'}}
+				<span class="help-block">{{{afFieldMessage name='type'}}}</span>
+				{{/if}}
 			  </div>
-			  
+			  <div class="form-group {{#if afFieldIsInvalid name='representative'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='representative'}}</label>
+				{{> afFieldInput name='representative'}}
+				{{#if afFieldIsInvalid name='representative'}}
+				<span class="help-block">{{{afFieldMessage name='representative'}}}</span>
+				{{/if}}
+			  </div>
+			  <div class="form-group {{#if afFieldIsInvalid name='manager'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='manager'}}</label>
+				{{> afFieldInput name='manager'}}
+				{{#if afFieldIsInvalid name='manager'}}
+				<span class="help-block">{{{afFieldMessage name='manager'}}}</span>
+				{{/if}}
+			  </div>
 			  <div class="form-group {{#if afFieldIsInvalid name='numOfFloors'}}has-error{{/if}}">
 				<label class="control-label">{{afFieldLabelText name='numOfFloors'}}</label>
 				{{> afFieldInput name='numOfFloors'}}
@@ -58,21 +78,6 @@
 				<span class="help-block">{{{afFieldMessage name='numHousePerFloor'}}}</span>
 				{{/if}}
 			  </div>
-			  <div class="form-group {{#if afFieldIsInvalid name='type'}}has-error{{/if}}">
-				<label class="control-label">{{afFieldLabelText name='type'}}</label>
-				{{> afFieldInput name='type' options="allowed"}}
-				{{#if afFieldIsInvalid name='type'}}
-				<span class="help-block">{{{afFieldMessage name='type'}}}</span>
-				{{/if}}
-			  </div>
-			  
-			  <div class="form-group {{#if afFieldIsInvalid name='manager'}}has-error{{/if}}">
-				<label class="control-label">{{afFieldLabelText name='manager'}}</label>
-				{{> afFieldInput name='manager'}}
-				{{#if afFieldIsInvalid name='manager'}}
-				<span class="help-block">{{{afFieldMessage name='manager'}}}</span>
-				{{/if}}
-			  </div>
 			  
 			  <div class="form-group {{#if afFieldIsInvalid name='remarks'}}has-error{{/if}}">
 				<label class="control-label">{{afFieldLabelText name='remarks'}}</label>
@@ -81,8 +86,6 @@
 				<span class="help-block">{{{afFieldMessage name='remarks'}}}</span>
 				{{/if}}
 			  </div>
-			  
-			  
 			  
 			  <div class="form-group">
 				<button type="submit" class="btn btn-primary">Submit</button>

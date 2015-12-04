@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 form-group">
-                <label for="apartment-selection-dashboard">Select an apartment</label>
+                <label for="apartment-selection-dashboard">건축물 선택</label>
                 <select class="form-control" id="apartment-selection-dashboard">
                     <option value="0" selected></option>
                     {{ #each apartments }}
@@ -56,25 +56,25 @@
 										<table class="table table-bordered" >
 											 <thead>
 												<tr>
-												  <th class="col-md-6">Parameter</th>
-												  <th class="col-md-6">Value</th>
-												  <th class="col-md-6">Date</th>
+												  <th class="col-md-6">항목</th>
+												  <th class="col-md-6">값</th>
+												  <th class="col-md-6">일자</th>
 												 
 												</tr>
 											  </thead>
 											<tbody>
 											  <tr>
-												<td >sound</td>
+												<td >소음</td>
 												<td >{{sound}}</td>
 												<td >{{formatDate lastDataUpdate}}</td>
 											  </tr>
 											  <tr>
-												<td>vibration</td>
+												<td>진동</td>
 												<td>{{vibration}}</td>
 												<td>{{formatDate lastDataUpdate}}</td>
 											  </tr>
 											  <tr>
-												<td>over_threshold</td>
+												<td>기준초과</td>
 												<td>{{lastOverThreshold}}</td>
 												<td>{{formatDate lastDataUpdate}}</td>
 											  </tr>
@@ -120,25 +120,25 @@
 										<table class="table table-bordered" >
 											 <thead>
 												<tr>
-												  <th class="col-md-6">Parameter</th>
-												  <th class="col-md-6">Value</th>
-												  <th class="col-md-6">Date</th>
+												  <th class="col-md-6">항목</th>
+												  <th class="col-md-6">값</th>
+												  <th class="col-md-6">일자</th>
 												 
 												</tr>
 											  </thead>
 											<tbody>
 											  <tr>
-												<td >sound</td>
+												<td >소음</td>
 												<td >{{sound}}</td>
 												<td >{{formatDate lastDataUpdate}}</td>
 											  </tr>
 											  <tr>
-												<td>vibration</td>
+												<td>진동</td>
 												<td>{{vibration}}</td>
 												<td>{{formatDate lastDataUpdate}}</td>
 											  </tr>
 											  <tr>
-												<td>over_threshold</td>
+												<td>기준초과</td>
 												<td>{{lastOverThreshold}}</td>
 												<td>{{formatDate lastDataUpdate}}</td>
 											  </tr>

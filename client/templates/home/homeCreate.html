@@ -11,7 +11,13 @@
 				<span class="help-block">{{{afFieldMessage name='createdBy'}}}</span>
 				{{/if}}
 			  </div>
-			  
+			  <div class="form-group {{#if afFieldIsInvalid name='apartmentId'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='apartmentId' }}</label>
+				{{> afFieldInput name='apartmentId' options=apartIdOptions}}
+				{{#if afFieldIsInvalid name='apartmentId'}}
+				<span class="help-block">{{{afFieldMessage name='apartmentId'}}}</span>
+				{{/if}}
+			 </div> 
 			<div class="form-group {{#if afFieldIsInvalid name='apartmentName'}}has-error{{/if}}">
 				<label class="control-label">{{afFieldLabelText name='apartmentName' }}</label>
 				{{> afFieldInput name='apartmentName' options=apartNameOptions}}
@@ -19,38 +25,18 @@
 				<span class="help-block">{{{afFieldMessage name='apartmentName'}}}</span>
 				{{/if}}
 			 </div>  
-			 
-			 <div class="form-group {{#if afFieldIsInvalid name='apartmentId'}}has-error{{/if}}">
-				<label class="control-label">{{afFieldLabelText name='apartmentId' }}</label>
-				{{> afFieldInput name='apartmentId' options=apartIdOptions}}
-				{{#if afFieldIsInvalid name='apartmentId'}}
-				<span class="help-block">{{{afFieldMessage name='apartmentId'}}}</span>
-				{{/if}}
-			 </div> 
-			  
-			<div class="form-group {{#if afFieldIsInvalid name='buildingName'}}has-error{{/if}}">
-				<label class="control-label">{{afFieldLabelText name='buildingName'}}</label>
-				{{> afFieldInput name='buildingName' options=buildingNameOptions}}
-				{{#if afFieldIsInvalid name='buildingName'}}
-				<span class="help-block">{{{afFieldMessage name='buildingName'}}}</span>
-				{{/if}}
-			  </div>
-			  
-			   <div class="form-group {{#if afFieldIsInvalid name='buildingId'}}has-error{{/if}}">
+			 <div class="form-group {{#if afFieldIsInvalid name='buildingId'}}has-error{{/if}}">
 				<label class="control-label">{{afFieldLabelText name='buildingId'}}</label>
 				{{> afFieldInput name='buildingId' options=buildingIdOptions}}
 				{{#if afFieldIsInvalid name='buildingId'}}
 				<span class="help-block">{{{afFieldMessage name='buildingId'}}}</span>
 				{{/if}}
 			  </div>
-			
-			 
-			  
-			  <div class="form-group {{#if afFieldIsInvalid name='homeNumber'}}has-error{{/if}}">
-				<label class="control-label">{{afFieldLabelText name='homeNumber'}}</label>
-				{{> afFieldInput name='homeNumber'}}
-				{{#if afFieldIsInvalid name='homeNumber'}}
-				<span class="help-block">{{{afFieldMessage name='homeNumber'}}}</span>
+			<div class="form-group {{#if afFieldIsInvalid name='buildingName'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='buildingName'}}</label>
+				{{> afFieldInput name='buildingName' options=buildingNameOptions}}
+				{{#if afFieldIsInvalid name='buildingName'}}
+				<span class="help-block">{{{afFieldMessage name='buildingName'}}}</span>
 				{{/if}}
 			  </div>
 			  <div class="form-group {{#if afFieldIsInvalid name='floor'}}has-error{{/if}}">
@@ -60,6 +46,14 @@
 				<span class="help-block">{{{afFieldMessage name='floor'}}}</span>
 				{{/if}}
 			  </div>
+			  <div class="form-group {{#if afFieldIsInvalid name='homeNumber'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='homeNumber'}}</label>
+				{{> afFieldInput name='homeNumber'}}
+				{{#if afFieldIsInvalid name='homeNumber'}}
+				<span class="help-block">{{{afFieldMessage name='homeNumber'}}}</span>
+				{{/if}}
+			  </div>
+			  
 			  
 			  <div class="form-group {{#if afFieldIsInvalid name='name'}}has-error{{/if}}">
 				<label class="control-label">{{afFieldLabelText name='name'}}</label>
@@ -75,7 +69,13 @@
 				<span class="help-block">{{{afFieldMessage name='telNumber'}}}</span>
 				{{/if}}
 			  </div>
-			  
+			  <div class="form-group {{#if afFieldIsInvalid name='homeSize'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='homeSize'}}</label>
+				{{> afFieldInput name='homeSize'}}
+				{{#if afFieldIsInvalid name='homeSize'}}
+				<span class="help-block">{{{afFieldMessage name='homeSize'}}}</span>
+				{{/if}}
+			  </div>
 			  <div class="form-group {{#if afFieldIsInvalid name='nodeId'}}has-error{{/if}}">
 				<label class="control-label">{{afFieldLabelText name='nodeId'}}</label>
 				{{> afFieldInput name='nodeId' options=nodeIdOptions}}

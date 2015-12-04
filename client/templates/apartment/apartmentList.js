@@ -6,8 +6,14 @@ Template.apartmentList.helpers({
         var fields = [
             SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'_id', {hidden: true}),
             SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'name'),
+			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'type'),
             SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'address'),
+			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'numOfBuildings'),
+			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'numOfHomes'),
+			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'constructDate'),
 			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'manager'),
+			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'remarks'),
+			
             {key: '_id', label: '', fn : function(value, object){
                 return new Spacebars.SafeString("<a href="+Router.routes['apartment.view'].path({_id:value})+">View</a>");
             }},

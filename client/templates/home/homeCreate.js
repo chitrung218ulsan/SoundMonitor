@@ -38,7 +38,7 @@ Template.homeCreate.helpers({
   },
   nodeIdOptions: function () {
     return Node.find().map(function (c) {
-      return {label: c.nodeNumber, value: c.nodeNumber};
+      return {label: c.name, value: c.name};
     });
   }
   

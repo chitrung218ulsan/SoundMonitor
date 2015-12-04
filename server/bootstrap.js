@@ -8,7 +8,10 @@ Meteor.startup(function()
 	
 	var apart1 = {
 		name: "Lotte",
+		type: "아바트",
 		address: "Ulsan",
+		numOfBuildings:10,
+		numOfHomes:20,
 		constructDate: new Date(),
 		manager: "Trung",
 		createdBy: "Trung",
@@ -20,8 +23,9 @@ Meteor.startup(function()
 		buildingNumber: 1,
 		numOfFloors: 7,
 		numHousePerFloor: 6,
-		type: "type1",
+		type: "계단식",
 		manager: "Trung",
+		representative: "Trung",
 		createdBy: "Trung",
 		remarks: "Building 1"
 	};
@@ -31,8 +35,9 @@ Meteor.startup(function()
 		buildingNumber: 3,
 		numOfFloors: 2,
 		numHousePerFloor: 3,
-		type: "type2",
+		type: "계단식",
 		manager: "Trung",
+		representative:"Trung",
 		createdBy: "Hieu Ngo",
 		remarks: "Building 2"
 	};
@@ -73,6 +78,7 @@ Meteor.startup(function()
 		name: 'Hieu',
 		telNumber: '7889302',
 		createdBy: "Hieu Ngo",
+		homeSize: 60,
 		nodeId: 1,
 		sound:0,
 		vibration:0,
@@ -86,6 +92,7 @@ Meteor.startup(function()
 		name: 'Hieu',
 		telNumber: '9999999',
 		createdBy: "Hieu Ngo",
+		homeSize: 60,
 		nodeId: 1,
 		sound:0,
 		vibration:0,
@@ -99,6 +106,7 @@ Meteor.startup(function()
 		name: 'Hieu',
 		telNumber: '7889302',
 		createdBy: "Hieu Ngo",
+		homeSize: 60,
 		nodeId: 1,
 		sound:0,
 		vibration:0,
@@ -112,6 +120,7 @@ Meteor.startup(function()
 		name: 'Hieu',
 		telNumber: '9999999',
 		createdBy: "Hieu Ngo",
+		homeSize: 60,
 		nodeId: 1,
 		sound:0,
 		vibration:0,
