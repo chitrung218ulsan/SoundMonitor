@@ -12,6 +12,11 @@ AutoForm.hooks({
             var url = Template.soundAlert.previousRoute ||
                 Router.routes[Router.current().route.options.parent].path({_id: this.currentDoc._id});
             Router.go(url);
+        },
+        docToForm: function(doc) {
+            var realDoc = Home.findOne({_id: doc._id});
+            doc.apartmentId = realDoc.building().apartment()._id;
+            return doc;
         }
     }
 });
@@ -24,30 +29,27 @@ Template.homeEdit.events({
     }
 });
 Template.homeEdit.helpers({
-  buildingNameOptions: function () {
-    return Building.find().map(function (c) {
-      return {label: c.name, value: c.name};
-    });
-  }
-});
-Template.homeEdit.helpers({
-  buildingIdOptions: function () {
-    return Building.find().map(function (c) {
-      return {label: c.name, value: c._id};
-    });
-  }
-});
-Template.homeEdit.helpers({
-  apartmentNameOptions: function () {
-    return Apartment.find().map(function (c) {
-      return {label: c.name, value: c.name};
-    });
-  }
-});
-Template.homeEdit.helpers({
-  aparmentIdOptions: function () {
-    return Apartment.find().map(function (c) {
-      return {label: c.name, value: c._id};
-    });
-  }
+    getSchema: function(){
+        var newSchema = new SimpleSchema([Home.simpleSchema(),{
+            apartmentId: {
+                type: String,
+                label: "공동주택 명",
+                optional: true
+            }
+        }]);
+        return newSchema;
+    },
+    apartmentOptions: function(){
+        var opts = Apartment.find().map(function(obj){
+           return {label: obj.name, value: obj._id};
+        });
+        return opts;
+    },
+    buildingOptions: function () {
+        var apId = AutoForm.getFieldValue('apartmentId');
+        var opts = Building.find({apartmentId: apId}).map(function(obj){
+            return {label: obj.name, value: obj._id};
+        });
+        return opts;
+    }
 });

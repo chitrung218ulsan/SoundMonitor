@@ -1,4 +1,4 @@
-<template name="homeCreate">
+<template name="homeCreateOld">
     <div class="container">
         <div class="row">
             <!--{{> quickForm collection=this id='createBuildingForm' type='insert' omitFields='isDeleted,createdAt, lastModifiedAt,lastModifiedBy' }}-->
@@ -100,6 +100,33 @@
 			  </div>
 			{{/autoForm}}
 			
+        </div>
+    </div>
+</template>
+
+<template name="homeCreate">
+    <div class="container">
+        <div class="row">
+            {{#autoForm collection=this schema=getSchema id="createHomeForm" type='insert' }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-info">Reset Form</button>
+
+                <span class="help-block"></span>
+
+                {{> afQuickField name='createdBy' }}
+                {{> afQuickField name='apartmentId' options=apartmentOptions}}
+                {{> afQuickField name='buildingId' options=buildingOptions}}
+                {{> afQuickField name='floor' }}
+                {{> afQuickField name='homeNumber' }}
+                {{> afQuickField name='name' }}
+                {{> afQuickField name='telNumber' }}
+                {{> afQuickField name='homeSize' }}
+                {{> afQuickField name='nodeId' options=nodeOptions}}
+                {{> afQuickField name='remarks' }}
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-info">Reset Form</button>
+            {{/autoForm}}
         </div>
     </div>
 </template>

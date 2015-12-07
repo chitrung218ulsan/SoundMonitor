@@ -3,7 +3,7 @@
         <div class="row">
             {{#autoForm collection=this id="createBuildingForm" type='insert' }}
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <!--<button type="button" class="btn btn-info edit-deny">Cancel</button>-->
+                <button type="reset" class="btn btn-info">Reset Form</button>
 
                 <span class="help-block"></span>
 
@@ -18,7 +18,7 @@
                 {{> afQuickField name='createdBy' }}
 
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <!--<button type="button" class="btn btn-info edit-deny">Cancel</button>-->
+                <button type="reset" class="btn btn-info">Reset Form</button>
             {{/autoForm}}
         </div>
     </div>

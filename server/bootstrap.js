@@ -144,10 +144,10 @@
 //				console.log(err);
 //				return;
 //			}
-//			home1.apartmentName = apart1.name;
-//			home1.apartmentId = obj;
+//			//home1.apartmentName = apart1.name;
+//			//home1.apartmentId = obj;
 //			home1.buildingId = bu1;
-//			home1.buildingName = building1.name;
+//			//home1.buildingName = building1.name;
 //			Node.insert(node1, function(err,realNode1){
 //				home1.nodeId = realNode1;
 //				var data1 = {
@@ -171,10 +171,10 @@
 //				});
 //			});
 //
-//			home2.apartmentName = apart1.name;
-//			home2.apartmentId = obj;
+//			//home2.apartmentName = apart1.name;
+//			//home2.apartmentId = obj;
 //			home2.buildingId = bu1;
-//			home2.buildingName = building1.name;
+//			//home2.buildingName = building1.name;
 //			Node.insert(node2,function(err,realNode2){
 //				home2.nodeId = realNode2;
 //				var data1 = {
@@ -203,10 +203,10 @@
 //				console.log(err);
 //				return;
 //			}
-//			home3.apartmentName = apart1.name;
-//			home3.apartmentId = obj;
+//			//home3.apartmentName = apart1.name;
+//			//home3.apartmentId = obj;
 //			home3.buildingId = bu2;
-//			home3.buildingName = building2.name;
+//			//home3.buildingName = building2.name;
 //			Node.insert(node3,function(err,realNode2){
 //				home3.nodeId = realNode2;
 //				var data1 = {
