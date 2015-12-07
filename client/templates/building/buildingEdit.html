@@ -6,15 +6,16 @@
                 <button type="button" class="btn btn-info edit-deny">Cancel</button>
 
                 <span class="help-block"></span>
-					
-                    {{> afQuickField name='name' }}
-                    {{> afQuickField name='type' options="allowed"}}
-                    {{> afQuickField name='representative' }}
-                    {{> afQuickField name='manager' }}
-					 {{> afQuickField name='numOfFloors' }}
-					  {{> afQuickField name='numHousePerFloor' }}
-					{{> afQuickField name='remarks' }}
-                    
+
+                {{> afQuickField name='name' }}
+                {{> afQuickField name='type' options="allowed"}}
+                {{> afQuickField name='apartmentId' options=apartmentOptions}}
+                {{> afQuickField name='representative' }}
+                {{> afQuickField name='manager' }}
+                {{> afQuickField name='numOfFloors' }}
+                {{> afQuickField name='numHousePerFloor' }}
+                {{> afQuickField name='remarks' }}
+
 
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <button type="button" class="btn btn-info edit-deny">Cancel</button>

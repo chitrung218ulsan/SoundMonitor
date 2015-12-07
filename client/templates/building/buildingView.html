@@ -1,7 +1,7 @@
 <template name="buildingView">
     <div class="container">
         <div class="row">
-            {{> quickForm collection='Building' doc=this id='viewBuildingForm' type='readonly' omitFields='isDeleted,apartmentId'}}
+            {{> quickForm collection='Building' schema=getSchema doc=this id='viewBuildingForm' type='disabled' omitFields='isDeleted,apartmentId'}}
         </div>
     </div>
 </template>

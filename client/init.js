@@ -10,5 +10,13 @@ AutoForm.hooks({
             doc.numOfHomes = realDoc.numOfHomes();
             return doc;
         }
+    },
+    viewBuildingForm: {
+        docToForm: function(doc) {
+            var realDoc = Building.findOne({_id: doc._id});
+            doc.numOfHomes = realDoc.numOfHomes();
+            doc.apartmentName = realDoc.apartment().name;
+            return doc;
+        }
     }
 });

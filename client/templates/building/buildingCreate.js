@@ -7,20 +7,17 @@ AutoForm.hooks({
                 "The " + entityType + " has been created successfully."
             );
             Router.go(entityType);
+        },
+        onError: function(formType, error){
+            console.log("error");
         }
     }
 });
 Template.buildingCreate.helpers({
-  apartNameOptions: function () {
-    return Apartment.find().map(function (c) {
-      return {label: c.name, value: c.name};
-    });
-  }
-});
-Template.buildingCreate.helpers({
-  apartIdOptions: function () {
-    return Apartment.find().map(function (c) {
-      return {label: c.name, value: c._id};
-    });
-  }
+    apartmentOptions: function(){
+        var options = _.map(Apartment.find({}).fetch(), function(obj){
+            return {label: obj.name, value: obj._id}
+        });
+        return options;
+    }
 });

@@ -8,8 +8,12 @@ Template.apartmentList.helpers({
             SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'name'),
 			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'type'),
             SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'address'),
-			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'numOfBuildings', {label: "동수"}),
-			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'numOfHomes',{label: "세대 수"}),
+			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'numOfBuildings', {label: "동수", fn: function(value, object){
+                return value;
+            }}),
+			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'numOfHomes',{label: "세대 수", fn: function(value, object){
+                return value;
+            }}),
 			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'constructDate'),
 			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'manager'),
 			SoundMonitor.Functions.getFieldForTable(Apartment.simpleSchema(),'remarks'),

@@ -23,3 +23,12 @@ Template.buildingEdit.events({
         Router.go(url);
     }
 });
+
+Template.buildingEdit.helpers({
+    apartmentOptions: function(){
+        var options = _.map(Apartment.find({}).fetch(), function(obj){
+           return {label: obj.name, value: obj._id}
+        });
+        return options;
+    }
+});
