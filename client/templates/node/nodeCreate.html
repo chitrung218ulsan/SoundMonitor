@@ -4,15 +4,6 @@
             <!--{{> quickForm collection=this id='createBuildingForm' type='insert' omitFields='isDeleted,createdAt, lastModifiedAt,lastModifiedBy' }}-->
 			{{#autoForm id="createNodeForm" type="insert" collection="Node"}}
 			
-			<div class="form-group {{#if afFieldIsInvalid name='createdBy'}}has-error{{/if}}">
-				<label class="control-label">{{afFieldLabelText name='createdBy'}}</label>
-				{{> afFieldInput name='createdBy'}}
-				{{#if afFieldIsInvalid name='createdBy'}}
-				<span class="help-block">{{{afFieldMessage name='createdBy'}}}</span>
-				{{/if}}
-			  </div>
-			  
-			  
 			  <div class="form-group {{#if afFieldIsInvalid name='name'}}has-error{{/if}}">
 				<label class="control-label">{{afFieldLabelText name='name'}}</label>
 				{{> afFieldInput name='name'}}
@@ -59,6 +50,14 @@
 				{{> afFieldInput name='remarks'}}
 				{{#if afFieldIsInvalid name='remarks'}}
 				<span class="help-block">{{{afFieldMessage name='remarks'}}}</span>
+				{{/if}}
+			  </div>
+			  
+			  <div class="form-group {{#if afFieldIsInvalid name='createdBy'}}has-error{{/if}}">
+				<label class="control-label">{{afFieldLabelText name='createdBy'}}</label>
+				{{> afFieldInput name='createdBy'}}
+				{{#if afFieldIsInvalid name='createdBy'}}
+				<span class="help-block">{{{afFieldMessage name='createdBy'}}}</span>
 				{{/if}}
 			  </div>
 			  

@@ -1,7 +1,8 @@
 <template name="apartmentView">
     <div class="container">
         <div class="row">
-            {{> quickForm collection='Apartment' schema=getSchema doc=this id='viewApartmentForm' type='disabled' omitFields='isDeleted,' }}
+            <!--{{> quickForm collection='Apartment' schema=getSchema doc=this id='viewApartmentForm' type='disabled' omitFields='isDeleted,' }}-->
+			{{> quickForm collection='Apartment' doc=this id='viewApartmentForm' type='disabled' omitFields='isDeleted, createdBy, lastModifiedAt,lastModifiedBy,createdAt' }}
         </div>
     </div>
 </template>

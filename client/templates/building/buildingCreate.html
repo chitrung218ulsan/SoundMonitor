@@ -6,10 +6,9 @@
                 <button type="reset" class="btn btn-info">Reset Form</button>
 
                 <span class="help-block"></span>
-
+				{{> afQuickField name='apartmentId' options=apartmentOptions}}
                 {{> afQuickField name='name' }}
                 {{> afQuickField name='type' options="allowed"}}
-                {{> afQuickField name='apartmentId' options=apartmentOptions}}
                 {{> afQuickField name='representative' }}
                 {{> afQuickField name='manager' }}
                 {{> afQuickField name='numOfFloors' }}
