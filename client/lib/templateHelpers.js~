@@ -31,5 +31,5 @@ Tracker.autorun(function(){
 });
 
 Template.registerHelper('formatDate', function(date) {
-    return moment(date).format('YYYY/MM/DD h:mm:ss a');
+    return moment(date).format('YYYY/MM/DD HH:MM:ss');
 });

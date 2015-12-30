@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 form-group">
-                <label for="apartment-selection-dashboard">건축물 선택</label>
+                <label for="apartment-selection-dashboard">건축�??�택</label>
                 <select class="form-control" id="apartment-selection-dashboard">
                     <option value="0" selected></option>
                     {{ #each apartments }}
@@ -56,15 +56,15 @@
 										<table class="table table-bordered" >
 											 <thead>
 												<tr>
-												  <th class="col-md-6">항목</th>
-												  <th class="col-md-6">값</th>
-												  <th class="col-md-6">일자</th>
+												  <th class="col-md-6">??��</th>
+												  <th class="col-md-6">�?/th>
+												  <th class="col-md-6">?�자</th>
 												 
 												</tr>
 											  </thead>
 											<tbody>
 											  <tr>
-												<td >소음</td>
+												<td >?�음</td>
 												<td >{{sound}}</td>
 												<td >{{formatDate lastDataUpdate}}</td>
 											  </tr>
@@ -74,7 +74,7 @@
 												<td>{{formatDate lastDataUpdate}}</td>
 											  </tr>
 											  <tr>
-												<td>기준초과</td>
+												<td>기�?초과</td>
 												<td>{{lastOverThreshold}}</td>
 												<td>{{formatDate lastDataUpdate}}</td>
 											  </tr>
@@ -120,15 +120,15 @@
 										<table class="table table-bordered" >
 											 <thead>
 												<tr>
-												  <th class="col-md-6">항목</th>
-												  <th class="col-md-6">값</th>
-												  <th class="col-md-6">일자</th>
+												  <th class="col-md-6">??��</th>
+												  <th class="col-md-6">�?/th>
+												  <th class="col-md-6">?�자</th>
 												 
 												</tr>
 											  </thead>
 											<tbody>
 											  <tr>
-												<td >소음</td>
+												<td >?�음</td>
 												<td >{{sound}}</td>
 												<td >{{formatDate lastDataUpdate}}</td>
 											  </tr>
@@ -138,7 +138,7 @@
 												<td>{{formatDate lastDataUpdate}}</td>
 											  </tr>
 											  <tr>
-												<td>기준초과</td>
+												<td>기�?초과</td>
 												<td>{{lastOverThreshold}}</td>
 												<td>{{formatDate lastDataUpdate}}</td>
 											  </tr>

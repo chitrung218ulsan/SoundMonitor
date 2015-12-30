@@ -226,7 +226,7 @@
 
 
 
-	var wsURL = 'ws://203.250.78.212:9003/websockets/data_service';
+	var wsURL = 'ws://192.168.0.28:9003/websockets/data_service';
 	var Websocket = Meteor.npmRequire('recon-ws');
 	startWebsocket();
 
@@ -292,17 +292,21 @@
 
 
 			// Insert received data into Data Collection
-			Data.insert(inputData);
+			if(!nodeEntry.isDeleted)
+			{
+				Data.insert(inputData);
+			}
+			
 
 			// Update value in House
 
-			Home.update({'nodeId':objNodeId},
+			Home.update({'nodeId':objNodeId,'isDeleted':false},
 			{$set:{
 				sound:sound,
 				vibration: vibration,
 				nodeBattery: battery,
 				lastDataUpdate: new Date()
-			}},{ multi: true });
+			}},{ multi: false });
 
 
 		}

@@ -15,7 +15,10 @@ Template.dataAnalysis.onCreated(function(){
 
     this.autorun(function(){
         var bu = self.buildingSelected.get();
-        self.subscribe(SoundMonitor.Constants.DATA_SOURCE, (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate());
+        //self.subscribe(SoundMonitor.Constants.DATA_SOURCE, (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
+		self.subscribe('SoundData', (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
+		
+		self.subscribe('VibData', (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
     });
 });
 Template.dataAnalysis.onRendered(function(){
@@ -91,7 +94,11 @@ Template.dataAnalysis.helpers({
             , Template.instance().endDate.get().toDate()
             , Template.instance().soundThreshold.get()
             , Template.instance().vibrationThreshold.get());
-    }
+    },
+	buildingMaxInfo_1:function(){
+		var chosenBuilding = Template.instance().buildingSelected.get();
+		return chosenBuilding && chosenBuilding.maxInfo_1();
+	}
 });
 
 Template.dataAnalysis.events({
@@ -129,5 +136,56 @@ Template.dataHome.helpers({
         var dataContext = Template.currentData();
         var home = dataContext.home;
         return home.maxInfo(dataContext.startDate, dataContext.endDate, dataContext.soundThreshold, dataContext.vibrationThreshold);
-    }
+    },
+	maxSoundInfo:function(){
+		var dataContext = Template.currentData();
+        var home = dataContext.home;
+		var node = home.node();
+		//console.log(node.nodeNumber);
+		//console.log(SoundData.find({nodeNumber:node.nodeNumber}));
+		var soundData = undefined;
+		soundData = SoundData.findOne({nodeNumber:node.nodeNumber});
+		if(soundData!=undefined)
+		{
+			return {
+				maxSound: soundData.maxSound,
+           
+				numOfSoundOverThreshold: soundData.numOfSoundOverThreshold
+			}
+		}
+		else{
+			return {
+				maxSound: 0,
+           
+				numOfSoundOverThreshold: 0,
+			}
+			
+            
+		}
+		
+	},
+	maxVibrationInfo:function(){
+		var dataContext = Template.currentData();
+        var home = dataContext.home;
+		var node = home.node();
+		//console.log(node.nodeNumber);
+		//console.log(SoundData.find({nodeNumber:node.nodeNumber}));
+		var vibData = undefined;
+		vibData = VibData.findOne({nodeNumber:node.nodeNumber});
+		if(vibData!=undefined)
+		{
+			return {
+				maxVib: vibData.maxVib,
+           
+				numOfVibOverThreshold: vibData.numOfVibOverThreshold
+			}
+		}
+		else{
+			return {
+				maxVib: 0,
+           
+				numOfVibOverThreshold: 0,
+			}
+		}
+	}
 });

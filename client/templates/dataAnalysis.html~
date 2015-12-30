@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="col-md-2 form-group">
-                <label for="endDateInput">Select end date:</label>
+                <label for="endDateInput">Select start date:</label>
                 <div class='input-group date' id='endDatePicker'>
                     <input type='text' class="form-control" id="endDateInput"/>
                     <span class="input-group-addon">
@@ -55,7 +55,7 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-12">
-                        <!--<table class="table table-bordered" >
+                        <table class="table table-bordered" >
                             {{ #with buildingMaxInfo }}
                             <tbody>
                             <tr>
@@ -73,29 +73,6 @@
                             <tr>
                                 <th>Over Vibration Threshold</th>
                                 <td>{{overThresholdVibration}}</td>
-                            </tr>
-                            </tbody>
-                            {{ /with}}
-                        </table>
-						-->
-						 <table class="table table-bordered" >
-                            {{ #with buildingMaxInfo_1 }}
-                            <tbody>
-                            <tr>
-                                <th>Max of Sound</th>
-                                <td >{{maxSound}}</td>
-                            </tr>
-                            <tr>
-                                <th>Over Sound Threshold</th>
-                                <td >{{overThresholdSound}}</td>
-                            </tr>
-                            <tr>
-                                <th>Max of Vibration</th>
-                                <td>{{maxVib}}</td>
-                            </tr>
-                            <tr>
-                                <th>Over Vibration Threshold</th>
-                                <td>{{overThresholdVib}}</td>
                             </tr>
                             </tbody>
                             {{ /with}}
@@ -139,31 +116,16 @@
     <div class="row">
         <div class="col-md-12">
             <table class="table table-bordered" >
-               <!-- {{ #with maxSoundInfo }} -->
+                {{ #with maxInfo }}
                 <tbody>
-				{{ #with maxSoundInfo }}
                 <tr>
                     <th>Max of Sound</th>
                     <td >{{maxSound}}</td>
                 </tr>
-				
                 <tr>
                     <th>Over Sound Threshold</th>
-                    <!--<td >{{overThresholdSound}}</td> -->
-					<td >{{numOfSoundOverThreshold}}</td>
+                    <td >{{overThresholdSound}}</td>
                 </tr>
-				{{/with}}
-				 {{ #with maxVibrationInfo }}
-				<tr>
-                    <th>Max of Vibration</th>
-                    <td>{{maxVib}}</td>
-                </tr>
-                <tr>
-                    <th>Over Vibration Threshold</th>
-                    <td>{{numOfVibOverThreshold}}</td>
-                </tr>
-				{{/with}}
-				<!--
                 <tr>
                     <th>Max of Vibration</th>
                     <td>{{maxVibration}}</td>
@@ -172,9 +134,8 @@
                     <th>Over Vibration Threshold</th>
                     <td>{{overThresholdVibration}}</td>
                 </tr>
-				-->
                 </tbody>
-                <!-- {{ /with}} -->
+                {{ /with}}
             </table>
         </div>
     </div>
