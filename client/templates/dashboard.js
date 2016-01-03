@@ -5,6 +5,52 @@ Template.dashboard.onCreated(function(){
     this.apartmentSelected = new ReactiveVar(undefined);
     this.buildingSelected = new ReactiveVar(undefined);
 });
+Template.checkDataSound.helpers({
+	checkNormal:function(){
+		var home = Template.currentData();
+		var buildingSelected = Session.get("buildingSelected");
+		
+        var valueCheck = parseFloat(home.sound);
+		
+		if(valueCheck <= buildingSelected.warningSoundThreshold)
+		{
+			//console.log('check normal true' )
+			return true;
+		}
+		else 
+			return false;
+		
+		
+	},
+	checkWarning:function(){
+		var home = Template.currentData();
+		var buildingSelected = Session.get("buildingSelected");
+        var valueCheck = parseFloat(home.sound);
+		if(buildingSelected.warningSoundThreshold < valueCheck &&  valueCheck < buildingSelected.dangerSoundThreshold)
+		{
+			//console.log('check warning true' )
+			return true;
+		}
+		else 
+			//console.log('check warning false' )
+			return false;
+		
+		
+	},
+	checkDanger:function(){
+		var home = Template.currentData();
+		var buildingSelected = Session.get("buildingSelected");
+        var valueCheck = parseFloat(home.sound);
+		if(buildingSelected.dangerSoundThreshold < valueCheck )
+		{
+			return true;
+		}
+		else 
+			return false;
+		
+		
+	}
+});
 Template.dashboard.helpers({
     apartments: function(){
         var templ = Template.instance();
@@ -43,6 +89,7 @@ Template.dashboard.helpers({
 		else
 			return false;
 	}
+	
 });
 
 Template.dashboard.events({
@@ -51,11 +98,13 @@ Template.dashboard.events({
         var newId = target.options[target.selectedIndex].value;
         Template.instance().apartmentSelected.set(Apartment.findOne({_id: newId}));
         Template.instance().buildingSelected.set(undefined);
+		
     },
     'click #building-list .list-group-item': function(event){
         var target = event.currentTarget;
         var newId = target.value;
         Template.instance().buildingSelected.set(Building.findOne({_id: newId}));
+		Session.set("buildingSelected",Building.findOne({_id: newId}));
     }
 });
 

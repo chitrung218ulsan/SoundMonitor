@@ -1,5 +1,7 @@
 ﻿Meteor.startup(function()
 {
+    Data._ensureIndex({"nodeNumber":1});
+	Data._ensureIndex({"createdAt":1});
 	//Apartment.remove({});
 	//Building.remove({});
 	//Home.remove({});

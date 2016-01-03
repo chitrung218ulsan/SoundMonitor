@@ -22,10 +22,60 @@ Meteor.publish(SoundMonitor.Constants.DATA_SOURCE,function(buildingId, startDate
 			
 		});
 	}
-	//return Data.find({nodeNumber : {$in :  nodes},isDeleted: false, createdAt: {$gte: startDate, $lte: endDate},sound:{$gt:0},vibration:{$gt:0}},{sort:{createdAt:1}});
-	//return Data.find({nodeNumber : {$in :  nodes},isDeleted: false, createdAt: {$gte: startDate, $lte: endDate}},{sort:{createdAt:1}});
+	
 	return Data.find({nodeNumber : {$in :  nodes},isDeleted: false, createdAt: {$gte: startDate, $lte: endDate},$or:[{sound:{$gte:soundThreshold}},{vibration:{$gte:vibrationThreshold}}]},{sort:{createdAt:1}});
 });
+
+Meteor.publish("Sound-Vib-Data",function(buildingId, startDate, endDate,soundThreshold,vibrationThreshold){
+	startDate.setHours(0,0,0,0);
+	endDate.setHours(23,59,59,999);
+	var self = this;
+	var nodes = [];
+	var bu = Building.findOne({_id: buildingId});
+	if (bu){
+		_.each(bu.homes().fetch(),function(ele,index,list){
+			
+				nodes.push(ele.node().nodeNumber);
+			
+		});
+	}
+	
+	
+	nodes.forEach(function(node){
+		
+		var datas = Data.find({nodeNumber : node,isDeleted: false, createdAt: {$gte: startDate, $lte: endDate}},{sort:{createdAt:1}});
+		var maxSound = 0;
+		var maxVib = 0;
+		var numOfSoundOverThreshold = 0;
+		var numOfVibOverThreshold = 0;
+		
+		_.each(datas.fetch(),function(element,index,list){
+			
+			
+			if(element.sound > maxSound)
+				maxSound = element.sound;
+			
+			if(element.vibration > maxVib)
+				maxVib = element.vibration;
+			
+			if(element.sound > soundThreshold) 
+				numOfSoundOverThreshold++
+			
+			if(element.vibration > vibrationThreshold)
+				numOfVibOverThreshold++
+			
+			
+		});
+		self.added ('SoundData',node,{
+				nodeNumber:node,
+				maxSound:maxSound,
+				numOfSoundOverThreshold:numOfSoundOverThreshold
+		});
+	});
+	return SoundData.find({});
+	//return Data.find({nodeNumber : {$in :  nodes},isDeleted: false, createdAt: {$gte: startDate, $lte: endDate},$or:[{sound:{$gte:soundThreshold}},{vibration:{$gte:vibrationThreshold}}]},{sort:{createdAt:1}});
+});
+
 
 Meteor.publish('SoundData',function(buildingId, startDate, endDate,soundThreshold,vibrationThreshold){
 	startDate.setHours(0,0,0,0);
@@ -40,15 +90,15 @@ Meteor.publish('SoundData',function(buildingId, startDate, endDate,soundThreshol
 			
 		});
 	}
-	console.log(nodes);
-	console.log(soundThreshold);
 	
+	//console.log(soundThreshold);
+	var sound_threshold = parseFloat(soundThreshold);
 	var pipeline = [
 	{"$match":{
                 nodeNumber:{$in:nodes},
 				isDeleted:false,
 				createdAt: {$gte: startDate, $lte: endDate},
-                sound:{$gte:600}
+				sound:{$gte:sound_threshold}
 			}
 	}, 
 	{"$group":{
@@ -90,16 +140,20 @@ Meteor.publish('VibData',function(buildingId, startDate, endDate,soundThreshold,
 			
 		});
 	}
-	console.log(nodes);
-	console.log(vibrationThreshold);
+	//console.log(startDate);
+	//console.log(vibrationThreshold);
+	var vib_threshold = parseFloat(vibrationThreshold);;
 	
+	
+	var cond = [
+					{nodeNumber:{$in:nodes}},
+					{isDeleted:false},
+					{createdAt: {$gte: startDate, $lte: endDate}},
+					{vibration: {$gte:vib_threshold}}
+				];
 	var pipeline = [
-	{"$match":{
-				
-                nodeNumber:{$in:nodes},
-				isDeleted:false,
-				//createdAt: {$gte: startDate, $lte: endDate},
-				vibration: {$gte:600}
+	{$match:{
+				$and:cond
 			}
 	}, 
 	{"$group":{
@@ -113,16 +167,39 @@ Meteor.publish('VibData',function(buildingId, startDate, endDate,soundThreshold,
 	
 	];
 	
-	var results = Data.aggregate(pipeline);
+	Data.aggregate(pipeline,
+	 
+		Meteor.bindEnvironment(
+			function(err, result){
+				
+				_.each(result,function(e) {
+					
+					self.added ('VibData',e._id,{
+						nodeNumber:e._id,
+						maxVib:e.maxVib,
+						numOfVibOverThreshold:e.numOfVibOverThreshold
+					});
+					
+				});
+				self.ready();
+			},
+			function(error){
+				Meteor._debug("Error doing aggregation: " + error);
+			}
+		)
+	 
+	);
+	
+	/*var results = Data.aggregate(pipeline);
 	results.forEach(function(result){
-			//console.log(result);
+			console.log(result);
 			self.added ('VibData',result._id,{
 				nodeNumber:result._id,
 				maxVib:result.maxVib,
 				numOfVibOverThreshold:result.numOfVibOverThreshold
 			});
 		});
-	
+	*/
 	return VibData.find({});
 	
 	

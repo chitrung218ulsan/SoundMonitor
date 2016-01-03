@@ -116,7 +116,8 @@
     <div class="row">
         <div class="col-md-12">
             <table class="table table-bordered" >
-                {{ #with maxInfo }}
+                <!--{{ #with maxInfo }} -->
+				{{ #with maxSoundInfo }}
                 <tbody>
                 <tr>
                     <th>Max of Sound</th>
@@ -124,8 +125,10 @@
                 </tr>
                 <tr>
                     <th>Over Sound Threshold</th>
-                    <td >{{overThresholdSound}}</td>
+                    <!--<td >{{overThresholdSound}}</td> -->
+					<td >{{numOfSoundOverThreshold}}</td>
                 </tr>
+				<!--
                 <tr>
                     <th>Max of Vibration</th>
                     <td>{{maxVibration}}</td>
@@ -133,7 +136,8 @@
                 <tr>
                     <th>Over Vibration Threshold</th>
                     <td>{{overThresholdVibration}}</td>
-                </tr>
+                </tr> 
+				-->
                 </tbody>
                 {{ /with}}
             </table>

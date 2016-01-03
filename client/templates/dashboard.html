@@ -34,7 +34,8 @@
 								  </div>
 								  <div class="row">
 									<div class="col-md-3">
-										<span class="label label-warning">Warning</span>
+										<!--<span class="label label-warning">Warning</span>-->
+										{{> checkDataSound home=this }}
 									</div>
 									<div class="col-md-3">
 										<p align="center">{{commStatus}}</p>
@@ -98,7 +99,8 @@
 								  </div>
 								  <div class="row">
 									<div class="col-md-3">
-										 <span class="label label-danger">Danger Label</span>
+										 <!--<span class="label label-danger">Danger Label</span>-->
+										 {{> checkDataSound home=this }}
 									</div>
 									<div class="col-md-3">
 										<p align="center">{{commStatus}}</p>
@@ -156,3 +158,16 @@
     </div>
 
 </template>
+<template name="checkDataSound">
+	{{#with home}}
+		{{#if checkNormal}}
+			<span class="label label-primary">Normal</span>
+		{{/if}}
+		{{#if checkWarning}}
+			<span class="label label-warning">Warning</span>
+		{{/if}}
+		{{#if checkDanger}}
+			<span class="label label-danger">Danger</span>
+		{{/if}}
+	{{/with}}
+</template> 
