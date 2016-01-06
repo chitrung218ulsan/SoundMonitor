@@ -13,6 +13,9 @@ Template.dataAnalysis.onCreated(function(){
     this.soundThreshold = new ReactiveVar(undefined);
     this.vibrationThreshold = new ReactiveVar(undefined);
 
+    this.viewMode = new ReactiveVar("data"); // "data" or "graph"
+    this.homeSelected = new ReactiveArray();
+
     this.autorun(function(){
         var bu = self.buildingSelected.get();
         //self.subscribe(SoundMonitor.Constants.DATA_SOURCE, (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
@@ -20,6 +23,11 @@ Template.dataAnalysis.onCreated(function(){
 		
 		self.subscribe('VibData', (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
 		//self.subscribe('Sound-Vib-Data', (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
+    });
+
+    this.autorun(function(){
+        var bu = self.buildingSelected.get();
+        self.homeSelected.clear();
     });
 });
 Template.dataAnalysis.onRendered(function(){
@@ -49,6 +57,9 @@ Template.dataAnalysis.onDestroyed(function(){
 });
 
 Template.dataAnalysis.helpers({
+    masterTemplate: function(){
+        return Template.instance();
+    },
     apartments: function(){
         var templ = Template.instance();
         var query = Apartment.find({});
@@ -89,6 +100,9 @@ Template.dataAnalysis.helpers({
     vibrationThreshold: function(){
         return Template.instance().vibrationThreshold.get();
     },
+    isGraphMode: function(){
+        return Template.instance().viewMode.get() == "graph";
+    },
     buildingMaxInfo: function(){
         var chosenBuilding = Template.instance().buildingSelected.get();
         return chosenBuilding && chosenBuilding.maxInfo(Template.instance().startDate.get().toDate()
@@ -103,6 +117,11 @@ Template.dataAnalysis.helpers({
 });
 
 Template.dataAnalysis.events({
+    'change #viewMode': function(event){
+        var target = event.currentTarget;
+        var mode = target.options[target.selectedIndex].value;
+        Template.instance().viewMode.set(mode);
+    },
     'change #apartment-selection-dashboard': function(event){
         var target = event.currentTarget;
         var newId = target.options[target.selectedIndex].value;
@@ -131,8 +150,19 @@ Template.dataAnalysis.events({
 });
 
 // Home
-
+Template.dataHome.onRendered(function(){
+    var dataContext = Template.currentData();
+    var homeId = this.$(".homeCell").attr("id");
+    if(dataContext.masterTemplate.homeSelected.indexOf(homeId) >= 0){
+        this.$(".homeCell").addClass("active");
+    }
+    console.log(dataContext.masterTemplate.homeSelected.array());
+});
 Template.dataHome.helpers({
+    isGraphMode: function(){
+        var dataContext = Template.currentData();
+        return dataContext.masterTemplate.viewMode.get() == "graph";
+    },
     maxInfo: function(){
         var dataContext = Template.currentData();
         var home = dataContext.home;
@@ -189,4 +219,20 @@ Template.dataHome.helpers({
 			}
 		}
 	}
+});
+
+Template.dataHome.events({
+    'click .homeCell': function(event){
+        var target = event.currentTarget;
+        var homeId = $(target).attr("id");
+        var dataContext = Template.currentData();
+        var parentTemplate = dataContext.masterTemplate;
+        if($(target).hasClass("active")){
+            $(target).removeClass("active");
+            parentTemplate.homeSelected.remove(homeId);
+        }else{
+            $(target).addClass("active");
+            parentTemplate.homeSelected.push(homeId);
+        }
+    }
 });
