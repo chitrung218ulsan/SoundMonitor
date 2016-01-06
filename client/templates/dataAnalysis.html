@@ -69,7 +69,7 @@
             </div>
             {{#if isGraphMode}}
                 <div class="col-md-9">
-
+                    {{> chartHome }}
                 </div>
             {{else}}
                 <div class="col-md-9">
@@ -170,3 +170,9 @@
 
     </div>
 </template>
+
+<template name="chartHome">
+    <h2>Sound and Vibration Data Chart</h2>
+    <div id="container-area" style=""></div>
+</template>
+
