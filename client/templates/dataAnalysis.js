@@ -57,6 +57,14 @@ Template.dataAnalysis.onDestroyed(function(){
 });
 
 Template.dataAnalysis.helpers({
+    parametersUpdated: function(){
+        // track parameter changes
+        var val1 = Template.instance().startDate.get();
+        var val2 = Template.instance().endDate.get();
+        var val3 = Template.instance().soundThreshold.get();
+        var val4 = Template.instance().vibrationThreshold.get();
+        return "";
+    },
     masterTemplate: function(){
         return Template.instance();
     },
@@ -87,18 +95,6 @@ Template.dataAnalysis.helpers({
     },
     isRemainder: function(index, rem){
         return index % 2 == rem;
-    },
-    startDate: function() {
-        return Template.instance().startDate.get().toDate();
-    },
-    endDate: function(){
-        return Template.instance().endDate.get().toDate();
-    },
-    soundThreshold: function(){
-        return Template.instance().soundThreshold.get();
-    },
-    vibrationThreshold: function(){
-        return Template.instance().vibrationThreshold.get();
     },
     isGraphMode: function(){
         return Template.instance().viewMode.get() == "graph";

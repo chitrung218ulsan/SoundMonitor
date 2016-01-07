@@ -61,7 +61,7 @@
                     <div><strong>Homes: </strong></div>
                     <div class="list-group" id="graph-home-list">
                         {{# each homes}}
-                            {{> dataHome home=this masterTemplate=masterTemplate }}
+                            {{> dataHome home=this masterTemplate=masterTemplate parametersUpdated=parametersUpdated }}
                         {{/each}}
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                             <ul class="list-group" id="home-list-col0">
                                 {{# each homes }}
                                     {{# if isRemainder index 0}}
-                                        {{> dataHome home=this masterTemplate=masterTemplate }}
+                                        {{> dataHome home=this masterTemplate=masterTemplate parametersUpdated=parametersUpdated}}
                                     {{/if}}
                                 {{/each}}
                             </ul>
@@ -113,7 +113,7 @@
                             <ul class="list-group" id="home-list-col1">
                                 {{# each homes }}
                                     {{# if isRemainder index 1}}
-                                        {{> dataHome home=this masterTemplate=masterTemplate }}
+                                        {{> dataHome home=this masterTemplate=masterTemplate parametersUpdated=parametersUpdated}}
                                     {{/if}}
                                 {{/each}}
                             </ul>
