@@ -122,12 +122,9 @@ Meteor.publish('SoundData',function(buildingId, startDate, endDate,soundThreshol
 			});
 	});
 	
-	return SoundData.find({});
-	
-	
 });
 
-Meteor.publish('VibData',function(buildingId, startDate, endDate,soundThreshold,vibrationThreshold){
+Meteor.publish('VibData',function(buildingId, startDate, endDate,vibrationThreshold){
 	startDate.setHours(0,0,0,0);
 	endDate.setHours(23,59,59,999);
 	var self = this;
@@ -142,7 +139,7 @@ Meteor.publish('VibData',function(buildingId, startDate, endDate,soundThreshold,
 	}
 	//console.log(startDate);
 	//console.log(vibrationThreshold);
-	var vib_threshold = parseFloat(vibrationThreshold);;
+	var vib_threshold = parseFloat(vibrationThreshold);
 	
 	
 	var cond = [
@@ -167,30 +164,30 @@ Meteor.publish('VibData',function(buildingId, startDate, endDate,soundThreshold,
 	
 	];
 	
-	Data.aggregate(pipeline,
-	 
-		Meteor.bindEnvironment(
-			function(err, result){
-				
-				_.each(result,function(e) {
-					
-					self.added ('VibData',e._id,{
-						nodeNumber:e._id,
-						maxVib:e.maxVib,
-						numOfVibOverThreshold:e.numOfVibOverThreshold
-					});
-					
-				});
-				self.ready();
-			},
-			function(error){
-				Meteor._debug("Error doing aggregation: " + error);
-			}
-		)
-	 
-	);
+	//Data.aggregate(pipeline,
+	//
+	//	Meteor.bindEnvironment(
+	//		function(err, result){
+	//
+	//			_.each(result,function(e) {
+	//
+	//				self.added ('VibData',e._id,{
+	//					nodeNumber:e._id,
+	//					maxVib:e.maxVib,
+	//					numOfVibOverThreshold:e.numOfVibOverThreshold
+	//				});
+	//
+	//			});
+	//			self.ready();
+	//		},
+	//		function(error){
+	//			Meteor._debug("Error doing aggregation: " + error);
+	//		}
+	//	)
+	//
+	//);
 	
-	/*var results = Data.aggregate(pipeline);
+	var results = Data.aggregate(pipeline);
 	results.forEach(function(result){
 			console.log(result);
 			self.added ('VibData',result._id,{
@@ -199,8 +196,5 @@ Meteor.publish('VibData',function(buildingId, startDate, endDate,soundThreshold,
 				numOfVibOverThreshold:result.numOfVibOverThreshold
 			});
 		});
-	*/
-	return VibData.find({});
-	
 	
 });
