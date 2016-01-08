@@ -10,8 +10,8 @@ Template.dataAnalysis.onCreated(function(){
     this.buildingSelected = new ReactiveVar(undefined);
     this.startDate = new ReactiveVar(startDate);
     this.endDate = new ReactiveVar(endDate);
-    this.soundThreshold = new ReactiveVar(undefined);
-    this.vibrationThreshold = new ReactiveVar(undefined);
+    this.soundThreshold = new ReactiveVar(0);
+    this.vibrationThreshold = new ReactiveVar(0);
 
     this.viewMode = new ReactiveVar("data"); // "data" or "graph"
     this.homeSelected = new ReactiveArray();
@@ -19,9 +19,9 @@ Template.dataAnalysis.onCreated(function(){
     this.autorun(function(){
         var bu = self.buildingSelected.get();
         //self.subscribe(SoundMonitor.Constants.DATA_SOURCE, (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
-		self.subscribe('SoundData', (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
+		self.subscribe('SoundData', (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get());
 		
-		self.subscribe('VibData', (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
+		self.subscribe('VibData', (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.vibrationThreshold.get());
 		//self.subscribe('Sound-Vib-Data', (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
     });
 
@@ -59,8 +59,19 @@ Template.dataAnalysis.onDestroyed(function(){
 });
 
 Template.dataAnalysis.helpers({
+    parametersUpdated: function(){
+        // track parameter changes
+        var val1 = Template.instance().startDate.get();
+        var val2 = Template.instance().endDate.get();
+        var val3 = Template.instance().soundThreshold.get();
+        var val4 = Template.instance().vibrationThreshold.get();
+        return val1.valueOf() + val2.valueOf() + (parseInt(val3) || 0) + (parseInt(val4) || 0);
+    },
     masterTemplate: function(){
         return Template.instance();
+    },
+    homeSelected: function(){
+        return Template.instance().homeSelected;
     },
     apartments: function(){
         var templ = Template.instance();
@@ -89,18 +100,6 @@ Template.dataAnalysis.helpers({
     },
     isRemainder: function(index, rem){
         return index % 2 == rem;
-    },
-    startDate: function() {
-        return Template.instance().startDate.get().toDate();
-    },
-    endDate: function(){
-        return Template.instance().endDate.get().toDate();
-    },
-    soundThreshold: function(){
-        return Template.instance().soundThreshold.get();
-    },
-    vibrationThreshold: function(){
-        return Template.instance().vibrationThreshold.get();
     },
     isGraphMode: function(){
         return Template.instance().viewMode.get() == "graph";
@@ -172,6 +171,10 @@ Template.dataHome.onRendered(function(){
     //console.log(dataContext.masterTemplate.homeSelected.array());
 });
 Template.dataHome.helpers({
+    parametersUpdated: function(){
+        var dataContext = Template.currentData();
+        return dataContext.parametersUpdated;
+    },
     isGraphMode: function(){
         var dataContext = Template.currentData();
         return dataContext.masterTemplate.viewMode.get() == "graph";
@@ -185,8 +188,7 @@ Template.dataHome.helpers({
 		var dataContext = Template.currentData();
         var home = dataContext.home;
 		var node = home.node();
-		//console.log(node.nodeNumber);
-		//console.log(SoundData.find({nodeNumber:node.nodeNumber}));
+		
 		var soundData = undefined;
 		soundData = SoundData.findOne({nodeNumber:node.nodeNumber});
 		if(soundData!=undefined)
@@ -263,6 +265,7 @@ Template.chartHome.onCreated(function(){
  * Call the function to built the chart when the template is rendered
  */
 Template.chartHome.onRendered(function() {
+
 
     Highcharts.setOptions({
 		global:{
