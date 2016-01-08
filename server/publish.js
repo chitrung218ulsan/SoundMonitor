@@ -77,7 +77,7 @@ Meteor.publish("Sound-Vib-Data",function(buildingId, startDate, endDate,soundThr
 });
 
 
-Meteor.publish('SoundData',function(buildingId, startDate, endDate,soundThreshold,vibrationThreshold){
+Meteor.publish('SoundData',function(buildingId, startDate, endDate,soundThreshold){
 	startDate.setHours(0,0,0,0);
 	endDate.setHours(23,59,59,999);
 	var self = this;
