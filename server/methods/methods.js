@@ -94,3 +94,24 @@
 //			}});
 //	}
 //});
+//var Future = Npm.require( 'fibers/future' ); 
+Meteor.methods({
+	'soundData':function(nodeId,startDate,endDate){
+		var future = new Future();
+		startDate.setHours(0,0,0,0);
+		endDate.setHours(23,59,59,999);
+		var testData = [];
+		var home = Home.findOne({nodeId:nodeId});
+		var node = home.node();
+		var datas = Data.find({nodeNumber : node.nodeNumber,isDeleted: false},{sort:{createdAt:1}});
+		_.each(datas.fetch(),function(element,index,list){
+			var tempData = [element.createdAt,element.sound];
+			//console.log(tempData);
+			testData.push(tempData);
+		});
+		return testData;
+		//future.return(testData);
+		//return future.wait();
+	
+	}
+});

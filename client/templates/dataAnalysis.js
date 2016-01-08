@@ -29,6 +29,8 @@ Template.dataAnalysis.onCreated(function(){
         var bu = self.buildingSelected.get();
         self.homeSelected.clear();
     });
+	
+	
 });
 Template.dataAnalysis.onRendered(function(){
     var self = this;
@@ -103,6 +105,11 @@ Template.dataAnalysis.helpers({
     isGraphMode: function(){
         return Template.instance().viewMode.get() == "graph";
     },
+	selectedHomes:function(){
+		var selectedHomes = Template.instance().homeSelected.array();
+		return (selectedHomes)?Home.find({_id:{$in:selectedHomes}}):[];
+		
+	},
     buildingMaxInfo: function(){
         var chosenBuilding = Template.instance().buildingSelected.get();
         return chosenBuilding && chosenBuilding.maxInfo(Template.instance().startDate.get().toDate()
@@ -113,7 +120,8 @@ Template.dataAnalysis.helpers({
 	buildingMaxInfo_1:function(){
 		var chosenBuilding = Template.instance().buildingSelected.get();
 		return chosenBuilding && chosenBuilding.maxInfo_1();
-	}
+	},
+	
 });
 
 Template.dataAnalysis.events({
@@ -121,6 +129,11 @@ Template.dataAnalysis.events({
         var target = event.currentTarget;
         var mode = target.options[target.selectedIndex].value;
         Template.instance().viewMode.set(mode);
+		var self = Template.instance();
+		if(mode == "graph"){
+			//console.log(Template.instance().homeSelected.array())
+			//self.subscribe('testData', self.homeSelected.array(),self.startDate.get().toDate(), self.endDate.get().toDate());
+		}
     },
     'change #apartment-selection-dashboard': function(event){
         var target = event.currentTarget;
@@ -237,61 +250,157 @@ Template.dataHome.events({
     }
 });
 
-/*
- * Function to draw the area chart
- */
+Template.chartHome.helpers({
+	
+	
+});
 
+Template.chartHome.onCreated(function(){
+	
+});
 
 /*
  * Call the function to built the chart when the template is rendered
  */
 Template.chartHome.onRendered(function() {
 
-    //this.$('#container-area').highcharts({
-    this.$('#container-area').highcharts({
-        title: {
-            text: 'Monthly Average Temperature',
-            x: -20 //center
+    Highcharts.setOptions({
+		global:{
+			useUTC:true
+		}
+	});
+	var template = this;
+	var home = Template.currentData().home;	
+	
+	var node = home.node();
+	
+	var dataContext = Template.currentData();
+	var parentTemplate = dataContext.masterTemplate;
+	
+	var startDate = parentTemplate.startDate.get().toDate();
+	var endDate = parentTemplate.endDate.get().toDate();
+	startDate.setHours(0,0,0,0);
+	endDate.setHours(23,59,59,999);
+	
+	var soundThreshold = parentTemplate.soundThreshold.get();
+	var vibThreshold = parentTemplate.vibrationThreshold.get();
+	var dataSound = [];
+	var dataVib = [];
+	console.log(node.nodeNumber);
+	
+	var id = '#'+home._id;
+	template.$(id).highcharts({
+				
+		chart:{
+			//type:'spline',
+			panning:true,
+			panKey:'shift',
+			zoomType:'x'
+		},
+		title: {
+			text: 'Sound and Vibration Data',
+			x: -20 //center
+		},
+		
+		xAxis: {
+			/*categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+				'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']*/
+			//categories : xData
+			type:'datetime',
+			dateTimeLabelFormats:{
+				//second: '%H:%M:%S',
+				//minute: '%H:%M',
+				//hour: '%H:%M',
+				//day: '%e. %b',
+				
+				//month: '%b \'%y',
+				//year: '%Y'
+			},
+			title:{
+				text:'Time'
+			},
+			label:{
+				formatter:function(){
+					 return moment(this.value).format("YYYY-MM-DD");
+				}
+			}
+		},
+		yAxis: {
+			title: {
+				text: 'Level (dB)'
+			},
+			plotLines: [{
+				value: parseFloat(soundThreshold),
+				width: 2,
+				color: '#FF0000'
+			}]
+		},
+		tooltip: {
+			valueSuffix: 'dB'
+		},
+		legend: {
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'middle',
+			borderWidth: 0
+		},
+		plotOptions:{
+			series:{
+				turboThreshold:0//larger threshold or set to 0 to disable
+			}
         },
-        subtitle: {
-            text: 'Source: WorldClimate.com',
-            x: -20
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            valueSuffix: '°C'
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'New York',
-            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-        }, {
-            name: 'Berlin',
-            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-        }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        }]
+		series: [{
+			
+			name: 'Sound',
+			data:dataSound,
+			color: '#0000FF'
+		},{
+			name: 'Vibration',
+			data: dataVib
+			//color: '#0000FF'
+		}
+		],
+		lang:{
+			noData: 'Please wait!, Data are processing'
+		}
+	});
+	template.subscribe('testData',parentTemplate.homeSelected.array(),soundThreshold,vibThreshold,startDate, endDate ,function () {
+		
+		
+		
+		//var datas = node.datas(startDate,endDate);
+		var datas = Data.find({nodeNumber:node.nodeNumber,createdAt:{$gte:startDate,$lte:endDate}},{sort:{createdAt:1}});
+		_.each(datas.fetch(),function(element,index,array){
+				var date = element.createdAt;
+				
+				
+				var tempSoundData = [Date.UTC(date.getFullYear(), (date.getMonth()), date.getDate()-1,date.getHours(),date.getMinutes(),date.getSeconds()),element.sound]
+				var tempVibData = [Date.UTC(date.getFullYear(), (date.getMonth()), date.getDate()-1,date.getHours(),date.getMinutes(),date.getSeconds()),element.vibration]
+				if(element.sound >= parseFloat(soundThreshold))
+				{
+					dataSound.push(tempSoundData);
+				}
+				if(element.vibration >= parseFloat(vibThreshold))
+				{
+					dataVib.push(tempVibData);
+				}
+				
+		});
+		var serie1 = template.$(id).highcharts().series[0];
+		var serie2 = template.$(id).highcharts().series[1];
+		serie1.setData(dataSound);
+		serie2.setData(dataVib);
+		
     });
+	/*Data.find({nodeNumber:node.nodeNumber,createdAt:{$gte:startDate,$lte:endDate}}).observe({
+		added: function(doc) {
+			//console.log(id);
+			var series = template.$(id).highcharts().series[0];
+			
+			//series.setData(doc.createdAt,doc.sound);
+			 //series.addPoint([doc.createdAt,doc.sound]);
+		}
+	});*/
+	
+	
 });

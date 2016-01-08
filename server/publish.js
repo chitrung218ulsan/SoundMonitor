@@ -204,3 +204,31 @@ Meteor.publish('VibData',function(buildingId, startDate, endDate,soundThreshold,
 	
 	
 });
+
+Meteor.publish('testData',function(homeArray,soundThreshold,vibThreshold,startDate, endDate){
+	
+	//console.log(homeArray);
+	startDate.setHours(0,0,0,0);
+	endDate.setHours(23,59,59,999);
+	var nodes = [];
+	homeArray.forEach(function(element,index,array){
+		var home = Home.findOne({_id: element});
+		if(home){
+			var node = home.node();
+			nodes.push(node.nodeNumber);
+		}
+	});
+	var threshold_sound = parseFloat(soundThreshold);
+	var threshold_vib = parseFloat(vibThreshold);
+	
+	/*var testData = Data.find({nodeNumber : {$in :  nodes},isDeleted: false},
+	{sort:{createdAt:1}});
+	
+	_.each(testData.fetch(),function(element,index,array){
+		
+		console.log(element);
+		
+	});*/
+	
+	return Data.find({nodeNumber : {$in :  nodes},isDeleted: false,$or:[{sound:{$gte:threshold_sound}},{vibration:{$gte:threshold_vib}}],createdAt:{$gte:startDate,$lte:endDate}},{"nodeNumber":1,"sound":1,"vibration":1,"createdAt":1},{sort:{createdAt:1}});
+});

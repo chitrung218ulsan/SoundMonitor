@@ -68,9 +68,15 @@
                 {{/if}}
             </div>
             {{#if isGraphMode}}
-                <div class="col-md-9">
-                    {{> chartHome }}
-                </div>
+			  
+					<div class="col-md-9">
+						
+							{{# each selectedHomes}}
+								{{> chartHome home=this masterTemplate=masterTemplate }}
+							{{/each}}
+						
+					</div>
+			  
             {{else}}
                 <div class="col-md-9">
                     <div class="row">
@@ -172,7 +178,11 @@
 </template>
 
 <template name="chartHome">
-    <h2>Sound and Vibration Data Chart</h2>
-    <div id="container-area" style=""></div>
+ <div class="row">
+    <h2 align="center">{{home.homeNumber}}</h2>
+	
+	<div id="{{home._id}}" style=""></div>
+
+</div >
 </template>
 
