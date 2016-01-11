@@ -291,6 +291,9 @@ Template.chartHome.onRendered(function() {
 	var dataVib = [];
 	console.log(node.nodeNumber);
 	
+	
+	
+	
 	var id = '#'+home._id;
 	template.$(id).highcharts({
 				
@@ -335,7 +338,7 @@ Template.chartHome.onRendered(function() {
 			plotLines: [{
 				value: parseFloat(soundThreshold),
 				width: 2,
-				color: '#FF0000'
+				color: '#FFFFFF'
 			}]
 		},
 		tooltip: {
@@ -367,11 +370,12 @@ Template.chartHome.onRendered(function() {
 			noData: 'Please wait!, Data are processing'
 		}
 	});
-	template.subscribe('testData',parentTemplate.homeSelected.array(),soundThreshold,vibThreshold,startDate, endDate ,function () {
+	/*template.subscribe('testData',node.nodeNumber,soundThreshold,vibThreshold,startDate, endDate ,function () {
 		
 		
+		var serie1 = template.$(id).highcharts().series[0];
+		var serie2 = template.$(id).highcharts().series[1];
 		
-		//var datas = node.datas(startDate,endDate);
 		var datas = Data.find({nodeNumber:node.nodeNumber,createdAt:{$gte:startDate,$lte:endDate}},{sort:{createdAt:1}});
 		_.each(datas.fetch(),function(element,index,array){
 				var date = element.createdAt;
@@ -382,28 +386,75 @@ Template.chartHome.onRendered(function() {
 				if(element.sound >= parseFloat(soundThreshold))
 				{
 					dataSound.push(tempSoundData);
+					//serie1.addPoint(tempSoundData);
 				}
 				if(element.vibration >= parseFloat(vibThreshold))
 				{
 					dataVib.push(tempVibData);
+					//serie2.addPoint(tempVibData);
 				}
 				
 		});
-		var serie1 = template.$(id).highcharts().series[0];
-		var serie2 = template.$(id).highcharts().series[1];
+		
 		serie1.setData(dataSound);
 		serie2.setData(dataVib);
 		
-    });
-	/*Data.find({nodeNumber:node.nodeNumber,createdAt:{$gte:startDate,$lte:endDate}}).observe({
-		added: function(doc) {
-			//console.log(id);
-			var series = template.$(id).highcharts().series[0];
+    });*/
+	
+	
+	
+	
+	
+	/*Meteor.call('soundData',node.nodeNumber,soundThreshold,vibThreshold,startDate,endDate,function(error,result){
+		
+		_.each(result,function(element,index,array){
 			
-			//series.setData(doc.createdAt,doc.sound);
-			 //series.addPoint([doc.createdAt,doc.sound]);
-		}
+				var serie1 = template.$(id).highcharts().series[0];
+				var serie2 = template.$(id).highcharts().series[1];
+				console.log(element);
+				var date = element.createdAt;
+				
+				var tempSoundData = [Date.UTC(date.getFullYear(), (date.getMonth()), date.getDate()-1,date.getHours(),date.getMinutes(),date.getSeconds()),element.sound]
+				var tempVibData = [Date.UTC(date.getFullYear(), (date.getMonth()), date.getDate()-1,date.getHours(),date.getMinutes(),date.getSeconds()),element.vibration]
+				if(element.sound >= parseFloat(soundThreshold))
+				{
+					//dataSound.push(tempSoundData);
+					serie1.addPoint(tempSoundData);
+				}
+				if(element.vibration >= parseFloat(vibThreshold))
+				{
+					//dataVib.push(tempVibData);
+					serie2.addPoint(tempVibData);
+				}
+				
+		});
+		
 	});*/
-	
-	
+	var serie1 = template.$(id).highcharts().series[0];
+	var serie2 = template.$(id).highcharts().series[1];
+	Meteor.call('soundVibData',node.nodeNumber,soundThreshold,vibThreshold,startDate,endDate,function(error,result){
+		
+		_.each(result,function(element,index,array){
+			
+				
+				//console.log(element);
+				var date = element.createdAt;
+				
+				var tempSoundData = [Date.UTC(date.getFullYear(), (date.getMonth()), date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds()),element.sound]
+				var tempVibData = [Date.UTC(date.getFullYear(), (date.getMonth()), date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds()),element.vib]
+				if(element.sound >= parseFloat(soundThreshold))
+				{
+					dataSound.push(tempSoundData);
+					
+				}
+				if(element.vib >= parseFloat(vibThreshold))
+				{
+					dataVib.push(tempVibData);
+				
+				}
+				
+		});
+		serie1.setData(dataSound);
+		serie2.setData(dataVib);
+	});
 });
