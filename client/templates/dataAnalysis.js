@@ -368,7 +368,10 @@ Template.chartHome.onRendered(function() {
 		],
 		lang:{
 			noData: 'Please wait!, Data are processing'
-		}
+		},
+		 exporting: {
+            type: 'image/jpeg'
+        }
 	});
 	/*template.subscribe('testData',node.nodeNumber,soundThreshold,vibThreshold,startDate, endDate ,function () {
 		
@@ -457,4 +460,9 @@ Template.chartHome.onRendered(function() {
 		serie1.setData(dataSound);
 		serie2.setData(dataVib);
 	});
+	
+	template.$('#export').click(function () {
+        var chart = template.$(id).highcharts();
+        chart.exportChart();
+    });
 });
