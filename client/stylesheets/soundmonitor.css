@@ -45,3 +45,33 @@ li > .btn-group > .btn {
     padding: 0px 6px 0px 0px;
     text-align: center;
 }
+.box {
+    max-width: 500px;
+	margin-top:10px;
+	margin-bottom:10px;
+    height: 0 auto;    
+    padding-left:2px;
+	padding-right:2px;
+	padding-top:2px;
+	padding-bottom:2px;
+    border: 3px solid red;
+}
+.container-full{
+	width:100%;
+	margin:0 auto;
+	padding-left:30px;
+	padding-right:30px;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+.table {
+  border: 1px solid ;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+   border: 1px solid ;
+}

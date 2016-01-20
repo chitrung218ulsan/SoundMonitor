@@ -78,7 +78,7 @@ Template.dashboard.helpers({
         }) : [];
     },
     isRemainder: function(index, rem){
-        return index % 2 == rem;
+        return index % 3 == rem;
     },
 	check: function(value,threshold)
 	{
@@ -102,6 +102,8 @@ Template.dashboard.events({
     },
     'click #building-list .list-group-item': function(event){
         var target = event.currentTarget;
+        $('#building-list .list-group-item').removeClass('active');
+        $(target).addClass("active");
         var newId = target.value;
         Template.instance().buildingSelected.set(Building.findOne({_id: newId}));
 		Session.set("buildingSelected",Building.findOne({_id: newId}));
