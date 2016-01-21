@@ -1,0 +1,56 @@
+<template name="configuration">
+    <!--<div class="container">
+        <div class="row">
+            This Configuration page is under construction ... Please come back later.
+        </div>
+    </div>
+	-->
+	<div class="container">
+        <div class="row">
+            <div class="col-md-2 form-group">
+                <label for="apartment-selection-dashboard">건축물 선택</label>
+                <select class="form-control" id="apartment-selection-dashboard">
+                    <option value="0" selected></option>
+                    {{ #each apartments }}
+                    <option value="{{_id}}">{{ name }}</option>
+                    {{ /each }}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+			 <div class="col-md-2" style="background-color: antiquewhite">
+                <div class="list-group" id="building-list">
+                    {{# each buildings}}
+                        <button type="button" class="list-group-item" value="{{_id}}">{{name}}</button>
+                    {{/each}}
+                </div>
+            </div>
+             <div class="col-md-10">
+				
+				{{#if showConfiguration}}
+					<!--{{> reactiveTable collection=buildingColection settings=settings showColumnToggles = true}} -->
+					{{#autoForm collection='Building' schema=getSchema id="editBuildingConfig" doc=selectedBuildingDoc type='update' }}
+							<span class="help-block"></span>
+							{{> afQuickField name='name' }}
+							
+							{{> afQuickField name='warningSoundThreshold' }}
+							{{> afQuickField name='dangerSoundThreshold' }}
+							{{> afQuickField name='warningVibThreshold' }}
+							{{> afQuickField name='dangerVibThreshold' }}
+						
+
+
+							<button type="submit" class="btn btn-primary">Submit</button>
+							
+						  
+					{{/autoForm}}
+					
+				{{/if}}
+			
+            </div>
+        </div>
+    </div>
+
+</template>

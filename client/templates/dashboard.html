@@ -22,11 +22,38 @@
                 </div>
             </div>
             <div class="col-md-10">
-                <div class="row">
-                    <div class="col-md-4" style="background-color: lightblue">
+				{{# each floors}}
+					{{> showHome floor=this masterTemplate=masterTemplate}}
+				{{/each}}
+            </div>
+        </div>
+    </div>
+
+</template>
+<template name="checkDataSound">
+	{{#with home}}
+		{{#if checkNormal}}
+			<span class="label label-primary">Normal</span>
+		{{/if}}
+		{{#if checkWarning}}
+			<span class="label label-warning">Warning</span>
+		{{/if}}
+		{{#if checkDanger}}
+			<span class="label label-danger">Danger</span>
+		{{/if}}
+	{{/with}}
+</template> 
+
+<template name="showHome">
+	<div class="panel panel-primary">
+		<div class="panel-heading">Floor {{floor.floorNumber}}</div>
+		<div class="panel-body">
+			<div class="row">
+                    <!--<div class="col-md-4" style="background-color: lightblue"> -->
+					<div class="col-md-4" >
 						<ul class="list-group" id="home-list-col0">
 							
-							{{# each homes }}
+							{{# each homeWithFloor }}
 								{{# if isRemainder index 0}}
 								<div class="box" >
 								  <div class="row">
@@ -36,7 +63,7 @@
 								  </div>
 								  <div class="row">
 									<div class="col-md-3">
-										<!--<span class="label label-warning">Warning</span>-->
+										
 										{{> checkDataSound home=this }}
 									</div>
 									<div class="col-md-3">
@@ -97,9 +124,9 @@
 							
                         </ul>
                     </div>
-                    <div class="col-md-4" style="background-color: lightblue">
+                    <div class="col-md-4" >
                         <ul class="list-group" id="home-list-col1">
-                            {{# each homes }}
+                            {{# each homeWithFloor }}
                                 {{# if isRemainder index 1}}
 								<div class="box" >
 									<div class="row">
@@ -109,7 +136,7 @@
 								  </div>
 								  <div class="row">
 									<div class="col-md-3">
-										 <!--<span class="label label-danger">Danger Label</span>-->
+										 
 										 {{> checkDataSound home=this }}
 									</div>
 									<div class="col-md-3">
@@ -170,9 +197,9 @@
                         </ul>
                     </div>
 					
-					<div class="col-md-4" style="background-color: lightblue">
+					<div class="col-md-4" >
                         <ul class="list-group" id="home-list-col2">
-                            {{# each homes }}
+                            {{# each homeWithFloor }}
                                 {{# if isRemainder index 2}}
 								<div class="box" >
 									<div class="row">
@@ -182,7 +209,7 @@
 								  </div>
 								  <div class="row">
 									<div class="col-md-3">
-										 <!--<span class="label label-danger">Danger Label</span>-->
+										
 										 {{> checkDataSound home=this }}
 									</div>
 									<div class="col-md-3">
@@ -242,22 +269,9 @@
                             {{/each}}
                         </ul>
                     </div>
-                </div>
             </div>
-        </div>
-    </div>
-
+		</div>
+	</div>
+	
+   
 </template>
-<template name="checkDataSound">
-	{{#with home}}
-		{{#if checkNormal}}
-			<span class="label label-primary">Normal</span>
-		{{/if}}
-		{{#if checkWarning}}
-			<span class="label label-warning">Warning</span>
-		{{/if}}
-		{{#if checkDanger}}
-			<span class="label label-danger">Danger</span>
-		{{/if}}
-	{{/with}}
-</template> 

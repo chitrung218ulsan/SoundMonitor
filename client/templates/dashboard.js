@@ -51,6 +51,23 @@ Template.checkDataSound.helpers({
 		
 	}
 });
+Template.showHome.helpers({
+	
+	homeWithFloor:function(){
+		var dataContext = Template.currentData();
+		var floor = dataContext.floor;
+		///console.log(floor.floorNumber);
+		var bu = dataContext.masterTemplate.buildingSelected.get();
+		//console.log(bu.name);
+		return (bu)? bu.homesWithFloor(floor.floorNumber).map(function(doc, index, cursor){
+            var i = _.extend(doc,{index: index});
+            return i;
+        }) : [];
+	},
+	isRemainder: function(index, rem){
+        return index % 3 == rem;
+    },
+});
 Template.dashboard.helpers({
     apartments: function(){
         var templ = Template.instance();
@@ -76,6 +93,27 @@ Template.dashboard.helpers({
             var i = _.extend(doc,{index: index});
             return i;
         }) : [];
+    },
+	floors:function(){
+		var bu = Template.instance().buildingSelected.get();
+		if(bu!=undefined){
+			var numOfFloor = bu.numOfFloors;
+			var i=1;
+			var floors = [];
+			for(i;i<=numOfFloor;i++){
+				var floorInfo={floorNumber:i};
+				floors.push(floorInfo);
+			}
+			return floors;
+		}
+		else{
+			return [];
+		}
+		
+		
+	},
+	masterTemplate: function(){
+        return Template.instance();
     },
     isRemainder: function(index, rem){
         return index % 3 == rem;

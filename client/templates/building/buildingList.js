@@ -8,9 +8,7 @@ Template.buildingList.helpers({
             SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'name'),
 			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'type'),
 			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'representative'),
-			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'manager'),
-			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'numOfFloors'),
-			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'numHousePerFloor'),
+			
             SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'numOfHomes',{label: "세대 수", fn: function(value, obj){
                 return value;
             }}),
@@ -18,7 +16,7 @@ Template.buildingList.helpers({
 			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'dangerSoundThreshold'),
 			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'warningVibThreshold'),
 			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'dangerVibThreshold'),
-			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'remarks'),
+			
             {key: '_id', label: '', fn : function(value, object){
                 return new Spacebars.SafeString("<a href="+Router.routes['building.view'].path({_id:value})+">View</a>");
             }},
