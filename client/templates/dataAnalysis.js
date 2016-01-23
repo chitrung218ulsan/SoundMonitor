@@ -140,12 +140,24 @@ Template.dataAnalysis.events({
         Template.instance().apartmentSelected.set(Apartment.findOne({_id: newId}));
         Template.instance().buildingSelected.set(undefined);
     },
-    'click #building-list .list-group-item': function(event){
+    'click #building-list .list-group-item': function(event,template){
         var target = event.currentTarget;
         $('#building-list .list-group-item').removeClass('active');
         $(target).addClass("active");
         var newId = target.value;
+		var buildingSelected = Building.findOne({_id: newId});
+		var soundDangerThreshold = buildingSelected.dangerSoundThreshold;
+		var vibDangerThreshold = buildingSelected.dangerVibThreshold;
+		
+		var soundThresholdInput = template.find('#thresholdSoundPicker');
+		soundThresholdInput.value = soundDangerThreshold;
+		
+		var vibThresholdInput = template.find('#thresholdVibrationPicker');
+		vibThresholdInput.value = vibDangerThreshold;
+		
         Template.instance().buildingSelected.set(Building.findOne({_id: newId}));
+		Template.instance().soundThreshold.set(soundDangerThreshold);
+		Template.instance().vibrationThreshold.set(vibDangerThreshold);
     },
     'change #thresholdSoundPicker': function(event){
         var target = event.currentTarget;

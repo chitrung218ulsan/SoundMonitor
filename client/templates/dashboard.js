@@ -67,6 +67,67 @@ Template.showHome.helpers({
 	isRemainder: function(index, rem){
         return index % 3 == rem;
     },
+	hasHomeInFloor:function(floor){
+		
+		var dataContext = Template.currentData();
+		var floor = dataContext.floor;
+		var bu = dataContext.masterTemplate.buildingSelected.get();
+		var numOfHomePerFloor = 0;
+		if(bu != undefined)
+		{
+			numOfHomePerFloor = bu.numOFHomesPerFloor(floor.floorNumber);
+			
+		}
+		if(numOfHomePerFloor > 0)
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+	},
+	listHomeNumber:function(){
+		var dataContext = Template.currentData();
+		var floor = dataContext.floor;
+		var bu = dataContext.masterTemplate.buildingSelected.get();
+		var list_HomeNumber = [];
+		var numOfHomePerFloor = 0;
+		if(bu != undefined)
+		{
+			numOfHomePerFloor = bu.numOFHomesPerFloor(floor.floorNumber);
+			if(numOfHomePerFloor>0)
+			{
+				var i=1;
+				var temp_homeNumber;
+				for(i;i<=numOfHomePerFloor;i++)
+				{
+					if(i<=9){
+						temp_homeNumber = floor.floorNumber.toString()+'0'+i.toString();
+						//console.log(temp_homeNumber);
+					}
+					else {
+						temp_homeNumber = floor.floorNumber.toString()+'0'+i.toString();
+						//console.log(temp_homeNumber);
+					}
+					var homeElement = {homeNumber:temp_homeNumber};
+					list_HomeNumber.push(homeElement);
+				}
+				
+			}
+			
+		}
+		return list_HomeNumber;
+	},
+	homeInfo:function(homeNumber){
+		//console.log(homeNumber.toString());
+		//var dataContext = Template.currentData();
+		//var floor = dataContext.floor;
+		//console.log(floor.floorNumber);
+		var bu = Session.get("buildingSelected");
+		//console.log(bu);
+		var home =  Home.findOne({buildingId:bu._id,homeNumber:parseInt(homeNumber)});
+		return home;
+	}
 });
 Template.dashboard.helpers({
     apartments: function(){

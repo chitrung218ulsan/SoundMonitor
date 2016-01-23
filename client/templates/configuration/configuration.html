@@ -31,7 +31,69 @@
 				
 				{{#if showConfiguration}}
 					<!--{{> reactiveTable collection=buildingColection settings=settings showColumnToggles = true}} -->
-					{{#autoForm collection='Building' schema=getSchema id="editBuildingConfig" doc=selectedBuildingDoc type='update' }}
+					<table class="table table-condensed">
+						 <thead>
+							<tr>
+								 <td class="col-md-2" style="text-align: center"></td>
+								 <td class="col-md-2" style="text-align: center">Warning Threshold </td>
+								 <td class="col-md-2" style="text-align: center">Danger Threshold </td>
+								  <td class="col-md-2" style="text-align: center">Setting Date</td>
+								 <!--<td style="width: 250px">Set</td>-->
+							</tr>
+						</thead>
+						<tbody>
+						
+							<tr>
+								<td>Sound</td>
+								
+								<td>
+								{{#autoForm collection='Building' schema=getSchema id="editBuildingConfig" doc=selectedBuildingDoc type='update' autosave=true}}
+								  {{> afFormGroup name="warningSoundThreshold" label=false}}
+								{{/autoForm}}
+								</td>
+								
+								<td>
+								{{#autoForm collection='Building' schema=getSchema id="editBuildingConfig" doc=selectedBuildingDoc type='update' autosave=true}}
+								  {{> afFormGroup name="dangerSoundThreshold" label=false}}
+								{{/autoForm}}
+								</td>
+								
+								<td>
+								{{#autoForm collection='Building' schema=getSchema id="editBuildingConfig" doc=selectedBuildingDoc type='update' autosave=true}}
+								  {{> afFormGroup name="soundThresholdSetingDate" label=false }}
+								{{/autoForm}}
+								</td>
+							 </tr>
+							 
+							 <tr>
+								<td>Vibration</td>
+								
+								<td>
+								{{#autoForm collection='Building' schema=getSchema id="editBuildingConfig" doc=selectedBuildingDoc type='update' autosave=true}}
+								  {{> afFormGroup name="warningVibThreshold" label=false }}
+								{{/autoForm}}
+								</td>
+								
+								<td>
+								{{#autoForm collection='Building' schema=getSchema id="editBuildingConfig" doc=selectedBuildingDoc type='update' autosave=true}}
+								  {{> afFormGroup name="dangerVibThreshold" label=false}}
+								{{/autoForm}}
+								</td>
+								
+								<td>
+								{{#autoForm collection='Building' schema=getSchema id="editBuildingConfig" doc=selectedBuildingDoc type='update' autosave=true}}
+								  {{> afFormGroup name="vibThresholdSetingDate" label=false }}
+								{{/autoForm}}
+								</td>
+							 </tr>
+						
+						</tbody>
+					</table>
+					
+					
+					
+					
+					<!--{{#autoForm collection='Building' schema=getSchema id="editBuildingConfig" doc=selectedBuildingDoc type='update' }}
 							<span class="help-block"></span>
 							{{> afQuickField name='name' }}
 							
@@ -45,7 +107,7 @@
 							<button type="submit" class="btn btn-primary">Submit</button>
 							
 						  
-					{{/autoForm}}
+					{{/autoForm}} -->
 					
 				{{/if}}
 			
