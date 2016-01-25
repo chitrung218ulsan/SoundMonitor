@@ -94,7 +94,8 @@ Template.showHome.helpers({
 		var numOfHomePerFloor = 0;
 		if(bu != undefined)
 		{
-			numOfHomePerFloor = bu.numOFHomesPerFloor(floor.floorNumber);
+			//numOfHomePerFloor = bu.numOFHomesPerFloor(floor.floorNumber);
+			numOfHomePerFloor = bu.numHousePerFloor;
 			if(numOfHomePerFloor>0)
 			{
 				var i=1;
@@ -106,7 +107,7 @@ Template.showHome.helpers({
 						//console.log(temp_homeNumber);
 					}
 					else {
-						temp_homeNumber = floor.floorNumber.toString()+'0'+i.toString();
+						temp_homeNumber = floor.floorNumber.toString()+i.toString();
 						//console.log(temp_homeNumber);
 					}
 					var homeElement = {homeNumber:temp_homeNumber};

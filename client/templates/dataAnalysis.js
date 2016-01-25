@@ -98,6 +98,10 @@ Template.dataAnalysis.helpers({
             return i;
         }) : [];
     },
+	homes_1: function(){
+        var bu = Template.instance().buildingSelected.get();
+        return (bu)? bu.homes(): [];
+    },
     isRemainder: function(index, rem){
         return index % 2 == rem;
     },
@@ -119,6 +123,25 @@ Template.dataAnalysis.helpers({
 	buildingMaxInfo_1:function(){
 		var chosenBuilding = Template.instance().buildingSelected.get();
 		return chosenBuilding && chosenBuilding.maxInfo_1();
+	},
+	
+	floors:function(){
+		var bu = Template.instance().buildingSelected.get();
+		if(bu!=undefined){
+			var numOfFloor = bu.numOfFloors;
+			var i=1;
+			var floors = [];
+			for(i;i<=numOfFloor;i++){
+				var floorInfo={floorNumber:i};
+				floors.push(floorInfo);
+			}
+			return floors;
+		}
+		else{
+			return [];
+		}
+		
+		
 	},
 	
 });
@@ -158,6 +181,8 @@ Template.dataAnalysis.events({
         Template.instance().buildingSelected.set(Building.findOne({_id: newId}));
 		Template.instance().soundThreshold.set(soundDangerThreshold);
 		Template.instance().vibrationThreshold.set(vibDangerThreshold);
+		
+		Session.set("data_analysis_buildingSelected",Building.findOne({_id: newId}));
     },
     'change #thresholdSoundPicker': function(event){
         var target = event.currentTarget;
@@ -245,11 +270,100 @@ Template.dataHome.helpers({
 				numOfVibOverThreshold: 0,
 			}
 		}
+	},
+	homeInfo:function(homeNumber){
+		
+		var bu = Session.get("data_analysis_buildingSelected"); 
+		//console.log(bu);
+		var home =  Home.findOne({buildingId:bu._id,homeNumber:parseInt(homeNumber)});
+		return home;
+	},
+	maxSoundInfo_1:function(home){
+		//var dataContext = Template.currentData();
+        //var home = dataContext.home;
+	
+		var node = home.node();
+		
+		var soundData = undefined;
+		soundData = SoundData.findOne({nodeNumber:node.nodeNumber});
+		if(soundData!=undefined)
+		{
+			return {
+				maxSound: soundData.maxSound,
+           
+				numOfSoundOverThreshold: soundData.numOfSoundOverThreshold
+			}
+		}
+		else{
+			return {
+				maxSound: 0,
+           
+				numOfSoundOverThreshold: 0,
+			}
+			
+            
+		}
+		
+	},
+	maxVibrationInfo_1:function(home){
+		//var dataContext = Template.currentData();
+        //var home = dataContext.home;
+		var node = home.node();
+		//console.log(node.nodeNumber);
+		//console.log(SoundData.find({nodeNumber:node.nodeNumber}));
+		var vibData = undefined;
+		vibData = VibData.findOne({nodeNumber:node.nodeNumber});
+		if(vibData!=undefined)
+		{
+			return {
+				maxVib: vibData.maxVib,
+           
+				numOfVibOverThreshold: vibData.numOfVibOverThreshold
+			}
+		}
+		else{
+			return {
+				maxVib: 0,
+           
+				numOfVibOverThreshold: 0,
+			}
+		}
+	},
+	listHomeNumber:function(floorNumber){
+		var bu = Session.get("data_analysis_buildingSelected"); 
+		var list_HomeNumber = [];
+		var numOfHomePerFloor = 0;
+		if(bu != undefined)
+		{
+			//numOfHomePerFloor = bu.numOFHomesPerFloor(floor.floorNumber);
+			numOfHomePerFloor = bu.numHousePerFloor;
+			if(numOfHomePerFloor>0)
+			{
+				var i=1;
+				var temp_homeNumber;
+				for(i;i<=numOfHomePerFloor;i++)
+				{
+					if(i<=9){
+						temp_homeNumber =floorNumber.toString()+'0'+i.toString();
+						//console.log(temp_homeNumber);
+					}
+					else {
+						temp_homeNumber = floorNumber.toString()+i.toString();
+						//console.log(temp_homeNumber);
+					}
+					var homeElement = {homeNumber:temp_homeNumber};
+					list_HomeNumber.push(homeElement);
+				}
+				
+			}
+			
+		}
+		return list_HomeNumber;
 	}
 });
 
 Template.dataHome.events({
-    'click .homeCell': function(event){
+    'click .homeCell': function(event,template){
         var target = event.currentTarget;
         var homeId = $(target).attr("id");
         var dataContext = Template.currentData();

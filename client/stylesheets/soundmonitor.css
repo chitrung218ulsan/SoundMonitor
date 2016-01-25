@@ -60,6 +60,21 @@ li > .btn-group > .btn {
     border: 1px solid red;
 	background-color: lightblue
 }
+.box_dataAnalysis {
+    max-width: 500px;
+	margin-top:10px;
+	margin-bottom:10px;
+	min-height: 280px;
+	overflow: hidden;
+	min-width: 350px;
+	overflow: hidden;
+    padding-left:2px;
+	padding-right:2px;
+	padding-top:2px;
+	padding-bottom:2px;
+    border: 1px solid red;
+	
+}
 .box1 {
     max-width: 500px;
 	margin-top:10px;
@@ -105,4 +120,10 @@ li > .btn-group > .btn {
 
 .list-inline {
   white-space:nowrap;
+}
+li.homeCell .list-group-item .list-dataAnalysis {
+	border-radius: 0px;
+	border-top: 0 none;
+	border-top: 0 none;
+
 }
