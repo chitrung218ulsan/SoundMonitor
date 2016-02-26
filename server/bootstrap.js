@@ -279,6 +279,10 @@
 			var sound = json.sound;
 			var vibration = json.vibration;
 			var battery = json.battery;
+			var minSound = json.minSound;
+			var minVibration = json.minVibration;
+			var maxSound = json.maxSound;
+			var maxVibration = json.maxVibration;
 			
 			var nodeEntry = Node.findOne({nodeNumber:nodeId});
 			var objNodeId = nodeEntry._id;
@@ -289,6 +293,10 @@
 				sound : sound,
 				vibration : vibration,
 				battery : battery,
+				minSound : minSound,
+				minVibration : minVibration,
+				maxSound : maxSound,
+				maxVibration : maxVibration,
 				createdBy: "Trung"
 			}
 
@@ -307,6 +315,10 @@
 				sound:sound,
 				vibration: vibration,
 				nodeBattery: battery,
+				minSound : minSound,
+				minVibration : minVibration,
+				maxSound : maxSound,
+				maxVibration : maxVibration,
 				lastDataUpdate: new Date()
 			}},{ multi: false });
 

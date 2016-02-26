@@ -10,7 +10,7 @@ Template.checkDataSound.helpers({
 		var home = Template.currentData();
 		var buildingSelected = Session.get("buildingSelected");
 		
-        var valueCheck = parseFloat(home.sound);
+        var valueCheck = parseFloat(home.maxSound);
 		
 		if(valueCheck <= buildingSelected.warningSoundThreshold)
 		{
@@ -25,7 +25,7 @@ Template.checkDataSound.helpers({
 	checkWarning:function(){
 		var home = Template.currentData();
 		var buildingSelected = Session.get("buildingSelected");
-        var valueCheck = parseFloat(home.sound);
+        var valueCheck = parseFloat(home.maxSound);
 		if(buildingSelected.warningSoundThreshold < valueCheck &&  valueCheck < buildingSelected.dangerSoundThreshold)
 		{
 			//console.log('check warning true' )
@@ -40,7 +40,7 @@ Template.checkDataSound.helpers({
 	checkDanger:function(){
 		var home = Template.currentData();
 		var buildingSelected = Session.get("buildingSelected");
-        var valueCheck = parseFloat(home.sound);
+        var valueCheck = parseFloat(home.maxSound);
 		if(buildingSelected.dangerSoundThreshold < valueCheck )
 		{
 			return true;

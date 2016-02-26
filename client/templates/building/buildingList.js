@@ -9,7 +9,7 @@ Template.buildingList.helpers({
 			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'type'),
 			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'representative'),
 			
-            SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'numOfHomes',{label: "세대 수", fn: function(value, obj){
+            SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'totalHomesInBuilding',{label: "세대 수", fn: function(value, obj){
                 return value;
             }}),
 			SoundMonitor.Functions.getFieldForTable(Building.simpleSchema(),'warningSoundThreshold'),

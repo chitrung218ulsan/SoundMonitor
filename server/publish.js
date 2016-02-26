@@ -207,7 +207,7 @@ Meteor.publish('sound_vib_graph',function(nodeNumber,soundThreshold,vibThreshold
 					{nodeNumber:nodeNumber},
 					{isDeleted:false},
 					{createdAt: {$gte: startDate, $lte: endDate}},
-					{$or:[{sound:{$gte:threshold_sound}},{vibration:{$gte:threshold_vib}}]}
+					{$and:[{sound:{$gte:threshold_sound}},{vibration:{$gte:threshold_vib}}]}
 					
 				];
 	var pipeline = [

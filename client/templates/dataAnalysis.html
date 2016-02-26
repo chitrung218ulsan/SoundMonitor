@@ -7,6 +7,7 @@
                 <select class="form-control" id="viewMode">
                     <option value="data" selected>Data Mode</option>
                     <option value="graph" >Graph Mode</option>
+					<option value="epicenter" >Epicenter Mode</option>
                 </select>
             </div>
             <div class="col-md-2 form-group">
@@ -62,9 +63,7 @@
 						<div><strong>Homes: </strong></div>
 						<div class="list-group" id="graph-home-list">
 							{{# each homes_1}}
-								<!--<div class="homeCell list-group-item" id="{{_id }}">
-									{{homeNumber}}
-								</div> -->
+								
 								{{> dataHome home=this masterTemplate=masterTemplate}}
 							{{/each}}
 						</div>
@@ -82,7 +81,21 @@
 					</div>
 			  
             {{else}}
-                <div class="col-md-10">
+				{{#if isEpicenterMode}}
+					<div class="col-md-10">
+						<div class="row">
+							
+									{{#each floors}} 
+										 
+										{{> dataHome floor=this masterTemplate=masterTemplate}}
+												
+										
+									{{/each}}
+						
+						</div>
+					</div>
+				{{else}}
+					<div class="col-md-10">
                     <div class="row">
                         <div class="col-md-12">
                             <table class="table table-bordered" >
@@ -114,32 +127,13 @@
 								{{#each floors}} 
 									 
 									{{> dataHome floor=this masterTemplate=masterTemplate}}
-											
 									
 								{{/each}}
 					
-						
-                        <!--<div class="col-md-6" style="">
-                            <ul class="list-group" id="home-list-col0">
-                                {{# each homes }}
-                                    {{# if isRemainder index 0}}
-                                        {{> dataHome home=this masterTemplate=masterTemplate }}
-                                    {{/if}}
-                                {{/each}}
-                            </ul>
-                        </div>
-                        <div class="col-md-6" style="">
-                            <ul class="list-group" id="home-list-col1">
-                                {{# each homes }}
-                                    {{# if isRemainder index 1}}
-                                        {{> dataHome home=this masterTemplate=masterTemplate }}
-                                    {{/if}}
-                                {{/each}}
-                            </ul>
-                        </div>
-						-->
                     </div>
                 </div>
+				{{/if}}
+                
             {{/if}}
 
         </div>
@@ -166,7 +160,7 @@
 				<div class="HomeList">  
 					<ul class="list-inline">
 						
-							{{#each listHomeNumber floor.floorNumber}} 
+							{{#each listHomeNumber floor.floorNumber masterTemplate}} 
 								
 								<li class="box_dataAnalysis">
 									<div class="row">
@@ -175,39 +169,80 @@
 										</div>
 									</div>
 									
-										{{#with homeInfo this.homeNumber}}
-											<div class="homeCell list-group-item list-dataAnalysis" id="{{ this._id }}">
-												
-													
-													
-												<table class="table table-bordered" >
-													<tbody>
-														{{ #with maxSoundInfo_1 this}}
-														<tr>
-															<th>Max of Sound</th>
-															<td >{{maxSound}}</td>
-														</tr>
-
-														<tr>
-															<th>Over Sound Threshold</th>
-															<td >{{numOfSoundOverThreshold}}</td>
-														</tr>
-														
-														{{/with}}
-														{{ #with maxVibrationInfo_1 this }}
-														<tr>
-															<th>Max of Vibration</th>
-															<td>{{maxVib}}</td>
-														</tr>
-														<tr>
-															<th>Over Vibration Threshold</th>
-															<td>{{numOfVibOverThreshold}}</td>
-														</tr>
-														{{/with}}
-													</tbody>
-												</table>
+										{{#with homeInfo this.homeNumber this.template}}
 										
-											</div>	
+											{{#with getResult this.home this.template }}
+												<!-- {{#if this.status}}
+													<div class="homeCell list-group-item list-dataAnalysis active" id="{{this._id }}">
+												{{else}}
+													<div class="homeCell list-group-item list-dataAnalysis" id="{{this._id }}">
+												{{/if}} -->
+												
+												{{#if this.status}}
+												<div class="homeCell list-group-item list-dataAnalysis active" id="{{this.home._id }}">
+													<table class="table table-bordered">
+														<tbody>
+															{{ #with maxSoundInfo_1 this.home}}
+															<tr>
+																<th>Max of Sound</th>
+																<td >{{maxSound}}</td>
+															</tr>
+
+															<tr>
+																<th>Over Sound Threshold</th>
+																<td >{{numOfSoundOverThreshold}}</td>
+															</tr>
+															
+															{{/with}}
+															{{ #with maxVibrationInfo_1 this.home }}
+															<tr>
+																<th>Max of Vibration</th>
+																<td>{{maxVib}}</td>
+															</tr>
+															<tr>
+																<th>Over Vibration Threshold</th>
+																<td>{{numOfVibOverThreshold}}</td>
+															</tr>
+															{{/with}}
+														</tbody>
+													</table>
+										
+													</div>
+												{{else}}
+												
+													<div class="homeCell list-group-item list-dataAnalysis" id="{{this.home._id }}">
+													<table class="table table-bordered">
+														<tbody>
+															{{ #with maxSoundInfo_1 this.home}}
+															<tr>
+																<th>Max of Sound</th>
+																<td >{{maxSound}}</td>
+															</tr>
+
+															<tr>
+																<th>Over Sound Threshold</th>
+																<td >{{numOfSoundOverThreshold}}</td>
+															</tr>
+															
+															{{/with}}
+															{{ #with maxVibrationInfo_1 this.home }}
+															<tr>
+																<th>Max of Vibration</th>
+																<td>{{maxVib}}</td>
+															</tr>
+															<tr>
+																<th>Over Vibration Threshold</th>
+																<td>{{numOfVibOverThreshold}}</td>
+															</tr>
+															{{/with}}
+														</tbody>
+													</table>
+										
+													</div>
+												
+												{{/if}}
+											{{/with}}
+											
 										{{/with}} 
 									
 								</li>	

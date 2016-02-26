@@ -15,7 +15,8 @@ Template.dataAnalysis.onCreated(function(){
 
     this.viewMode = new ReactiveVar("data"); // "data" or "graph"
     this.homeSelected = new ReactiveArray();
-
+	this.epicenterCheckedHome = [];
+	this.homeMakingNoise = undefined;
     this.autorun(function(){
         var bu = self.buildingSelected.get();
         //self.subscribe(SoundMonitor.Constants.DATA_SOURCE, (bu && bu._id) || null,self.startDate.get().toDate(), self.endDate.get().toDate(),self.soundThreshold.get(),self.vibrationThreshold.get());
@@ -73,6 +74,51 @@ Template.dataAnalysis.helpers({
     homeSelected: function(){
         return Template.instance().homeSelected;
     },
+	
+	homeListForEpicenter:function(){
+		if(Template.instance().homeSelected.length >=1 )
+		{
+			var checkedHome = [];
+			var condRow1 = false;
+			var condRow2 = false;
+			var condCol1 = false;
+			var condCol2 = false;
+			var selectedBuilding = Template.instance().buildingSelected.get();
+			var selectedHomeId = Template.instance().homeSelected[Template.instance().homeSelected.length - 1];
+			var selectedHome = Home.findOne({_id:selectedHomeId});
+			var selectedHomeNumber = selectedHome.homeNumber;
+			var homeColumn = selectedHomeNumber % 100;
+			var homeRow = selectedHomeNumber/100;
+			
+			if(selectedHome.maxSound >= Template.instance().soundThreshold.get() &&
+			selectedHome.maxVibration >= Template.instance().vibrationThreshold.get())
+			{
+				condRow1 = (homeRow + 1 >= selectedBuilding.numOfFloors) ? (selectedBuilding.numOfFloors):homeRow + 1;
+				condRow2 = (homeRow + 1 >= selectedBuilding.numOfFloors) ? (selectedBuilding.numOfFloors):homeRow + 1;
+			} else if(selectedHome.maxSound > Template.instance().soundThreshold.get() &&
+			selectedHome.maxVibration < Template.instance().vibrationThreshold.get()){
+				var condRow1 = (homeRow - 1 >= 0)? (homeRow-1) : 0;
+				var condRow2 = (homeRow + 1 >= selectedBuilding.numOfFloors) ? (selectedBuilding.numOfFloors):homeRow + 1;
+				
+			}
+			var condCol1 = (0 >= homeColumn -1) ? 0 : homeColumn -1;
+			var condCol2 = (homeColumn + 1 >= selectedBuilding.numHousePerFloor) ? selectedBuilding.numHousePerFloor :homeColumn + 1 ;
+			var homeList = selectedBuilding.homes();
+			
+			_.each(homeList,function(element,index,array){
+				if(element._id != selectedHomeId){
+					var checkHomeColumn = element.homeNumber % 100;
+					var checkHomeRow = element.homeNumber/100;
+					if(condRow1 <= checkHomeRow && checkHomeRow <= condRow2 && condCol1 <= checkHomeColumn && checkHomeColumn <= condCol2){
+						checkedHome.push(element.homeNumber);
+					
+					}
+				}
+			});
+			return checkedHome;
+		}
+	},
+	
     apartments: function(){
         var templ = Template.instance();
         var query = Apartment.find({});
@@ -108,6 +154,10 @@ Template.dataAnalysis.helpers({
     isGraphMode: function(){
         return Template.instance().viewMode.get() == "graph";
     },
+	isEpicenterMode:function(){
+		 
+		 return Template.instance().viewMode.get() == "epicenter";
+	},
 	selectedHomes:function(){
 		var selectedHomes = Template.instance().homeSelected.array();
 		return (selectedHomes)?Home.find({_id:{$in:selectedHomes}}):[];
@@ -152,10 +202,71 @@ Template.dataAnalysis.events({
         var mode = target.options[target.selectedIndex].value;
         Template.instance().viewMode.set(mode);
 		var self = Template.instance();
-		if(mode == "graph"){
-			//console.log(Template.instance().homeSelected.array())
-			//self.subscribe('testData', self.homeSelected.array(),self.startDate.get().toDate(), self.endDate.get().toDate());
+		if(mode == "epicenter"){
+			
+			var checkedHome = [] ;
+			Template.instance().epicenterCheckedHome = checkedHome ;
+			
+			if(Template.instance().homeSelected.length >=1 )
+			{
+				
+				var condRow1 = undefined;
+				var condRow2 = undefined;
+				var condCol1 = undefined;
+				var condCol2 = undefined;
+				var selectedBuilding = Template.instance().buildingSelected.get();
+				var selectedHomeId = Template.instance().homeSelected[Template.instance().homeSelected.length - 1];
+				var selectedHome = Home.findOne({_id:selectedHomeId});
+				var selectedHomeNumber = selectedHome.homeNumber;
+				var homeColumn = selectedHomeNumber % 100;
+				var homeRow = parseInt(selectedHomeNumber/100);
+				if(selectedHome.maxSound >= Template.instance().soundThreshold.get() &&
+				selectedHome.maxVibration >= Template.instance().vibrationThreshold.get())
+				{
+					condRow1 = homeRow;
+					condRow2 = homeRow;
+				} else if(selectedHome.maxSound > Template.instance().soundThreshold.get() &&
+				selectedHome.maxVibration < Template.instance().vibrationThreshold.get()){
+					var condRow1 = (homeRow - 1 >= 0)? (homeRow-1) : 0;
+					var condRow2 = (homeRow + 1 >= selectedBuilding.numOfFloors) ? (selectedBuilding.numOfFloors):homeRow + 1;
+					
+				}
+				var condCol1 = (0 >= homeColumn -1) ? 0 : homeColumn -1;
+				var condCol2 = (homeColumn + 1 >= selectedBuilding.numHousePerFloor) ? selectedBuilding.numHousePerFloor :homeColumn + 1 ;
+				var homeList = selectedBuilding.homes().fetch();
+				var maxHome = undefined;
+				var maxSoundDetected = 0;
+				var maxVibDetected = 0;
+				_.each(homeList,function(element,index,array){
+					
+						var checkHomeColumn = element.homeNumber % 100;
+						var checkHomeRow = parseInt(element.homeNumber/100);
+						
+						if(condRow1 <= checkHomeRow && checkHomeRow <= condRow2 && condCol1 <= checkHomeColumn && checkHomeColumn <= condCol2){
+							checkedHome.push(element.homeNumber);
+							if(condRow1 == condRow2){
+								if(maxVibDetected < element.maxVibration && element.homeNumber != selectedHomeNumber)
+								{
+									maxHome = element;
+									maxVibDetected = element.maxVibration;
+								}
+							}
+							else if(condRow1 != undefined && condRow2 != undefined && condRow1 != condRow2)
+							{
+								if(maxSoundDetected < element.maxSound)
+								{
+									maxHome = element;
+									maxSoundDetected = element.maxSound;
+								}
+							}
+						}
+					
+				});
+				
+				Template.instance().homeMakingNoise = maxHome;
+			}
 		}
+		
     },
     'change #apartment-selection-dashboard': function(event){
         var target = event.currentTarget;
@@ -208,6 +319,29 @@ Template.dataHome.onRendered(function(){
     //console.log(dataContext.masterTemplate.homeSelected.array());
 });
 Template.dataHome.helpers({
+	getResult: function(home,masterTemplate){
+		/* var dataContext = Template.currentData();
+		var masterTemplate = dataContext.masterTemplate; */
+		
+		if(masterTemplate.viewMode.get() == 'epicenter' )
+		{
+			if(home._id == masterTemplate.homeMakingNoise._id)
+			{
+				var result = {home:home, status:true};
+				return result;
+			}
+			else
+			{
+				var result = {home:home, status:false};
+				return result;
+			}
+		}
+		else{
+			var result = {home:home, status:false};
+			return result;
+		}
+		
+	},
     parametersUpdated: function(){
         var dataContext = Template.currentData();
         return dataContext.parametersUpdated;
@@ -216,6 +350,7 @@ Template.dataHome.helpers({
         var dataContext = Template.currentData();
         return dataContext.masterTemplate.viewMode.get() == "graph";
     },
+	
     maxInfo: function(){
         var dataContext = Template.currentData();
         var home = dataContext.home;
@@ -271,12 +406,17 @@ Template.dataHome.helpers({
 			}
 		}
 	},
-	homeInfo:function(homeNumber){
+	homeInfo:function(homeNumber,masterTemplate){
 		
 		var bu = Session.get("data_analysis_buildingSelected"); 
 		//console.log(bu);
-		var home =  Home.findOne({buildingId:bu._id,homeNumber:parseInt(homeNumber)});
-		return home;
+		var foundHome =  Home.findOne({buildingId:bu._id,homeNumber:parseInt(homeNumber)});
+		var result = {home:foundHome,template:masterTemplate}
+		if(foundHome != undefined)
+		{
+			return result;
+		}
+		return undefined;
 	},
 	maxSoundInfo_1:function(home){
 		//var dataContext = Template.currentData();
@@ -329,10 +469,12 @@ Template.dataHome.helpers({
 			}
 		}
 	},
-	listHomeNumber:function(floorNumber){
+	listHomeNumber:function(floorNumber, masterTemplate){
 		var bu = Session.get("data_analysis_buildingSelected"); 
+		var isEpicenterMode = masterTemplate.viewMode.get() == 'epicenter';
 		var list_HomeNumber = [];
 		var numOfHomePerFloor = 0;
+		var checkedHome = masterTemplate.epicenterCheckedHome;
 		if(bu != undefined)
 		{
 			//numOfHomePerFloor = bu.numOFHomesPerFloor(floor.floorNumber);
@@ -351,8 +493,18 @@ Template.dataHome.helpers({
 						temp_homeNumber = floorNumber.toString()+i.toString();
 						//console.log(temp_homeNumber);
 					}
-					var homeElement = {homeNumber:temp_homeNumber};
-					list_HomeNumber.push(homeElement);
+					var homeElement = {homeNumber:temp_homeNumber,template:masterTemplate};
+					if(isEpicenterMode)
+					{
+						if(checkedHome.indexOf(parseInt(temp_homeNumber)) > -1 ){
+							
+							list_HomeNumber.push(homeElement);
+						}
+					}else{
+						
+						list_HomeNumber.push(homeElement);
+					}
+					
 				}
 				
 			}
@@ -368,13 +520,23 @@ Template.dataHome.events({
         var homeId = $(target).attr("id");
         var dataContext = Template.currentData();
         var parentTemplate = dataContext.masterTemplate;
-        if($(target).hasClass("active")){
-            $(target).removeClass("active");
-            parentTemplate.homeSelected.remove(homeId);
-        }else{
-            $(target).addClass("active");
-            parentTemplate.homeSelected.push(homeId);
-        }
+		if(parentTemplate.viewMode.get() != 'epicenter')
+		{
+			 if($(target).hasClass("active")){
+				$(target).removeClass("active");
+				parentTemplate.homeSelected.remove(homeId);
+			}else{
+				$(target).addClass("active");
+				parentTemplate.homeSelected.push(homeId);
+			}
+		}
+		else{
+			if(parentTemplate.homeSelected.length == 0){
+				$(target).addClass("active");
+				parentTemplate.homeSelected.push(homeId);
+			}
+		}
+       
     }
 });
 
