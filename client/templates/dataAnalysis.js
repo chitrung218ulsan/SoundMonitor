@@ -93,8 +93,9 @@ Template.dataAnalysis.helpers({
 			if(selectedHome.maxSound >= Template.instance().soundThreshold.get() &&
 			selectedHome.maxVibration >= Template.instance().vibrationThreshold.get())
 			{
-				condRow1 = (homeRow + 1 >= selectedBuilding.numOfFloors) ? (selectedBuilding.numOfFloors):homeRow + 1;
-				condRow2 = (homeRow + 1 >= selectedBuilding.numOfFloors) ? (selectedBuilding.numOfFloors):homeRow + 1;
+				condRow1 = (homeRow + 1 >= selectedBuilding.numOfFloors) ? (selectedBuilding.numOfFloors+1):homeRow + 1;
+				condRow2 = (homeRow + 1 >= selectedBuilding.numOfFloors) ? (selectedBuilding.numOfFloors+1):homeRow + 1;
+				
 			} else if(selectedHome.maxSound > Template.instance().soundThreshold.get() &&
 			selectedHome.maxVibration < Template.instance().vibrationThreshold.get()){
 				var condRow1 = (homeRow - 1 >= 0)? (homeRow-1) : 0;

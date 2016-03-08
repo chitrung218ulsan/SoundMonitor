@@ -228,7 +228,7 @@
 
 
 
-	var wsURL = 'ws://192.168.0.28:9003/websockets/data_service';
+	var wsURL = 'ws://192.168.0.34:9003/websockets/data_service';
 	var Websocket = Meteor.npmRequire('recon-ws');
 	startWebsocket();
 
